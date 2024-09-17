@@ -1,9 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 :root {
     --radius : 20px;
+    --radius2 : 10px;
     --darkBlue: #25303B;
+    --blue : #1972D2;
+    --blueHover : #0151a7;
+    --white : #ffff;
 }
 
 body {
+    font-family: "Inter", sans-serif;
     margin: 0;
     height: 100%;
     overflow: hidden;
@@ -12,37 +19,126 @@ body {
 #nav {
     background-color: var(--darkBlue);
     height: 4vw;
+    color: var(--white);
+    display: flex; /* Utiliser flex pour aligner les éléments horizontalement */
+    align-items: center; /* Aligner verticalement les éléments au centre */
+    justify-content: flex-end; /* Aligner les éléments au début (à gauche) */
+    padding: 0 1vw; /* Espacement intérieur pour ne pas coller les éléments aux bords */
+}
+
+.onglet_nav {
+    color: var(--white);
+    margin-right: 2vw; /* Espacement entre les onglets */
+}
+
+.onglet_nav:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+#btn_mon_compte {
+    margin-right: 2vw; /* Espacement entre les inputs */
+    height: 2.5vw;
+    width: 10vw;
+    border-radius: var(--radius2);
+    border: none;
+    color: var(--blue);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#btn_mon_compte:hover {
+    background-color: var(--blueHover);
+    color: var(--white);
 }
 
 #image_accueil {
-    background-color: red;
-    height: 15vw;
+    height: 17.5vw;
     position: relative; /* Nécessaire pour que l'élément fils en absolu (#bandeau_recherche) puisse se positionner */
+    overflow: hidden;
+}
+
+#image_accueil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* garde le ratio, remplissant la div */
+    object-position: 50% 90%; /* centre l'image verticalement et montre davantage le bas */
 }
 
 #bandeau_recherche {
-    background-color: greenyellow;
-    height: 10vw;
-    width: 70vw; 
+    background-color: var(--white);
+    display: flex;
+    align-items: flex-end; /* Aligne les éléments en bas */
+    height: 7vw;
+    width: 60vw; 
     position: absolute; /* Pour permettre la superposition */
-    top: 19vw;
+    top: 21vw;
     left: 0; 
     transform: translateY(-50%); /* Centre verticalement à moitié */
     border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1vw;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.39);
 }
 
-#cartes_infos {
-    background-color: yellow;
+#bandeau_recherche h2 {
+    position: absolute;
+    margin: 0;
+    top: 1.5vw; 
+    left: 1.5vw; 
+    color: var(--blue);
+}
+.champs_recherche, #btn_rechercher {
+    margin-right: 2vw; /* Espacement entre les inputs */
+    height: 2.5vw;
+    width: 15vw;
+    border-radius: var(--radius2);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.432);
+    border: none;
+}
+
+.champs_recherche {
+   
+}
+
+#btn_rechercher {
+    background-color: var(--blue);
+    color: white;
+    border: none;
+}
+
+#btn_rechercher:hover {
+    background-color: var(--blueHover);
+}
+
+#cartes_infos { 
+    background-color: var(--white);
     width: 100%;
     height: 30vw;
     display: flex;
     justify-content: space-around; /* Pour espacer les cartes régulièrement */
     align-items: flex-end; /* Pour aligner les cartes en bas */
 }
+
 .carte {
-    background-color: rgb(203, 0, 230);
+    background-color: var(--white);
+    border: 1px solid var(--darkBlue);
     color: black;
-    height: 20vw;
-    width: 20vw;
+    height: 23vw;
+    width: 27vw;
     border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden; /* Assure que l'image ne dépasse pas les bords arrondis */
+}
+
+.carte img {
+    width: 100%; /* Remplit toute la largeur de la div */
+    height: 50%; /* Remplit la moitié supérieure de la div */
+    object-fit: cover; /* Garde le ratio et remplit l'espace */
+    object-position: center; /* Centre l'image */
+}
+
+.carte h2 {
+    margin: 0;
+    margin-top: 1vw; 
+    margin-left: 1vw; 
+    color: var(--blue);
 }
