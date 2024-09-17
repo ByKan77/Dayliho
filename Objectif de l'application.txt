@@ -1,0 +1,5 @@
+Objectif de l'application : 
+
+Donner l'endroit où on part, combien de temps (et combien de personnes).
+Ces informations seront rentrées dans un prompt d'IA qui nous créera un itinéraire de voyage.
+Sa réponse sera formatée et adaptée avec un visuel propre à l'application.
