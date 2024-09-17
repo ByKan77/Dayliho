@@ -1,0 +1,48 @@
+:root {
+    --radius : 20px;
+    --darkBlue: #25303B;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+#nav {
+    background-color: var(--darkBlue);
+    height: 4vw;
+}
+
+#image_accueil {
+    background-color: red;
+    height: 15vw;
+    position: relative; /* Nécessaire pour que l'élément fils en absolu (#bandeau_recherche) puisse se positionner */
+}
+
+#bandeau_recherche {
+    background-color: greenyellow;
+    height: 10vw;
+    width: 70vw; 
+    position: absolute; /* Pour permettre la superposition */
+    top: 19vw;
+    left: 0; 
+    transform: translateY(-50%); /* Centre verticalement à moitié */
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+#cartes_infos {
+    background-color: yellow;
+    width: 100%;
+    height: 30vw;
+    display: flex;
+    justify-content: space-around; /* Pour espacer les cartes régulièrement */
+    align-items: flex-end; /* Pour aligner les cartes en bas */
+}
+.carte {
+    background-color: rgb(203, 0, 230);
+    color: black;
+    height: 20vw;
+    width: 20vw;
+    border-radius: var(--radius) var(--radius) 0 0;
+}
