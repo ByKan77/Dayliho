@@ -1,5 +1,58 @@
+Problématique:
+
+Suite à l'épidémie du covid 19, les joueurs de la ligue ne pouvait plus s'entrainer durant une longue période, pour éviter "qu'ils perdent leur ligne", nous avons mis à disposition un système de cours de sport sur une application, sous forme de vidéos, créées et publiées par des coach, sur l'application mobile.
+
+======================================================================================================
+
+Objectif de site : 
+
+Le site servira aux sportifs à visionner les vidéos mises en ligne par les coachs. L'utilisateur doit pouvoir :
+	
+Obligatoire :
+	- Se connecter / déconnecter
+	- Modification de mot de passe
+	- Pouvoir visionner des vidéos
+	- Rechercher des vidéos par nom
+	- Commentaires
+
+
+
+Facultatif :
+	- Ajouter des vidéos aux favoris
+	- Evaluations
+	- Historique des vidéos
+	- Partager une vidéo
+	- Ajouter des vidéos dans une playlist
+	- Système de chat joueur - coach
+	- Signaler une vidéo -> notif admin	
+	- Personnaliser son compte 
+
+
+======================================================================================================
+
 Objectif de l'application : 
 
-Donner l'endroit où on part, combien de temps (et combien de personnes).
-Ces informations seront rentrées dans un prompt d'IA qui nous créera un itinéraire de voyage.
-Sa réponse sera formatée et adaptée avec un visuel propre à l'application.
+L'application servira aux coachs à publier leur vidéos :
+
+Obligatoire :
+	- Se connecter / déconnecter
+	- Modification de mot de passe
+	- Ajouter une vidéo (titre, description, type, date)
+	- Visionner ses vidéos
+	- Modifier ses vidéos déjà publiées (titre, description)
+
+Facultatif :
+	- Voir les stats des vidéos publiées (nombre de vues, de likes, de partages...)
+	- Faire des storys
+	- Système de chat joueur - coach
+	- Signaler un commentaire -> notif admin
+
+======================================================================================================
+
+Système admin :
+
+Fonctionnalités :
+	- 
+	- Gestion des comptes coach et joueurs
+	- Gestion des vidéos
+	- Gestion des commentaires
