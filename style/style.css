@@ -34,6 +34,7 @@ body {
 .onglet_nav:hover {
     transform: scale(1.05);
     transition: 0.3s;
+    cursor: pointer;
 }
 
 #btn_mon_compte {
@@ -96,14 +97,11 @@ body {
     border: none;
 }
 
-.champs_recherche {
-   
-}
-
 #btn_rechercher {
     background-color: var(--blue);
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 #btn_rechercher:hover {
