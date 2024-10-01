@@ -1,10 +1,6 @@
-<?php require_once '../back/header.php'; ?>
-<!-- Navbar -->
-<div id="nav_bar">
-
-</div>
-    
-<?php
+<?php 
+    require_once '../back/header.php';
+    require '../requires/nav.php';
     require '../requires/index_section_1.php';
     require '../requires/index_section_2.php';
     require '../requires/index_section_3.php';
