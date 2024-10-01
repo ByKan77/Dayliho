@@ -1,8 +1,8 @@
 -- Création de la base de données
-CREATE DATABASE ma_base_de_donnees;
+CREATE DATABASE dayliho;
 
 -- Utilisation de la base de données
-USE ma_base_de_donnees;
+USE dayliho;
 
 -- Création de la table utilisateur
 CREATE TABLE utilisateur (
