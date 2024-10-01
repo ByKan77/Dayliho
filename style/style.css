@@ -1,146 +1,229 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
     --radius : 20px;
     --radius2 : 10px;
     --principale: #00296b;
     --secondaire : #003f88;
-    --bouton : #fdc500;
-    --boutonHover : #ffd500;
+    --bouton : #fd9d1f;
+    --boutonHover : #c9780d;
     --white : #ffff;
+    --black: #000000;
+    --nav : #f2f2f2;
 }
 
 body {
-    font-family: "Inter", sans-serif;
     margin: 0;
-    height: 100%;
-    overflow: hidden;
+    padding: 0;
+    font-family: 'Kanit', sans-serif;
 }
 
-.nav-right {
+#nav_bar {
+    z-index: 1000;
+    position: fixed;
     display: flex;
-    align-items: center;
-}
-.nav-right .onglet_nav, .nav-right #btn_mon_compte {
-    margin-left: 10px;
+    justify-content: space-around;
+    min-height: 60px;
+    height: auto;
+    width: 100%;
+    background-color: var(--nav);
 }
 
-#nav {
+.section {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--principale);
-    height: 4vw;
-    color: var(--white);
-    display: flex; 
-    padding: 0 1vw; 
+    height: 100vh;
 }
 
-.onglet_nav {
-    color: var(--white);
-    margin-right: 2vw; 
+                                        /* Section 1 */
+
+#section_1 {
+    flex-wrap: wrap;
+
 }
 
-.onglet_nav:hover {
-    transform: scale(1.05);
-    transition: 0.3s;
-    cursor: pointer;
+#bouton_nous_contacter {
+  margin-top: 2vw;
 }
 
-#btn_mon_compte {
+#bouton_nous_contacter a {
     background-color: var(--bouton);
-    margin-right: 2vw; 
-    height: 2.5vw;
-    width: 10vw;
-    border-radius: var(--radius2);
     border: none;
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--white);
+    font-size: 0.75em;
+}
+
+#section_1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(50%);
+}
+
+#section_1_infos, #bouton_nous_contacter {
+    position: absolute;
+    color: var(--white);
+    text-align: center;
+    width: 100%;
+}
+
+#section_1_infos {
+    padding-top: 200px;
+}
+
+#bouton_nous_contacter {
+    padding-top: 100px;
+}
+
+#section_1 h1 {
+    top: 20%;
+}
+
+#section_1 h2 {
+    top: 30%;
+}
+
+#bouton_nous_contacter {
+    top: 40%;
+}
+
+
+                                        /* Section 2 */
+
+#section_2 {
+    background-color: var(--black);
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+}
+
+#titre_section_2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    padding-top: 30px;
+}
+
+.liste_coach {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 100%; 
+}
+
+.carte_coach{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
+    height: 80%;
+    background-color: white;
+    border: 1px solid black;
     color: black;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(238, 237, 237, 0.39);
+    margin: 10px 0 0 10px;
 }
 
-#btn_mon_compte:hover {
-    background-color: var(--boutonHover);
-    color: var(--white);
+.image_coach {
+    width: 14vw;
+    height: 14vw;
+    background-color: gray;
 }
 
-#image_accueil {
-    height: 17.5vw;
-    position: relative; /* Nécessaire pour que l'élément fils en absolu (#bandeau_recherche) puisse se positionner */
-    overflow: hidden;
+.nom_coach {
+    margin: 10px;
 }
 
-#image_accueil img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    object-position: 50% 35%; 
-}
-
-#recherche {
-    margin-left: 0;
-}
-
-.champs_recherche{
-    margin-right: 2vw;
-    height: 2.5vw;
-    width: 15vw;
-    border-radius: var(--radius2);
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.432);
+.bouton_informations_coach a {
+    background-color: orange;
     border: none;
-}
-
-#btn_rechercher {
-    background-color: var(--bouton);
-    color: var(--principale);
-    border: none;
+    border-radius: 10px;
+    padding: 10px;
     cursor: pointer;
-    width: 2.5vw;
-    height: 2.5vw;
-    border-radius: 13px;
+    text-decoration: none;
+    color: black;
 }
 
-#btn_rechercher:hover {
-    background-color: var(--boutonHover);
-    color: var(--white);
+
+                                        /* Section 3 */
+
+#section_3 {
+    
 }
 
-#cartes_infos { 
-    background-color: var(--principale);
-    width: 100%;
-    height: 30vw;
+#footer {
+    
+}
+
+#liste_coach_mobile {
+    display: none;
+}
+
+.swiper-slide {
     display: flex;
-    justify-content: space-around; 
-    align-items: flex-end; 
-    border-top: 2px solid var(--white);
+    justify-content: center;
+    align-items: center;
 }
 
-.carte {
-    background-color: var(--secondaire);
-    border: 2px solid var(--white);
-    color: var(--white);
-    height: 23vw;
-    width: 27vw;
-    border-radius: var(--radius) var(--radius) 0 0;
-    overflow: hidden; 
-}
+                                        /*  Mobile */
 
-.carte img {
-    width: 100%;
-    height: 50%; 
-    object-fit: cover; 
-    object-position: center; 
-}
+@media (max-width: 768px) {
 
-.carte h2 {
-    margin: 0;
-    margin-top: 1vw; 
-    margin-left: 1vw; 
-    color: var(--white);
-}
+    .swiper {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
 
-ion-icon {
-    color: #000000;
-    font-size: 15px;
+    #swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    #liste_coach_mobile {
+        display: block;
+    }
+
+    #liste_coach_pc {
+        display: none;
+    }
+
+    #nav_bar {
+        /* position: relative; */ /* Pour que la nav ne suive pas le défilement de la page */
+        align-items: center;
+    }
+
+    .section {
+        flex-direction: column;
+    }
+
+    .carte_coach {
+        width: 60%;
+        padding: 30px;
+        height: auto;
+    }
+
+    .image_coach {
+        width: 150px;
+        height: 150px;
+    }
+
+    .bouton_informations_coach a {
+        width: 100%;
+        text-align: center;
+    }
 }
