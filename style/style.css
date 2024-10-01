@@ -3,10 +3,10 @@
 :root {
     --radius : 20px;
     --radius2 : 10px;
-    --darkBlue: #001d3d;
-    --blue : #023a54;
-    --yellow : #ffd60a;
-    --yellowHover : #e9c822;
+    --principale: #00296b;
+    --secondaire : #003f88;
+    --bouton : #fdc500;
+    --boutonHover : #ffd500;
     --white : #ffff;
 }
 
@@ -17,19 +17,28 @@ body {
     overflow: hidden;
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+.nav-right .onglet_nav, .nav-right #btn_mon_compte {
+    margin-left: 10px;
+}
+
 #nav {
-    background-color: var(--darkBlue);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--principale);
     height: 4vw;
     color: var(--white);
-    display: flex; /* Utiliser flex pour aligner les éléments horizontalement */
-    align-items: center; /* Aligner verticalement les éléments au centre */
-    justify-content: flex-end; /* Aligner les éléments au début (à gauche) */
-    padding: 0 1vw; /* Espacement intérieur pour ne pas coller les éléments aux bords */
+    display: flex; 
+    padding: 0 1vw; 
 }
 
 .onglet_nav {
     color: var(--white);
-    margin-right: 2vw; /* Espacement entre les onglets */
+    margin-right: 2vw; 
 }
 
 .onglet_nav:hover {
@@ -38,20 +47,21 @@ body {
     cursor: pointer;
 }
 
-#btn_mon_compte {background-color: var(--yellow);
-    margin-right: 2vw; /* Espacement entre les inputs */
+#btn_mon_compte {
+    background-color: var(--bouton);
+    margin-right: 2vw; 
     height: 2.5vw;
     width: 10vw;
     border-radius: var(--radius2);
     border: none;
-    color: var(--blue);
+    color: black;
     font-weight: bold;
     cursor: pointer;
     box-shadow: 2px 2px 10px rgba(238, 237, 237, 0.39);
 }
 
 #btn_mon_compte:hover {
-    background-color: var(--yellowHover);
+    background-color: var(--boutonHover);
     color: var(--white);
 }
 
@@ -64,35 +74,16 @@ body {
 #image_accueil img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* garde le ratio, remplissant la div */
-    object-position: 50% 35%; /* centre l'image verticalement et montre davantage le bas */
+    object-fit: cover; 
+    object-position: 50% 35%; 
 }
 
-#bandeau_recherche {
-    background-color: var(--darkBlue);
-    display: flex;
-    align-items: flex-end; /* Aligne les éléments en bas */
-    height: 7vw;
-    width: 30vw; 
-    position: absolute; /* Pour permettre la superposition */
-    top: 21vw;
-    left: 33%;
-    transform: translateY(-50%); /* Centre verticalement à moitié */
-    border-radius: var(--radius);
-    padding: 1vw;
-    border: 2px solid var(--white);
-}
-
-#bandeau_recherche h2 {
-    position: absolute;
-    margin: 0;
-    top: 1.5vw; 
-    left: 1.5vw; 
-    color: var(--yellow);
+#recherche {
+    margin-left: 0;
 }
 
 .champs_recherche{
-    margin-right: 2vw; /* Espacement entre les inputs */
+    margin-right: 2vw;
     height: 2.5vw;
     width: 15vw;
     border-radius: var(--radius2);
@@ -101,8 +92,8 @@ body {
 }
 
 #btn_rechercher {
-    background-color: var(--yellow);
-    color: var(--blue);
+    background-color: var(--bouton);
+    color: var(--principale);
     border: none;
     cursor: pointer;
     width: 2.5vw;
@@ -111,35 +102,35 @@ body {
 }
 
 #btn_rechercher:hover {
-    background-color: var(--yellowHover);
+    background-color: var(--boutonHover);
     color: var(--white);
 }
 
 #cartes_infos { 
-    background-color: var(--darkBlue);
+    background-color: var(--principale);
     width: 100%;
     height: 30vw;
     display: flex;
-    justify-content: space-around; /* Pour espacer les cartes régulièrement */
-    align-items: flex-end; /* Pour aligner les cartes en bas */
+    justify-content: space-around; 
+    align-items: flex-end; 
     border-top: 2px solid var(--white);
 }
 
 .carte {
-    background-color: var(--blue);
+    background-color: var(--secondaire);
     border: 2px solid var(--white);
     color: var(--white);
     height: 23vw;
     width: 27vw;
     border-radius: var(--radius) var(--radius) 0 0;
-    overflow: hidden; /* Assure que l'image ne dépasse pas les bords arrondis */
+    overflow: hidden; 
 }
 
 .carte img {
-    width: 100%; /* Remplit toute la largeur de la div */
-    height: 50%; /* Remplit la moitié supérieure de la div */
-    object-fit: cover; /* Garde le ratio et remplit l'espace */
-    object-position: center; /* Centre l'image */
+    width: 100%;
+    height: 50%; 
+    object-fit: cover; 
+    object-position: center; 
 }
 
 .carte h2 {
