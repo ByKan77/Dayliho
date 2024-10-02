@@ -1,8 +1,3 @@
--- Création de la base de données
-CREATE DATABASE dayliho;
-
--- Utilisation de la base de données
-USE dayliho;
 
 -- Création de la table utilisateur
 CREATE TABLE utilisateur (
@@ -14,6 +9,11 @@ CREATE TABLE utilisateur (
     role VARCHAR(50) NOT NULL
 );
 
+INSERT INTO utilisateur (nom, prenom, mdp, sport, role) VALUES 
+('DENEUCHATEL', 'Dorian', 'mdp', 'foot', 'administrateur'),
+('OUADAH', 'Sofiane', 'mdp', 'basketball', 'administrateur'),
+('NOUET', 'Flavien', 'mdp', 'doigt cassé', 'administrateur');
+
 -- Création de la table video
 CREATE TABLE video (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -23,6 +23,10 @@ CREATE TABLE video (
     date DATE,
     FOREIGN KEY (auteur) REFERENCES utilisateur(id)
 );
+
+INSERT INTO video (titre, description, auteur, date) VALUES 
+('Entraînement cardio', 'blablablablablabla', 1, '2024-10-02'),
+('Entraînement boxe', 'blablablablablabla', 2, '2024-10-02');
 
 -- Création de la table historique_video
 CREATE TABLE historique_video (
