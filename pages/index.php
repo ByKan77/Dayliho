@@ -4,6 +4,7 @@
     require '../requires/index_section_1.php';
     require '../requires/index_section_2.php';
     require '../requires/index_section_3.php';
+    require '../requires/index_footer.php';
 ?>
 <div id="footer">
     

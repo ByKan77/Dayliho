@@ -1,15 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-    --radius : 20px;
-    --radius2 : 10px;
+    --radius: 20px;
+    --radius2: 10px;
     --principale: #00296b;
-    --secondaire : #003f88;
-    --bouton : #fd9d1f;
-    --boutonHover : #bd6e06;
-    --white : #ffff;
+    --secondaire: #003f88;
+    --bouton: #fd9d1f;
+    --boutonHover: #bd6e06;
+    --white: #ffff;
     --black: #000000;
-    --nav : #f2f2f2;
+    --nav: #f2f2f2;
+}
+
+* {
+    margin: 0; /* Réinitialisation des marges pour tous les éléments */
+    padding: 0; /* Réinitialisation des paddings pour tous les éléments */
+    box-sizing: border-box; /* Gère le padding et les bordures */
 }
 
 body {
@@ -21,32 +27,29 @@ body {
 #nav_bar {
     z-index: 1000;
     position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #060e31;
     display: flex;
     justify-content: space-around;
+    padding: 10px 0;
     min-height: 60px;
-    height: auto;
-    width: 100%;
-    background-color: var(--nav);
-}
-
-#nav_bar {
-    background-color: #333;
     overflow: hidden;
+    border-bottom: 2px solid white;
 }
 
 #nav_bar .bouton_nav {
-    float: left;
-    display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #nav_bar .bouton_nav:hover {
     background-color: #ddd;
-    color: black;
+    color: rgb(92, 46, 192);
 }
 
 .section {
@@ -54,15 +57,13 @@ body {
     height: 100vh;
 }
 
-                                        /* Section 1 */
-
+/* Section 1 */
 #section_1 {
     flex-wrap: wrap;
-
 }
 
 #bouton_nous_contacter {
-  margin-top: 2vw;
+    margin-top: 2vw;
 }
 
 #bouton_nous_contacter a {
@@ -78,7 +79,6 @@ body {
 
 #bouton_nous_contacter a:hover {
     background-color: var(--boutonHover);
-
 }
 
 #section_1 img {
@@ -88,7 +88,8 @@ body {
     filter: brightness(40%);
 }
 
-#section_1_infos, #bouton_nous_contacter {
+#section_1_infos,
+#bouton_nous_contacter {
     position: absolute;
     color: var(--white);
     text-align: center;
@@ -123,9 +124,7 @@ body {
     top: 40%;
 }
 
-
-                                        /* Section 2 */
-
+/* Section 2 */
 #section_2 {
     background-color: var(--black);
     flex-direction: row;
@@ -133,6 +132,7 @@ body {
     justify-content: center;
     align-items: center;
     color: var(--white);
+    border-bottom: 2px solid white;
 }
 
 #titre_section_2 {
@@ -150,10 +150,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 80%;
-    width: 100%; 
+    width: 100%;
 }
 
-.carte_coach{
+.carte_coach {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -161,10 +161,11 @@ body {
     justify-content: center;
     width: 20vw;
     height: 80%;
-    background-color: white;
-    border: 1px solid black;
+    background-color: #060e31;
+    border: 1px solid rgb(255, 255, 255);
     color: black;
-    margin: 10px 0 0 10px;
+    margin: 20px 0 0 10px;
+    color: white;
 }
 
 .image_coach {
@@ -172,11 +173,10 @@ body {
     height: 14vw;
 }
 
-.image_coach img{
+.image_coach img {
     width: 14vw;
     height: 14vw;
 }
-
 
 .nom_coach {
     display: flex;
@@ -196,15 +196,86 @@ body {
     color: black;
 }
 
-
-                                        /* Section 3 */
-
+/* Section 3 */
 #section_3 {
-    
+    background-color: #060e31;
+    color: var(--footer-text);
+    padding: 50px 20px;
+    text-align: center;
+    border-bottom: 2px solid white;
+    margin-bottom: 0; /* Supprime l'espace entre section 3 et footer */
 }
 
-#footer {
-    
+#section_3 h2 {
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+#contact_form {
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: var(--radius2);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#contact_form .form-group {
+    margin-bottom: 20px;
+}
+
+#contact_form label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+#contact_form input,
+#contact_form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: var(--radius2);
+    font-size: 16px;
+    font-family: 'Kanit', sans-serif;
+    color: #333;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease;
+}
+
+#contact_form input:focus,
+#contact_form textarea:focus {
+    border-color: var(--principale);
+    outline: none;
+}
+
+#contact_form button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--bouton);
+    color: white;
+    border: none;
+    border-radius: var(--radius2);
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#contact_form button:hover {
+    background-color: var(--boutonHover);
+}
+
+footer {
+    background-color: #000000;
+    margin: 0; /* Supprime la marge pour le footer */
+}
+
+footer p {
+    color: white;
+    text-align: center;
+    margin: 0; /* Supprime les marges pour le texte du footer */
 }
 
 #liste_coach_mobile {
@@ -217,9 +288,7 @@ body {
     align-items: center;
 }
 
-
-                                        /*  Videos */
-
+/*  Videos */
 .video-grid {
     padding-top: 90px;
     display: flex;
@@ -239,7 +308,7 @@ body {
     width: 40%;
     height: auto;
     object-fit: cover;
-    border-radius:20px;
+    border-radius: 20px;
 }
 
 .video-info {
@@ -261,10 +330,8 @@ body {
     color: #555;
 }
 
-                                        /*  Mobile */
-
+/*  Mobile */
 @media (max-width: 768px) {
-
     .swiper {
         width: 100%;
         height: 300px;
@@ -279,7 +346,7 @@ body {
         justify-content: center;
         align-items: center;
     }
-    
+
     #liste_coach_mobile {
         display: block;
     }
@@ -289,7 +356,6 @@ body {
     }
 
     #nav_bar {
-        /* position: relative; */ /* Pour que la nav ne suive pas le défilement de la page */
         align-items: center;
     }
 
