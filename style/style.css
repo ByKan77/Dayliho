@@ -220,45 +220,26 @@ body {
 
                                         /*  Videos */
 
-.video-grid {
-    padding-top: 90px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.container {
+    padding-top: 5vw;
 }
 
-.video-card {
-    display: flex;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100%;
-    height: 20vw;
+.video-container {
+    padding: 4px;
+    margin: 4px;
+    background-color: red;
 }
 
-.video-thumbnail {
-    width: 40%;
-    height: auto;
-    object-fit: cover;
-    border-radius:20px;
+.titre-video {
+    background-color: blue;
 }
 
-.video-info {
-    padding: 10px;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.description-video {
+    background-color: green;
 }
 
-.titre_video {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0;
-}
-
-.description_video {
-    font-size: 14px;
-    color: #555;
+.auteur-video {
+    background-color: orange;
 }
 
                                         /*  Mobile */
