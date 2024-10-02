@@ -6,7 +6,7 @@
     --principale: #00296b;
     --secondaire : #003f88;
     --bouton : #fd9d1f;
-    --boutonHover : #c9780d;
+    --boutonHover : #bd6e06;
     --white : #ffff;
     --black: #000000;
     --nav : #f2f2f2;
@@ -74,6 +74,11 @@ body {
     text-decoration: none;
     color: var(--white);
     font-size: 0.75em;
+}
+
+#bouton_nous_contacter a:hover {
+    background-color: var(--boutonHover);
+
 }
 
 #section_1 img {
