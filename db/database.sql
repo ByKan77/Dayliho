@@ -4,15 +4,16 @@ CREATE TABLE utilisateur (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
-    mdp VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    mot_de_passe VARCHAR(255) NOT NULL,
     sport VARCHAR(100),
     role VARCHAR(50) NOT NULL
 );
 
-INSERT INTO utilisateur (nom, prenom, mdp, sport, role) VALUES 
-('DENEUCHATEL', 'Dorian', 'mdp', 'foot', 'administrateur'),
-('OUADAH', 'Sofiane', 'mdp', 'basketball', 'administrateur'),
-('NOUET', 'Flavien', 'mdp', 'doigt cassé', 'administrateur');
+INSERT INTO utilisateur (nom, prenom, email, mot_de_passe, sport, role) VALUES 
+('DENEUCHATEL', 'Dorian', 'dorian@gmail.com', 'mdp', 'foot', 'administrateur'),
+('OUADAH', 'Sofiane', 'sofiane@gmail.com', 'mdp', 'basketball', 'administrateur'),
+('NOUET', 'Flavien', 'flavien@gmail.com', 'mdp', 'doigt cassé', 'administrateur');
 
 -- Création de la table video
 CREATE TABLE video (
