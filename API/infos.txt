@@ -1,0 +1,4 @@
+Node est un environnement d'exécution, il permet l'exécution du JS côté serveur.
+Ce n'est ni un langage de prog, ni une librairy, ni un framework.
+Librairy : ensemble de fonctions.
+Framework : ensemble de librairy.
