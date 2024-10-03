@@ -1,36 +1,8 @@
 <?php
 require '../back/header.php';
-
-// Vérifie si le formulaire a été soumis
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupère l'email et le mot de passe
-    $email = $_POST['email'];
-    $mot_de_passe = $_POST['mot_de_passe'];
-
-    // Prépare et exécute la requête pour récupérer l'utilisateur
-    $stmt = $pdo->prepare("SELECT id, nom, prenom, role, mot_de_passe FROM utilisateurs WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Vérifie si l'utilisateur existe et si le mot de passe est correct
-    if ($user && password_verify($mot_de_passe, $user['mot_de_passe'])) {
-        // Stocke les informations de l'utilisateur dans la session
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_name'] = $user['nom'];
-        $_SESSION['user_role'] = $user['role'];
-        
-        header('Location: ...');
-        
-        exit();
-    } else {
-        // Message d'erreur si l'authentification échoue
-        $error_message = "Email ou mot de passe incorrect.";
-    }   
-}
 ?>
 <title>Connexion</title>
 <style>
-
     #formulaire_connexion {
         display: flex;
         flex-direction: column;
@@ -60,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         margin-bottom: 5px;
     }
 
-    #connexion input{
+    #connexion input {
         width: 20vw;
         padding: 10px;
         border: 1px solid #ccc;
@@ -89,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </style>
 <div id="connexion">
     <h1>Connexion</h1>
-    <form id="formulaire_connexion" method="POST">
+    <form id="formulaire_de_connexion" method="POST">
         <div>
             <label for="email">Email :</label>
             <input type="email" name="email" id="email" class="form-control" required>
@@ -105,6 +77,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div style="display:flex;justify-content:center;align-item:center; margin:20px;">
     <a href="index.php" style="color:red;">CONNEXION DIRECTE</a>
 </div>
-
-</body>
-</html>
+<script>
+    axios.get("http://localhost:1234/getUser") // Effectue une requête GET à l'URL spécifiée
+        .then(response => { // Traite la réponse de la requête
+            const utilisateurs = response.data; // Récupère la liste des utilisateurs
+            if (utilisateurs.length > 0) { // Vérifie que des utilisateurs ont été récupérés
+                utilisateurs.forEach(utilisateur => {
+                    const userEmail = utilisateur.email; // Récupère l'email de l'utilisateur
+                    const userPassword = utilisateur.mot_de_passe; // Récupère le mot de passe de l'utilisateur
+                    document.getElementById('formulaire_de_connexion').addEventListener('submit', function(event) {
+                        event.preventDefault(); // Empêche l'envoi du formulaire
+                        const formEmail = document.getElementById('email').value;
+                        const formPassword = document.getElementById('mot_de_passe').value;
+                        if (formEmail === userEmail && formPassword === userPassword) {
+                            window.location.href = 'index.php';
+                        } else {
+                            alert('Email ou mot de passe incorrect.');
+                        }
+                    });
+                });
+            } else {
+                console.log("Aucun utilisateur trouvé.");
+            }
+        })
+        .catch(error => {
+            console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
+        });
+</script>
