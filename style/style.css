@@ -193,7 +193,7 @@ body {
     padding: 10px;
     cursor: pointer;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 /* Section 3 */
@@ -204,12 +204,25 @@ body {
     text-align: center;
     border-bottom: 2px solid white;
     margin-bottom: 0; /* Supprime l'espace entre section 3 et footer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #section_3 h2 {
     margin-bottom: 30px;
     font-size: 2em;
 }
+
+@media (max-width: 768px) { /* Responsive du contact */
+    #contact_form {
+        width: 100%;
+        max-width: 90%;
+        height: auto;
+        padding: 15px;
+    }
+}
+
 
 #contact_form {
     width: 600px;

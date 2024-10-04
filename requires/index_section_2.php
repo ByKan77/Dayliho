@@ -87,8 +87,8 @@
 
                         </div>
                         <div class="nom_coach">
-                            <h3>Bryan RUKIA</h3>
-                            <p>Coach universel</p>
+                            <h3>Julie GARNIER</h3>
+                            <p>Coach renforcement musculaire</p>
                         </div>
                         <div class="bouton_informations_coach">
                             <a href="">En savoir plus</a>
