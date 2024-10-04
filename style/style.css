@@ -176,6 +176,11 @@ body {
     color: black;
     margin: 20px 0 0 10px;
     color: white;
+    transition: border 0.6s ease; 
+}
+
+.carte_coach:hover {
+    border-color: rgba(255, 255, 255, 0); /* Bordure blanche avec opacité à 0 (disparition) */
 }
 
 .image_coach {
