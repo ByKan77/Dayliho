@@ -6,6 +6,6 @@
         <span id="entête_2">Créé par des coachs, pour les joueurs.</span>
     </div>
     <div id="bouton_nous_contacter">
-        <a href="">CONTACTEZ-NOUS</a>
+        <a href="#section_3">CONTACTEZ-NOUS</a>
     </div>
 </div>
