@@ -4,6 +4,6 @@
     <i class="fa-solid fa-house"></i>  Accueil</a>
     <a href="../pages/videos.php" class="bouton_nav">
     <i class="fa-solid fa-video"></i>  Vidéos</a>
-    <a href="../pages/videos.php" class="bouton_nav">
+    <a href="../pages/login.php" class="bouton_nav">
     <i class="fa-solid fa-user"></i>  Connexion</a>
 </div>
