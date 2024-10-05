@@ -202,7 +202,7 @@ body {
 }
 
 .bouton_informations_coach a {
-    background-color: orange;
+    background-color: var(--bouton);
     border: none;
     border-radius: 10px;
     padding: 10px;
@@ -216,7 +216,7 @@ body {
     background-color: #060e31;
     color: var(--footer-text);
     padding: 50px 20px;
-    text-align: center;
+    text-align: left;
     border-bottom: 2px solid white;
     margin-bottom: 0; /* Supprime l'espace entre section 3 et footer */
     display: flex;
