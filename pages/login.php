@@ -74,33 +74,30 @@ require '../back/header.php';
         <input type="submit" value="Se connecter" class="btn">
     </form>
 </div>
-<div style="display:flex;justify-content:center;align-item:center; margin:20px;">
-    <a href="index.php" style="color:red;">CONNEXION DIRECTE</a>
-</div>
 <script>
     axios.get("http://localhost:1234/getUser") // Effectue une requête GET à l'URL spécifiée
         .then(response => { // Traite la réponse de la requête
             const utilisateurs = response.data; // Récupère la liste des utilisateurs
-            if (utilisateurs.length > 0) { // Vérifie que des utilisateurs ont été récupérés
-                utilisateurs.forEach(utilisateur => {
-                    const userEmail = utilisateur.email; // Récupère l'email de l'utilisateur
-                    const userPassword = utilisateur.mot_de_passe; // Récupère le mot de passe de l'utilisateur
-                    document.getElementById('formulaire_de_connexion').addEventListener('submit', function(event) {
-                        event.preventDefault(); // Empêche l'envoi du formulaire
-                        const formEmail = document.getElementById('email').value;
-                        const formPassword = document.getElementById('mot_de_passe').value;
-                        if (formEmail === userEmail && formPassword === userPassword) {
-                            window.location.href = 'index.php';
-                        } else {
-                            alert('Email ou mot de passe incorrect.');
-                        }
-                    });
-                });
-            } else {
-                console.log("Aucun utilisateur trouvé.");
-            }
+            document.getElementById('formulaire_de_connexion').addEventListener('submit', function(event) {
+                event.preventDefault(); // Empêche le comportement par défaut du formulaire (soumission et rafraîchissement de la page)
+                
+                const formEmail = document.getElementById('email').value;
+                const formPassword = document.getElementById('mot_de_passe').value;
+
+                // Vérifie si l'utilisateur avec le bon email et mot de passe existe
+                const utilisateur = utilisateurs.find(user => user.email === formEmail && user.mot_de_passe === formPassword); // Find recherche le premier utilisateur qui correspond à l'email et au mot de passe saisis dans le formulaire.
+
+                if (utilisateur) {
+                    // Connexion réussie
+                    window.location.href = 'index.php';
+                } else {
+                    // Connexion échouée
+                    alert('Email ou mot de passe incorrect.');
+                }
+            });
         })
         .catch(error => {
             console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
         });
 </script>
+
