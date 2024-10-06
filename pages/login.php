@@ -75,29 +75,53 @@ require '../back/header.php';
     </form>
 </div>
 <script>
-    axios.get("http://localhost:1234/getUser") // Effectue une requête GET à l'URL spécifiée
-        .then(response => { // Traite la réponse de la requête
-            const utilisateurs = response.data; // Récupère la liste des utilisateurs
-            document.getElementById('formulaire_de_connexion').addEventListener('submit', function(event) {
-                event.preventDefault(); // Empêche le comportement par défaut du formulaire (soumission et rafraîchissement de la page)
-                
-                const formEmail = document.getElementById('email').value;
-                const formPassword = document.getElementById('mot_de_passe').value;
+    document.getElementById('formulaire_de_connexion').addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêche l'envoi du formulaire
 
-                // Vérifie si l'utilisateur avec le bon email et mot de passe existe
-                const utilisateur = utilisateurs.find(user => user.email === formEmail && user.mot_de_passe === formPassword); // Find recherche le premier utilisateur qui correspond à l'email et au mot de passe saisis dans le formulaire.
+        const formEmail = document.getElementById('email').value;
+        const formPassword = document.getElementById('mot_de_passe').value;
 
-                if (utilisateur) {
-                    // Connexion réussie
-                    window.location.href = 'index.php';
-                } else {
-                    // Connexion échouée
-                    alert('Email ou mot de passe incorrect.');
-                }
-            });
+        // Envoi des informations de connexion à l'API pour vérification
+        fetch('http://localhost:1234/checkUser', { // Route API pour vérifier les infos
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: formEmail,
+                mot_de_passe: formPassword
+            })
         })
-        .catch(error => {
-            console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
-        });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Connexion réussie, on envoie les données à PHP pour gérer la session
+                fetch('../back/login_handler.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: formEmail,
+                        user_id: data.user_id // On récupère l'ID utilisateur renvoyé par l'API
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Redirection vers la page protégée
+                        window.location.href = 'index.php';
+                    } else {
+                        alert('Erreur de session : ' + data.message);
+                    }
+                });
+            } else {
+                // Erreur de connexion
+                alert('Email ou mot de passe incorrect.');
+            }
+        })
+        .catch(error => console.error('Erreur lors de la connexion:', error));
+    });
 </script>
+
 

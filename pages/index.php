@@ -1,4 +1,12 @@
 <?php 
+    session_start();
+
+    // Si l'utilisateur n'est pas connecté, redirection vers la page de connexion
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: login.php');
+        exit();
+    }
+
     require_once '../back/header.php';
     require '../requires/nav.php';
     require '../requires/index_section_1.php';
