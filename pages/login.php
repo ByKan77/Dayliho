@@ -1,63 +1,83 @@
 <?php
 require '../back/header.php';
+require '../requires/nav.php';
 ?>
 <title>Connexion</title>
 <style>
-    #formulaire_connexion {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    
+    body {
+    display: flex;
+    justify-content: flex-start; /* Position à gauche */
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('../addons/image_connexion.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
-    #connexion {
-        width: 40vw;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+#connexion {
+    width: 40vw; /* Largeur de la boîte */
+    padding: 20px;
+    margin: 70px; /* Marge autour de la boîte */
+    border: 1px solid #444;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    background-color: #fff; /* Fond blanc */
+    text-align: center; /* Centre le texte à l'intérieur de la boîte */
+}
 
-    #connexion h1 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+#connexion h1 {
+    margin-bottom: 20px; /* Espace sous le titre */
+}
 
-    #connexion div {
-        margin-bottom: 15px;
-    }
+#connexion div {
+    margin-bottom: 15px; /* Espace sous chaque groupe */
+}
 
-    #connexion label {
-        display: block;
-        margin-bottom: 5px;
-    }
+#connexion label {
+    display: block; /* Affiche le label en bloc */
+    margin-bottom: 5px; /* Espace sous le label */
+    text-align: center; /* Centre le texte du label */
+}
 
-    #connexion input {
-        width: 20vw;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
+#connexion input {
+    width: calc(100% - 20px); /* Largeur complète moins le padding */
+    padding: 10px;
+    border: 1px solid #ccc; /* Bordure sombre */
+    border-radius: 5px;
+    background-color: #fafafa; /* Fond blanc pour les champs */
+    color: #333; /* Couleur du texte dans les champs */
+}
 
-    #connexion .btn {
-        width: 20vw;
-        padding: 10px;
-        background-color: #007bff;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-    }
+#connexion .btn {
+    width: calc(100% - 20px); /* Largeur complète moins le padding */
+    padding: 10px;
+    background-color: #fd9d1f; /* Couleur orange du bouton */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Bordure arrondie */
+    color: white; /* Couleur du texte en blanc */
+    font-size: 16px; /* Taille de police */
+    cursor: pointer; /* Curseur main au survol */
+    transition: background-color 0.3s ease; /* Transition pour le survol */
+}
 
-    #connexion .btn:hover {
-        background-color: #0056b3;
-    }
+#connexion .btn:hover {
+    background-color: #bd6e06; /* Couleur orange plus sombre au survol */
+}
 
-    .alert {
-        color: red;
-        text-align: center;
-    }
+.alert {
+    color: red; /* Couleur rouge pour les alertes */
+    text-align: center; /* Centre le texte de l'alerte */
+    margin-top: 10px; /* Espace au-dessus de l'alerte */
+    font-size: 14px; /* Taille de police de l'alerte */
+}
+
+
+
+
+
 </style>
 <div id="connexion">
     <h1>Connexion</h1>

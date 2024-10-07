@@ -202,7 +202,7 @@ body {
 }
 
 .bouton_informations_coach a {
-    background-color: var(--bouton);
+    background-color: orange;
     border: none;
     border-radius: 10px;
     padding: 10px;
@@ -216,7 +216,7 @@ body {
     background-color: #060e31;
     color: var(--footer-text);
     padding: 50px 20px;
-    text-align: left;
+    text-align: center;
     border-bottom: 2px solid white;
     margin-bottom: 0; /* Supprime l'espace entre section 3 et footer */
     display: flex;
@@ -316,6 +316,8 @@ footer p {
     align-items: center;
 }
 
+
+
 /*  Videos */
 .video-grid {
     padding-top: 90px;
@@ -344,6 +346,8 @@ footer p {
 .auteur-video {
     background-color: orange;
 }
+
+
 
 /*  Mobile */
 @media (max-width: 768px) {
