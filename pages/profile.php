@@ -10,7 +10,67 @@ require '../back/header.php';
 require '../requires/nav.php';
 ?>
 
-<div id="user_profile">
+<style>
+    body {
+    background-image: url('../addons/image_profile.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    min-height: 100vh;
+}
+
+#user_profile {
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    max-width: 1200px;
+    width: 100%;
+}
+
+#user_info, #admin_section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#admin_section {
+    display: block;
+    margin-left: 4%;
+}
+
+/* Styles pour le tableau des comptes */
+#accounts_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#accounts_table th, #accounts_table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#accounts_table th {
+    background-color: #f2f2f2;
+}
+
+
+
+</style>
+
+</style> 
+<div id="user_profile" >
     <h1>Profil de l'utilisateur</h1>
     <div id="user_info">
         <!-- Informations de l'utilisateur -->
@@ -45,9 +105,13 @@ require '../requires/nav.php';
                 document.getElementById('user_info').innerHTML = `
                     <br>
                     <p><strong>Email :</strong> ${utilisateur.email}</p>
+                    <br>
                     <p><strong>Nom :</strong> ${utilisateur.nom}</p>
+                    <br>
                     <p><strong>Prénom :</strong> ${utilisateur.prenom}</p>
+                    <br>
                     <p><strong>Sport :</strong> ${utilisateur.sport}</p>
+                    <br>
                     <p><strong>Rôle :</strong> ${utilisateur.role}</p>
                 `;
 
