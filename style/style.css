@@ -54,12 +54,12 @@ body {
 }
 
 #nav_bar .bouton_nav i {
-    transition: transform 0.3s ease; /* Transition fluide sur 0.3 secondes */
+    transition: transform 0.3s ease;
 }
 
 #nav_bar .bouton_nav:hover i {
     transform: translateY(-100px);
-    opacity: 0; /* Déplace l'icône vers le haut de 5px */
+    opacity: 0;
 }
 
 .section {
@@ -180,7 +180,7 @@ body {
 }
 
 .carte_coach:hover {
-    border-color: rgba(255, 255, 255, 0); /* Bordure blanche avec opacité à 0 (disparition) */
+    border-color: rgba(255, 255, 255, 0);
 }
 
 .image_coach {
@@ -218,7 +218,7 @@ body {
     padding: 50px 20px;
     text-align: center;
     border-bottom: 2px solid white;
-    margin-bottom: 0; /* Supprime l'espace entre section 3 et footer */
+    margin-bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -297,13 +297,13 @@ body {
 
 footer {
     background-color: #000000;
-    margin: 0; /* Supprime la marge pour le footer */
+    margin: 0;
 }
 
 footer p {
     color: white;
     text-align: center;
-    margin: 0; /* Supprime les marges pour le texte du footer */
+    margin: 0;
 }
 
 #liste_coach_mobile {
