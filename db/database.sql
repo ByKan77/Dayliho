@@ -27,7 +27,9 @@ CREATE TABLE video (
 
 INSERT INTO video (titre, description, auteur, date) VALUES 
 ('Entraînement cardio', 'blablablablablabla', 1, '2024-10-02'),
-('Entraînement boxe', 'blablablablablabla', 2, '2024-10-02');
+('Entraînement boxe', 'blablablablablabla', 2, '2024-10-02'),
+('Entraînement cardio', 'blablablablablabla', 1, '2024-10-02'),
+('Entraînement cardio', 'blablablablablabla', 2, '2024-10-02'),;
 
 -- Création de la table historique_video
 CREATE TABLE historique_video (
