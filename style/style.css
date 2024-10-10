@@ -318,34 +318,7 @@ footer p {
 
 
 
-/*  Videos */
-.video-grid {
-    padding-top: 90px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
 
-.video-container {
-    padding: 4px;
-    margin: 4px;
-    background-color: red;
-}
-
-.video-thumbnail {
-    width: 40%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 20px;
-}
-
-.description-video {
-    background-color: green;
-}
-
-.auteur-video {
-    background-color: orange;
-}
 
 
 
