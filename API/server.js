@@ -33,6 +33,7 @@ app.get("/getUser",async (req,res)=>{
     let conn = await pool.getConnection() // Si serveur en ligne, fonction async
     const rows = await conn.query("SELECT * FROM utilisateur")
      // console.log(rows)
+     conn.release();
     res.status(200).json(rows)
  });
 
@@ -40,6 +41,8 @@ app.get("/getVideos",async (req,res)=>{
     let conn = await pool.getConnection() 
     const rows = await conn.query("SELECT * FROM video")
     // console.log(rows)
+    conn.release();
+
     res.status(200).json(rows)
 });
 
