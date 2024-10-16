@@ -9,6 +9,6 @@ router.post("/checkUser", userController.checkUser);
 router.get("/getUserById", userController.getUser);
 
 // Route pour récupérer tous les utilisateurs
-router.get("/getUser", userController.getUsers);
+router.get("/getUser", userController.getUser);
 
 module.exports = router;
