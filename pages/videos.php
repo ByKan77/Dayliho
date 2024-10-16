@@ -11,6 +11,17 @@
     require '../requires/nav.php';
 ?>
 <style>
+
+
+/* Pour la nav bar : texte en blanc et une fois que l'on clique dessus c'est la seule blanche et les autres 
+deviennent grises => https://m2.material.io/components/bottom-navigation */
+
+/* Pour les vidéos, suprrimer l'espace entre les box de textes */
+
+
+
+
+
 body {
     background-color: #000;
     color: white;
@@ -38,7 +49,7 @@ body {
     flex: 0 1 calc(33.33% - 20px); /* La largeur reste fixe pour 3 éléments par ligne */
     display: flex;
     gap: 20px;
-    background-color: #1e1e1e;
+    background-color: #060e31;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -96,7 +107,7 @@ body {
 }
 
 .titre-video, .description-video, .auteur-video {
-    background-color: red;
+    background-color: black;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -109,12 +120,12 @@ body {
 
 .description-video {
     font-size: 1rem;
-    background-color: green;
+    background-color: black;
 }
 
 .auteur-video {
     font-size: 0.9rem;
-    background-color: blue;
+    background-color: black;
 }
 
 /* Style du bloc blanc */
@@ -159,13 +170,13 @@ body {
                 const titreVideo = document.createElement('div');
                 titreVideo.classList.add('titre-video');
                 const h3 = document.createElement('h3');
-                h3.textContent = `Intitulé: ${video.intitule}`;
+                h3.textContent = `${video.titre}`;
                 titreVideo.appendChild(h3);
 
                 // Description de la vidéo
                 const descriptionVideo = document.createElement('div');
                 descriptionVideo.classList.add('description-video');
-                descriptionVideo.textContent = `Description: ${video.description}`;
+                descriptionVideo.textContent = `${video.description}`;
 
                 // Auteur de la vidéo
                 const auteurVideo = document.createElement('div');
