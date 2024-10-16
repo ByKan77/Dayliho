@@ -48,18 +48,14 @@ body {
     border-radius: 20%;
 }
 
-#nav_bar .bouton_nav:hover {
-    background-color: #ddd;
-    color: #060e31;
-}
 
 #nav_bar .bouton_nav i {
     transition: transform 0.3s ease;
 }
 
-#nav_bar .bouton_nav:hover i {
-    transform: translateY(-100px);
-    opacity: 0;
+#nav_bar .bouton_nav:hover {
+    transform: scale(1.25);
+    transition: transform 0.3s ease;
 }
 
 .section {
