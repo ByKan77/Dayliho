@@ -90,7 +90,7 @@ require '../requires/nav.php';
 
     @media (max-width: 768px) {
         #user_profile {
-            flex-direction: column; /* Passe en colonne sur les petits écrans */
+            flex-direction: column;
             align-items: center;
         }
 
@@ -130,15 +130,12 @@ require '../requires/nav.php';
     const userId = <?php echo json_encode($_SESSION['user_id']); ?>; // Récupère l'ID de l'utilisateur à partir de la session
 
     // Récupérer les informations de l'utilisateur connecté via l'API
-    axios.get(`http://localhost:1234/user/getUser?id=${userId}`)
+    axios.get(`http://localhost:1234/user/getUserById?id=${userId}`)
     .then(response => {
-        console.log(response.data);  // Ajoute ceci pour voir la réponse complète
         const utilisateur = response.data;
         
         if (utilisateur) {
             // Affichage des infos de l'utilisateur
-            console.log('Utilisateur récupéré');
-            
             document.getElementById('user_info').innerHTML = `
                 <br>
                 <p><strong>Email :</strong> ${utilisateur.email}</p>
@@ -151,6 +148,32 @@ require '../requires/nav.php';
                 <br>
                 <p><strong>Rôle :</strong> ${utilisateur.role}</p>
             `;
+
+            // Si l'utilisateur est un administrateur, affichez la section administrateur et récupérez la liste des comptes
+            if (utilisateur.role === 'administrateur') {
+                document.getElementById('admin_section').style.display = 'block';
+
+                axios.get('http://localhost:1234/user/getUsers') // Récupérer tous les utilisateurs
+                    .then(response => {
+                        const allUsers = response.data;
+                        const accountsTableBody = document.getElementById('accounts_table').querySelector('tbody');
+                        accountsTableBody.innerHTML = ''; 
+
+                        allUsers.forEach(user => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${user.nom}</td>
+                                <td>${user.prenom}</td>
+                                <td>${user.email}</td>
+                            `;
+                            accountsTableBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Erreur lors de la récupération de la liste des comptes:", error);
+                        document.getElementById('admin_section').innerHTML = '<p>Erreur lors de la récupération de la liste des comptes.</p>';
+                    });
+            }
         } else {
             document.getElementById('user_info').innerHTML = '<p>Aucun utilisateur trouvé.</p>';
         }
@@ -159,6 +182,4 @@ require '../requires/nav.php';
         console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
         document.getElementById('user_info').innerHTML = '<p>Erreur lors de la récupération des données.</p>';
     });
-
 </script>
-
