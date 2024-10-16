@@ -148,7 +148,7 @@ body {
 <script>
     const listeVideos = document.getElementById("listeVideos");
 
-    axios.get("http://localhost:1234/getVideos")
+    axios.get("http://localhost:1234/video/getVideos")
         .then(response => {
             const videos = response.data;
             listeVideos.innerHTML = ''; 
