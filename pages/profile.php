@@ -127,60 +127,38 @@ require '../requires/nav.php';
 </div>
 
 <script>
-    const userId = <?php echo json_encode($_SESSION['user_id']); ?>; // Prend l'id du user
+    const userId = <?php echo json_encode($_SESSION['user_id']); ?>; // Récupère l'ID de l'utilisateur à partir de la session
 
-    // Recupere les infos user
-    axios.get(`http://localhost:1234/getUser?id=${userId}`)
-        .then(response => {
-            const utilisateurs = response.data; // Liste user
-            const utilisateur = utilisateurs.find(user => user.id === userId);
+    // Récupérer les informations de l'utilisateur connecté via l'API
+    axios.get(`http://localhost:1234/user/getUser?id=${userId}`)
+    .then(response => {
+        console.log(response.data);  // Ajoute ceci pour voir la réponse complète
+        const utilisateur = response.data;
+        
+        if (utilisateur) {
+            // Affichage des infos de l'utilisateur
+            console.log('Utilisateur récupéré');
             
-            if (utilisateur) {
-                // Infos du user 
-                document.getElementById('user_info').innerHTML = `
-                    <br>
-                    <p><strong>Email :</strong> ${utilisateur.email}</p>
-                    <br>
-                    <p><strong>Nom :</strong> ${utilisateur.nom}</p>
-                    <br>
-                    <p><strong>Prénom :</strong> ${utilisateur.prenom}</p>
-                    <br>
-                    <p><strong>Sport :</strong> ${utilisateur.sport}</p>
-                    <br>
-                    <p><strong>Rôle :</strong> ${utilisateur.role}</p>
-                `;
+            document.getElementById('user_info').innerHTML = `
+                <br>
+                <p><strong>Email :</strong> ${utilisateur.email}</p>
+                <br>
+                <p><strong>Nom :</strong> ${utilisateur.nom}</p>
+                <br>
+                <p><strong>Prénom :</strong> ${utilisateur.prenom}</p>
+                <br>
+                <p><strong>Sport :</strong> ${utilisateur.sport}</p>
+                <br>
+                <p><strong>Rôle :</strong> ${utilisateur.role}</p>
+            `;
+        } else {
+            document.getElementById('user_info').innerHTML = '<p>Aucun utilisateur trouvé.</p>';
+        }
+    })
+    .catch(error => {
+        console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
+        document.getElementById('user_info').innerHTML = '<p>Erreur lors de la récupération des données.</p>';
+    });
 
-                // Si l'utilisateur est un administrateur, affichez la section administrateur et récupérez la liste des comptes
-                if (utilisateur.role === 'administrateur') {
-                    document.getElementById('admin_section').style.display = 'block';
-
-                    axios.get('http://localhost:1234/getUser') // Récupérer tous les utilisateurs
-                        .then(response => {
-                            const allUsers = response.data;
-                            const accountsTableBody = document.getElementById('accounts_table').querySelector('tbody');
-                            accountsTableBody.innerHTML = ''; 
-
-                            allUsers.forEach(user => {
-                                const row = document.createElement('tr');
-                                row.innerHTML = `
-                                    <td>${user.nom}</td>
-                                    <td>${user.prenom}</td>
-                                    <td>${user.email}</td>
-                                `;
-                                accountsTableBody.appendChild(row);
-                            });
-                        })
-                        .catch(error => {
-                            console.error("Erreur lors de la récupération de la liste des comptes:", error);
-                            document.getElementById('admin_section').innerHTML = '<p>Erreur lors de la récupération de la liste des comptes.</p>';
-                        });
-                }
-            } else {
-                document.getElementById('user_info').innerHTML = '<p>Aucun utilisateur trouvé.</p>';
-            }
-        })
-        .catch(error => {
-            console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
-            document.getElementById('user_info').innerHTML = '<p>Erreur lors de la récupération des données.</p>';
-        });
 </script>
+
