@@ -38,7 +38,7 @@ body {
     flex: 0 1 calc(33.33% - 20px); /* La largeur reste fixe pour 3 éléments par ligne */
     display: flex;
     gap: 20px;
-    background-color: #1e1e1e;
+    background-color: #060e31;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -96,7 +96,7 @@ body {
 }
 
 .titre-video, .description-video, .auteur-video {
-    background-color: red;
+    background-color: black;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -109,12 +109,12 @@ body {
 
 .description-video {
     font-size: 1rem;
-    background-color: green;
+    background-color: black;
 }
 
 .auteur-video {
     font-size: 0.9rem;
-    background-color: blue;
+    background-color: black;
 }
 
 /* Style du bloc blanc */
