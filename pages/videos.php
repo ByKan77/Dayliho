@@ -11,6 +11,17 @@
     require '../requires/nav.php';
 ?>
 <style>
+
+
+/* Pour la nav bar : texte en blanc et une fois que l'on clique dessus c'est la seule blanche et les autres 
+deviennent grises => https://m2.material.io/components/bottom-navigation */
+
+/* Pour les vidéos, suprrimer l'espace entre les box de textes */
+
+
+
+
+
 body {
     background-color: #000;
     color: white;
@@ -159,13 +170,13 @@ body {
                 const titreVideo = document.createElement('div');
                 titreVideo.classList.add('titre-video');
                 const h3 = document.createElement('h3');
-                h3.textContent = `Intitulé: ${video.intitule}`;
+                h3.textContent = `${video.titre}`;
                 titreVideo.appendChild(h3);
 
                 // Description de la vidéo
                 const descriptionVideo = document.createElement('div');
                 descriptionVideo.classList.add('description-video');
-                descriptionVideo.textContent = `Description: ${video.description}`;
+                descriptionVideo.textContent = `${video.description}`;
 
                 // Auteur de la vidéo
                 const auteurVideo = document.createElement('div');
