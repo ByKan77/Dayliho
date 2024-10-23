@@ -12,16 +12,6 @@
 ?>
 <style>
 
-
-/* Pour la nav bar : texte en blanc et une fois que l'on clique dessus c'est la seule blanche et les autres 
-deviennent grises => https://m2.material.io/components/bottom-navigation */
-
-/* Pour les vidéos, suprrimer l'espace entre les box de textes */
-
-
-
-
-
 body {
     background-color: #000;
     color: white;
@@ -29,7 +19,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Container principal sous la navbar */
 .container {
     padding-top: 90px;
     display: flex;
@@ -59,7 +48,6 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* Crée l'effet blanc avec ::before */
 .video-container::before {
     content: '';
     position: absolute;
@@ -73,14 +61,13 @@ body {
     z-index: 1;
 }
 
-/* Lors du survol, l'effet blanc apparaît */
 .video-container:hover::before {
-    background-color: rgba(255, 255, 255, 0.2); /* Légère superposition blanche */
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Effet de zoom */
 .video-container:hover {
-    transform: scale(1.05); /* Léger zoom */
+    transform: scale(1.05);
     z-index: 2;
 }
 
@@ -98,8 +85,6 @@ body {
     }
 }
 
-
-/* Bloc contenant le titre, la description et l'auteur */
 .video-content {
     flex: 1;
     display: flex;
@@ -109,8 +94,7 @@ body {
 .titre-video, .description-video, .auteur-video {
     background-color: black;
     padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    margin: 0; 
 }
 
 .titre-video h3 {
@@ -120,12 +104,10 @@ body {
 
 .description-video {
     font-size: 1rem;
-    background-color: black;
 }
 
 .auteur-video {
     font-size: 0.9rem;
-    background-color: black;
 }
 
 /* Style du bloc blanc */
@@ -135,6 +117,10 @@ body {
     height: 100%; 
     border-radius: 10px;
 }
+
+
+
+
 </style>
 
 
