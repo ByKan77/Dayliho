@@ -42,6 +42,7 @@
 
     .profile-sidebar {
         width: 250px;
+        min-height: 50vh;
         background-color: #2d3e50;
         color: white;
         padding: 20px;
@@ -112,24 +113,35 @@
         const profileContent = document.querySelector('.profile-content');
 
         function showDetails() {
-            profileContent.innerHTML = `
-                <h2>Account Settings</h2>
-                <form id="profileForm">
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" id="email" placeholder="support@profilepress.net" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="firstName">First name</label>
-                        <input type="text" id="firstName" placeholder="John" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last name</label>
-                        <input type="text" id="lastName" placeholder="Doe" required>
-                    </div>
-                    <button type="button" onclick="saveChanges()">Save Changes</button>
-                </form>
-            `;
+            axios.get(`http://localhost:1234/user/getUserById?id=${userId}`)
+                .then(response => {
+                    const utilisateur = response.data;
+                    if (utilisateur) {
+                        profileContent.innerHTML = `
+                            <h2>Account Settings</h2>
+                            <form id="profileForm">
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" id="email" value="${utilisateur.email}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstName">First name</label>
+                                    <input type="text" id="firstName" value="${utilisateur.prenom}" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last name</label>
+                                    <input type="text" id="lastName" value="${utilisateur.nom}" readonly>
+                                </div>
+                            </form>
+                        `;
+                    } else {
+                        profileContent.innerHTML = '<p>Aucun utilisateur trouvé.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
+                    profileContent.innerHTML = '<p>Erreur lors de la récupération des données.</p>';
+                });
         }
 
         function showAccounts() {
@@ -146,6 +158,27 @@
                     <tbody></tbody>
                 </table>
             `;
+
+            axios.get('http://localhost:1234/user/getUsers')
+                .then(response => {
+                    const allUsers = response.data;
+                    const accountsTableBody = document.getElementById('accounts_table').querySelector('tbody');
+                    accountsTableBody.innerHTML = '';
+
+                    allUsers.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${user.nom}</td>
+                            <td>${user.prenom}</td>
+                            <td>${user.email}</td>
+                        `;
+                        accountsTableBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error("Erreur lors de la récupération de la liste des comptes:", error);
+                    profileContent.innerHTML = '<p>Erreur lors de la récupération de la liste des comptes.</p>';
+                });
         }
 
         function showPassword() {
