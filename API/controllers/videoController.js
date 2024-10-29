@@ -10,4 +10,15 @@ async function getVideos(req, res) {
     }
 }
 
-module.exports = { getVideos };
+async function addVideo(req, res) {
+    try {
+        const { title, description, auteur, date } = req.body;
+        const result = await videoModel.pushNewVideo(title, description, auteur, date);
+        res.status(201).json({ success: true, message: "Vidéo ajoutée avec succès", result });
+    } catch (error) {
+        console.error("Erreur lors de l'ajout de la vidéo:", error);
+        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+    }
+}
+
+module.exports = { getVideos, addVideo };

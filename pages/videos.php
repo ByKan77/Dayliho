@@ -124,6 +124,12 @@ body {
 </style>
 
 
+<div class="container"> 
+
+    <input type="text" id="searchBar" placeholder="Rechercher une vidéo" />
+    
+</div>
+
 
 <div class="container">
     <div id="listeVideos">
@@ -132,56 +138,73 @@ body {
 </div>
 
 <script>
+    const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
+    console.log(userId);
     const listeVideos = document.getElementById("listeVideos");
+    const searchBar = document.getElementById("searchBar");
+    let videos = [];
 
+    // Récupération des vidéos depuis le serveur
     axios.get("http://localhost:1234/video/getVideos")
         .then(response => {
-            const videos = response.data;
-            listeVideos.innerHTML = ''; 
-
-            videos.forEach(video => { 
-                // Création du conteneur de la vidéo
-                const videoContainer = document.createElement('div');
-                videoContainer.classList.add('video-container');
-
-                // Création du bloc blanc (à gauche)
-                const blancBlock = document.createElement('div');
-                blancBlock.classList.add('blanc-block');
-
-                // Contenu de la vidéo (titre, description, auteur)
-                const videoContent = document.createElement('div');
-                videoContent.classList.add('video-content');
-
-                // Titre de la vidéo
-                const titreVideo = document.createElement('div');
-                titreVideo.classList.add('titre-video');
-                const h3 = document.createElement('h3');
-                h3.textContent = `${video.titre}`;
-                titreVideo.appendChild(h3);
-
-                // Description de la vidéo
-                const descriptionVideo = document.createElement('div');
-                descriptionVideo.classList.add('description-video');
-                descriptionVideo.textContent = `${video.description}`;
-
-                // Auteur de la vidéo
-                const auteurVideo = document.createElement('div');
-                auteurVideo.classList.add('auteur-video');
-                auteurVideo.textContent = `Auteur: ${video.auteur}`;
-
-                videoContent.appendChild(titreVideo);
-                videoContent.appendChild(descriptionVideo);
-                videoContent.appendChild(auteurVideo);
-
-                // Ajout du bloc blanc et du contenu vidéo dans le conteneur de la vidéo
-                videoContainer.appendChild(blancBlock);
-                videoContainer.appendChild(videoContent);
-
-                // Ajout de chaque vidéo dans la liste
-                listeVideos.appendChild(videoContainer);
-            });
+            videos = response.data;
+            afficherVideos(videos); // Affiche toutes les vidéos au chargement
         })
         .catch(error => {
             console.error('Erreur lors de la récupération des vidéos:', error);
         });
+
+    // Fonction pour afficher les vidéos dans la liste
+    function afficherVideos(videos) {
+        listeVideos.innerHTML = ''; // Vide la liste actuelle
+
+        videos.forEach(video => {
+            // Création du conteneur de la vidéo
+            const videoContainer = document.createElement('div');
+            videoContainer.classList.add('video-container');
+
+            // Création du bloc blanc (à gauche)
+            const blancBlock = document.createElement('div');
+            blancBlock.classList.add('blanc-block');
+
+            // Contenu de la vidéo (titre, description, auteur)
+            const videoContent = document.createElement('div');
+            videoContent.classList.add('video-content');
+
+            // Titre de la vidéo
+            const titreVideo = document.createElement('div');
+            titreVideo.classList.add('titre-video');
+            const h3 = document.createElement('h3');
+            h3.textContent = `${video.titre}`;
+            titreVideo.appendChild(h3);
+
+            // Description de la vidéo
+            const descriptionVideo = document.createElement('div');
+            descriptionVideo.classList.add('description-video');
+            descriptionVideo.textContent = `${video.description}`;
+
+            // Auteur de la vidéo
+            const auteurVideo = document.createElement('div');
+            auteurVideo.classList.add('auteur-video');
+            auteurVideo.textContent = `Auteur: ${video.auteur}`;
+
+            videoContent.appendChild(titreVideo);
+            videoContent.appendChild(descriptionVideo);
+            videoContent.appendChild(auteurVideo);
+
+            // Ajout du bloc blanc et du contenu vidéo dans le conteneur de la vidéo
+            videoContainer.appendChild(blancBlock);
+            videoContainer.appendChild(videoContent);
+
+            // Ajout de chaque vidéo dans la liste
+            listeVideos.appendChild(videoContainer);
+        });
+    }
+
+    // Écouteur d'événements pour la barre de recherche
+    searchBar.addEventListener('input', () => {
+        const recherche = searchBar.value.toLowerCase();
+        const videosFiltrees = videos.filter(video => video.titre.toLowerCase().includes(recherche));
+        afficherVideos(videosFiltrees); // Affiche seulement les vidéos filtrées
+    });
 </script>

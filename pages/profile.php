@@ -8,6 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 
 require '../back/header.php';
 require '../requires/nav.php';
+
 ?>
 
 <style>
@@ -21,8 +22,9 @@ require '../requires/nav.php';
         padding: 20px;
         display: flex;
         justify-content: center;
-        align-items:center;
+        align-items: center;
         min-height: 100vh;
+        flex-direction: column; /* S'assure que le contenu est empilé verticalement */
     }
 
     #user_profile_container {
@@ -86,6 +88,16 @@ require '../requires/nav.php';
 
     #accounts_table th {
         background-color: #f2f2f2;
+    }
+
+    .container {
+        width: 60%;
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
     }
 
     @media (max-width: 768px) {
@@ -178,6 +190,7 @@ require '../requires/nav.php';
             document.getElementById('user_info').innerHTML = '<p>Aucun utilisateur trouvé.</p>';
         }
     })
+    
     .catch(error => {
         console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
         document.getElementById('user_info').innerHTML = '<p>Erreur lors de la récupération des données.</p>';

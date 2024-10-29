@@ -7,4 +7,12 @@ async function getAllVideos() {
     return rows;
 }
 
-module.exports = { getAllVideos };
+async function pushNewVideo(title, description, auteur, date) {
+    let conn = await pool.getConnection();
+    const query = "INSERT INTO video (title, description, auteur, date) VALUES (?, ?, ?, ?)";
+    const result = await conn.query(query, [title, description, auteur, date]);
+    conn.release();
+    return result;
+}
+
+module.exports = { getAllVideos, pushNewVideo };
