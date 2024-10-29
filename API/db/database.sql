@@ -22,6 +22,7 @@ CREATE TABLE video (
     description TEXT,
     auteur INT,
     date DATE,
+    fichier BLOB,  -- Pour stocker le fichier vidéo
     FOREIGN KEY (auteur) REFERENCES utilisateur(id)
 );
 
