@@ -64,16 +64,19 @@
         function showAccounts() {
             profileContent.innerHTML = `
                 <h2>Liste des comptes</h2>
-                <table id="accounts_table">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <div id="accounts_table_container">
+                    <table id="accounts_table">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             `;
 
             axios.get('http://localhost:1234/user/getUsers')
@@ -88,6 +91,7 @@
                             <td>${user.nom}</td>
                             <td>${user.prenom}</td>
                             <td>${user.email}</td>
+                            <td id="actionColumn"><button id="deleteButton" onClick="deleteUser('${user.id}')">Supprimer</button></td>
                         `;
                         accountsTableBody.appendChild(row);
                     });
@@ -140,6 +144,11 @@
 
         showDetails();
     });
+
+    
+    function deleteUser(id) {
+        alert(`L'ID de l'utilisateur est : ${id}`);
+    }
 </script>
 
 
@@ -223,5 +232,27 @@
 
     button:hover {
         background-color: #0056b3;
+    }
+    
+    #actionColumn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+     #deleteButton {
+        background-color: red;
+        margin: 5px
+     }
+    #accounts_table {
+        width: 90%;
+        height: auto;
+    }
+
+    table {
+        border: 1px solid black;
+    }
+
+    th, td {
+        border: 1px solid black;
     }
 </style>
