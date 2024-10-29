@@ -133,11 +133,16 @@
 
 
 <style>
+    body{
+        background-color: black;
+    }
+
     #profile {
         margin-top: 15vh;
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: black;
     }
 
     .container {
@@ -153,7 +158,7 @@
     .profile-sidebar {
         width: 250px;
         min-height: 50vh;
-        background-color: #2d3e50;
+        background-color: #444;
         color: white;
         padding: 20px;
         display: flex;
