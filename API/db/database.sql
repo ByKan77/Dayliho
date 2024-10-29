@@ -26,11 +26,12 @@ CREATE TABLE video (
     FOREIGN KEY (auteur) REFERENCES utilisateur(id)
 );
 
-INSERT INTO video (titre, description, auteur, date) VALUES 
-('Entraînement cardio', 'blablablablablabla', 1, '2024-10-02'),
-('Entraînement boxe', 'blablablablablabla', 2, '2024-10-02'),
-('Entraînement cardio', 'blablablablablabla', 1, '2024-10-02'),
-('Entraînement cardio', 'blablablablablabla', 2, '2024-10-02');
+INSERT INTO video (titre, description, auteur, date, fichier) VALUES 
+('Cardio', 'blablablablablabla', 1, '2024-10-02', LOAD_FILE('/path/to/video.mp4')),
+('Boxe', 'blablablablablabla', 1, '2024-10-02', LOAD_FILE('/path/to/video.mp4')),
+('Renfo musculaire', 'blablablablablabla', 1, '2024-10-02', LOAD_FILE('/path/to/video.mp4')),
+('Théâtre', 'blablablablablabla', 1, '2024-10-02', LOAD_FILE('/path/to/video.mp4'));
+
 
 -- Création de la table historique_video
 CREATE TABLE historique_video (
