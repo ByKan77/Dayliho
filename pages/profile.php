@@ -15,7 +15,6 @@
         <div class="profile-sidebar">
             <a href="#" class="menu-item active" id="details-tab">Détails</a>
             <a href="#" class="menu-item" id="accounts-tab">Liste des comptes</a>
-            <a href="#" class="menu-item" id="password-tab">Mot de passe</a>
         </div>
         <div class="profile-content"></div>
     </div>
@@ -99,23 +98,6 @@
                     console.error("Erreur lors de la récupération de la liste des comptes:", error);
                     profileContent.innerHTML = '<p>Erreur lors de la récupération de la liste des comptes.</p>';
                 });
-        }
-
-        function showPassword() {
-            profileContent.innerHTML = `
-                <h2>Changer le mot de passe</h2>
-                <form id="passwordForm">
-                    <div class="form-group">
-                        <label for="oldPassword">Ancien mot de passe</label>
-                        <input type="password" id="oldPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword">Nouveau mot de passe</label>
-                        <input type="password" id="newPassword" required>
-                    </div>
-                    <button type="button" onclick="changePassword()">Changer le mot de passe</button>
-                </form>
-            `;
         }
 
         tabs.forEach(tab => {
