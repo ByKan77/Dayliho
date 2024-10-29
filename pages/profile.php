@@ -16,94 +16,11 @@
             <a href="#" class="menu-item active" id="details-tab">Détails</a>
             <a href="#" class="menu-item" id="accounts-tab">Liste des comptes</a>
             <a href="#" class="menu-item" id="password-tab">Mot de passe</a>
-            <a href="logout.php" class="menu-item" id="logout-tab">Déconnexion</a>
+            <a href="" class="menu-item" id="logout-tab">Déconnexion</a>
         </div>
         <div class="profile-content"></div>
     </div>
 </div>
-
-<style>
-    #profile {
-        margin-top: 15vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .container {
-        display: flex;
-        margin: 0;
-        background: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        overflow: hidden;
-        width: 80%;
-    }
-
-    .profile-sidebar {
-        width: 250px;
-        min-height: 50vh;
-        background-color: #2d3e50;
-        color: white;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .menu-item {
-        display: block;
-        padding: 10px 15px;
-        color: white;
-        text-decoration: none;
-        font-size: 16px;
-        margin-bottom: 10px;
-        border-radius: 4px;
-    }
-
-    .menu-item.active, .menu-item:hover {
-        background-color: #1a2735;
-    }
-
-    .profile-content {
-        flex-grow: 1;
-        padding: 20px;
-    }
-
-    .profile-content h2 {
-        margin-top: 0;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        color: #333;
-    }
-
-    .form-group input {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    button {
-        padding: 10px 15px;
-        color: white;
-        background-color: #007bff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-</style>
 
 <script>
     const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
@@ -215,7 +132,7 @@
                         showPassword();
                         break;
                     case 'logout-tab':
-                        window.location.href = 'logout.php';
+                        window.location.href = '../back/logout.php';
                         break;
                 }
             });
@@ -224,3 +141,87 @@
         showDetails();
     });
 </script>
+
+
+<style>
+    #profile {
+        margin-top: 15vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        display: flex;
+        margin: 0;
+        background: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        width: 80%;
+    }
+
+    .profile-sidebar {
+        width: 250px;
+        min-height: 50vh;
+        background-color: #2d3e50;
+        color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-item {
+        display: block;
+        padding: 10px 15px;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+
+    .menu-item.active, .menu-item:hover {
+        background-color: #1a2735;
+    }
+
+    .profile-content {
+        flex-grow: 1;
+        padding: 20px;
+    }
+
+    .profile-content h2 {
+        margin-top: 0;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 10px 15px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>
