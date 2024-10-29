@@ -137,8 +137,10 @@ body {
 
 .search-area {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
     padding: 20px;
+    width: 100%;             /* Full width */
 }
 
 .single-search {
@@ -173,6 +175,10 @@ body {
     padding-left: 10px;
 }
 
+a {
+    text-decoration: none; /* Enlève le soulignement */
+    }
+
 .icon-area {
     width: 40px;
     height: 40px;
@@ -193,7 +199,7 @@ body {
 <div class="container">
    <div class="search-area">
        <div class="single-search">
-           <input type="text" id="searchBar" class="custom-input" placeholder="What are you looking for ...">
+           <input type="text" id="searchBar" class="custom-input" placeholder="Quel sport recherches tu ?">
            <a href="#" class="icon-area">
                <i class="fa fa-search"></i>
            </a>
