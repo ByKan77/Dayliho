@@ -16,7 +16,6 @@
             <a href="#" class="menu-item active" id="details-tab">Détails</a>
             <a href="#" class="menu-item" id="accounts-tab">Liste des comptes</a>
             <a href="#" class="menu-item" id="password-tab">Mot de passe</a>
-            <a href="" class="menu-item" id="logout-tab">Déconnexion</a>
         </div>
         <div class="profile-content"></div>
     </div>
@@ -135,9 +134,8 @@
                     case 'password-tab':
                         showPassword();
                         break;
-                    case 'logout-tab':
-                        window.location.href = '../back/logout.php';
-                        break;
+                    default:
+                        showDetails();
                 }
             });
         });
