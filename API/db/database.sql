@@ -60,4 +60,3 @@ CREATE TABLE `historique_video` (
   CONSTRAINT `historique_video_ibfk_2` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-COMMIT;

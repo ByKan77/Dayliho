@@ -1,7 +1,7 @@
 <?php
    session_start();
 
-   // Si l'utilisateur n'est pas connecté, redirection vers la page de connexion
+   // Redirect to login if the user is not authenticated
    if (!isset($_SESSION['user_id'])) {
        header('Location: login.php');
        exit();
@@ -11,6 +11,8 @@
     require '../requires/nav.php';
 ?>
 <style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'); /* Font Awesome for search icon */
 
 body {
     background-color: #000;
@@ -27,25 +29,26 @@ body {
 }
 
 #listeVideos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: flex-start; 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 fixed columns */
+    gap: 30px;
+    justify-items: center;
+    padding: 0 20px;
 }
 
 .video-container {
-    position: relative;
-    flex: 0 1 calc(33.33% - 20px); /* La largeur reste fixe pour 3 éléments par ligne */
     display: flex;
-    gap: 20px;
+    align-items: flex-start;
     background-color: #060e31;
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
-    margin-bottom: 20px;
     box-sizing: border-box;
-    max-width: calc(33.33% - 20px);
+    width: 100%; 
+    max-width: 500px; /* Width */
+    height: 220px; /* Fixed height */
     overflow: hidden;
     transition: transform 0.3s ease;
+    position: relative;
 }
 
 .video-container::before {
@@ -65,36 +68,49 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Effet de zoom */
 .video-container:hover {
     transform: scale(1.05);
     z-index: 2;
 }
 
 @media (max-width: 1024px) {
-    .video-container {
-        flex: 0 1 calc(50% - 20px);
-        max-width: calc(50% - 20px);
+    #listeVideos {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
     }
 }
 
 @media (max-width: 768px) {
-    .video-container {
-        flex: 0 1 calc(100% - 20px);
-        max-width: calc(100% - 20px);
+    #listeVideos {
+        grid-template-columns: 1fr; /* 1 column for mobile */
     }
 }
 
+.blanc-block {
+    background-color: #fff;
+    width: 180px;
+    min-width: 180px;
+    height: 180px;
+    border-radius: 10px;
+    margin-right: 25px;
+    flex-shrink: 0;
+}
+
 .video-content {
-    flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    flex-grow: 2;
+    height: 100%; /* Fixed height to match .video-container */
+    overflow: hidden;
 }
 
 .titre-video, .description-video, .auteur-video {
     background-color: black;
     padding: 10px;
-    margin: 0; 
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .titre-video h3 {
@@ -110,30 +126,84 @@ body {
     font-size: 0.9rem;
 }
 
-/* Style du bloc blanc */
-.blanc-block {
-    background-color: #fff; 
-    width: 200px; 
-    height: 100%; 
-    border-radius: 10px;
+/* Search Bar Styling */
+.wrapper, html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #262626;
 }
 
+.search-area {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
 
+.single-search {
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    background-color: white;
+    padding: 10px;
+    transition: width 0.4s linear;
+    width: 40px;
+    overflow: hidden;
+}
 
+.custom-input {
+    border: none;
+    outline: none;
+    width: 0;
+    transition: width 0.4s linear;
+    font-size: 18px;
+}
+
+.custom-input::placeholder {
+    color: #262626;
+}
+
+.single-search:hover {
+    width: 400px;
+}
+
+.single-search:hover .custom-input {
+    width: 350px;
+    padding-left: 10px;
+}
+
+.icon-area {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #262626;
+}
+
+.fa-search {
+    font-size: 20px;
+}
 
 </style>
 
-
-<div class="container"> 
-
-    <input type="text" id="searchBar" placeholder="Rechercher une vidéo" />
-    
+<div class="container">
+   <div class="search-area">
+       <div class="single-search">
+           <input type="text" id="searchBar" class="custom-input" placeholder="What are you looking for ...">
+           <a href="#" class="icon-area">
+               <i class="fa fa-search"></i>
+           </a>
+       </div>
+   </div>
 </div>
-
 
 <div class="container">
     <div id="listeVideos">
-        <!-- Les vidéos seront affichées ici dans une div "video-container" -->
+        <!-- Videos will display here inside a "video-container" div -->
     </div>
 </div>
 
@@ -144,46 +214,46 @@ body {
     const searchBar = document.getElementById("searchBar");
     let videos = [];
 
-    // Récupération des vidéos depuis le serveur
+    // Fetch videos from the server
     axios.get("http://localhost:1234/video/getVideos")
         .then(response => {
             videos = response.data;
-            afficherVideos(videos); // Affiche toutes les vidéos au chargement
+            afficherVideos(videos); // Show all videos on load
         })
         .catch(error => {
-            console.error('Erreur lors de la récupération des vidéos:', error);
+            console.error('Error fetching videos:', error);
         });
 
-    // Fonction pour afficher les vidéos dans la liste
+    // Function to display videos in the list
     function afficherVideos(videos) {
-        listeVideos.innerHTML = ''; // Vide la liste actuelle
+        listeVideos.innerHTML = ''; // Clear current list
 
         videos.forEach(video => {
-            // Création du conteneur de la vidéo
+            // Create video container
             const videoContainer = document.createElement('div');
             videoContainer.classList.add('video-container');
 
-            // Création du bloc blanc (à gauche)
+            // White block (left side)
             const blancBlock = document.createElement('div');
             blancBlock.classList.add('blanc-block');
 
-            // Contenu de la vidéo (titre, description, auteur)
+            // Video content (title, description, author)
             const videoContent = document.createElement('div');
             videoContent.classList.add('video-content');
 
-            // Titre de la vidéo
+            // Video title
             const titreVideo = document.createElement('div');
             titreVideo.classList.add('titre-video');
             const h3 = document.createElement('h3');
             h3.textContent = `${video.titre}`;
             titreVideo.appendChild(h3);
 
-            // Description de la vidéo
+            // Video description
             const descriptionVideo = document.createElement('div');
             descriptionVideo.classList.add('description-video');
             descriptionVideo.textContent = `${video.description}`;
 
-            // Auteur de la vidéo
+            // Video author
             const auteurVideo = document.createElement('div');
             auteurVideo.classList.add('auteur-video');
             auteurVideo.textContent = `Auteur: ${video.auteur}`;
@@ -192,19 +262,19 @@ body {
             videoContent.appendChild(descriptionVideo);
             videoContent.appendChild(auteurVideo);
 
-            // Ajout du bloc blanc et du contenu vidéo dans le conteneur de la vidéo
+            // Add the white block and video content to the video container
             videoContainer.appendChild(blancBlock);
             videoContainer.appendChild(videoContent);
 
-            // Ajout de chaque vidéo dans la liste
+            // Add each video to the list
             listeVideos.appendChild(videoContainer);
         });
     }
 
-    // Écouteur d'événements pour la barre de recherche
+    // Search bar event listener
     searchBar.addEventListener('input', () => {
-        const recherche = searchBar.value.toLowerCase();
-        const videosFiltrees = videos.filter(video => video.titre.toLowerCase().includes(recherche));
-        afficherVideos(videosFiltrees); // Affiche seulement les vidéos filtrées
+        const searchQuery = searchBar.value.toLowerCase();
+        const filteredVideos = videos.filter(video => video.titre.toLowerCase().includes(searchQuery));
+        afficherVideos(filteredVideos); // Show only filtered videos
     });
 </script>
