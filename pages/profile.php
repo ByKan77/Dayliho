@@ -1,9 +1,30 @@
 <?php
     session_start();
 
-    if (!isset($_SESSION['user_id'])) {
-        header('Location: login.php');
-        exit();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+require '../back/header.php';
+require '../requires/nav.php';
+
+?>
+
+<style>
+    body {
+        background-image: url('../addons/image_profile.webp');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column; /* S'assure que le contenu est empilé verticalement */
     }
 
     require '../back/header.php';
@@ -100,8 +121,26 @@
         cursor: pointer;
     }
 
-    button:hover {
-        background-color: #0056b3;
+    .container {
+        width: 60%;
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+    }
+
+    @media (max-width: 768px) {
+        #user_profile {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #user_info, #admin_section {
+            width: 100%;
+            margin-bottom: 20px;
+        }
     }
 </style>
 
@@ -180,47 +219,10 @@
                     profileContent.innerHTML = '<p>Erreur lors de la récupération de la liste des comptes.</p>';
                 });
         }
-
-        function showPassword() {
-            profileContent.innerHTML = `
-                <h2>Changer le mot de passe</h2>
-                <form id="passwordForm">
-                    <div class="form-group">
-                        <label for="oldPassword">Ancien mot de passe</label>
-                        <input type="password" id="oldPassword" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="newPassword">Nouveau mot de passe</label>
-                        <input type="password" id="newPassword" required>
-                    </div>
-                    <button type="button" onclick="changePassword()">Changer le mot de passe</button>
-                </form>
-            `;
-        }
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', event => {
-                event.preventDefault();
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                switch (tab.id) {
-                    case 'details-tab':
-                        showDetails();
-                        break;
-                    case 'accounts-tab':
-                        showAccounts();
-                        break;
-                    case 'password-tab':
-                        showPassword();
-                        break;
-                    case 'logout-tab':
-                        window.location.href = 'logout.php';
-                        break;
-                }
-            });
-        });
-
-        showDetails();
+    })
+    
+    .catch(error => {
+        console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
+        document.getElementById('user_info').innerHTML = '<p>Erreur lors de la récupération des données.</p>';
     });
 </script>
