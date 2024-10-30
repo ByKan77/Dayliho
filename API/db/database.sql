@@ -11,13 +11,13 @@ CREATE TABLE utilisateur(
     nom        Varchar(50) NOT NULL,
     prenom     Varchar(50) NOT NULL,
     email      Varchar(50) NOT NULL,
-    motDePasse Varchar(50) NOT NULL,
+    mot_de_passe Varchar(50) NOT NULL,
     role       Varchar(50) NOT NULL,
     CONSTRAINT utilisateur_PK PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
 -- Déchargement des données de la table `utilisateur`
-INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `email`, `motDePasse`, `role`) VALUES
+INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role`) VALUES
 (1, 'DENEUCHATEL', 'Dorian', 'dorian@gmail.com', 'mdp', 'administrateur'),
 (2, 'OUADAH', 'Sofiane', 'sofiane@gmail.com', 'mdp', 'administrateur'),
 (3, 'NOUET', 'Flavien', 'flavien@gmail.com', 'mdp', 'administrateur'),
