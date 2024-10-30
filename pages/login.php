@@ -2,98 +2,93 @@
 require '../back/header.php';
 require '../requires/nav.php';
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-size: cover;
-            background-position: center;
-            background-image: url('../addons/image_connexion.jpg');
-            background-repeat: no-repeat;
-        }
+<style>
+    #login-body {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-size: cover;
+        background-position: center;
+        background-image: url('../addons/image_connexion.jpg');
+        background-repeat: no-repeat;
+    }
 
-        #connexion {
-            width: 40vw;
-            padding: 20px;
-            margin: 70px;
-            border: 1px solid #444;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            background-color: #fff;
-            text-align: center;
-        }
+    #connexion {
+        width: 40vw;
+        padding: 20px;
+        margin: 70px;
+        border: 1px solid #444;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        background-color: #fff;
+        text-align: center;
+    }
 
-        #connexion h1 {
-            margin-bottom: 20px;
-        }
+    #connexion h1 {
+        margin-bottom: 20px;
+    }
 
-        #connexion div {
-            margin-bottom: 15px;
-        }
+    #connexion div {
+        margin-bottom: 15px;
+    }
 
-        #connexion label {
-            display: block;
-            margin-bottom: 5px;
-            text-align: center;
-        }
+    #connexion label {
+        display: block;
+        margin-bottom: 5px;
+        text-align: center;
+    }
 
-        #connexion input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #fafafa;
-            color: #333;
-        }
+    #connexion input {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fafafa;
+        color: #333;
+    }
 
-        #connexion .btn {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin: 10px;
-            background-color: #fd9d1f;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+    #connexion .btn {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px;
+        background-color: #fd9d1f;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
-        #connexion .btn:hover {
-            background-color: #bd6e06;
-        }
+    #connexion .btn:hover {
+        background-color: #bd6e06;
+    }
 
-        .alert {
-            color: red;
-            text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-    </style>
-</head>
-<body>
+    .alert {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+</style>
 
-<div id="connexion">
-    <h1>Connexion</h1>
-    <form id="formulaire_de_connexion">
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required>
-        <br>
-        <label for="mot_de_passe">Mot de passe :</label>
-        <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-        <br>
-        <button type="submit" class="btn">Se connecter</button>
-    </form>
+<div id="login-body">
+    <div id="connexion">
+        <h1>Connexion</h1>
+        <form id="formulaire_de_connexion">
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="mot_de_passe">Mot de passe :</label>
+            <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+            <br>
+            <button type="submit" class="btn">Se connecter</button>
+        </form>
+    </div>
 </div>
+
 
 <script>
     document.getElementById('formulaire_de_connexion').addEventListener('submit', function(event) {
