@@ -69,6 +69,7 @@
                                 <th>Nom</th>
                                 <th>Prénom</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -89,6 +90,7 @@
                             <td>${user.nom}</td>
                             <td>${user.prenom}</td>
                             <td>${user.email}</td>
+                             <td>${user.role}</td>
                             <td><button id="deleteButton" onclick="deleteUser('${user.id}')">Supprimer</button></td>
                         `;
                         accountsTableBody.appendChild(row);
