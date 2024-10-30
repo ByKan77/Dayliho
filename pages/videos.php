@@ -7,27 +7,41 @@
        exit();
    }
 
-    require '../back/header.php';
-    require '../requires/nav.php';
+   require '../back/header.php';
+   require '../requires/nav.php';
 ?>
 
-<div id="videos_body_unique">
-    <div id="container_videos_unique">
-        <div id="search_area_unique">
-            <div id="single_search_unique">
-                <input type="text" id="custom_input_unique" placeholder="Quel sport recherches-tu ?">
-                <a href="#" id="icon_area_unique">
-                    <i id="fa_search_unique" class="fa fa-search"></i>
-                </a>
+<div id="tab_navigation" style="display:flex;justify-content:center; margin:20vh 10vh 10vh 10vh">
+    <!-- Onglets de navigation -->
+    <button onclick="showTab('videos')">Toutes les vidéos</button>
+    <button onclick="showTab('bonjour')">Planning</button>
+</div>
+
+<!-- Contenu de l'onglet "Vidéos" -->
+<div id="videos_tab" class="tab_content">
+    <div id="videos_body_unique">
+        <div id="container_videos_unique">
+            <div id="search_area_unique">
+                <div id="single_search_unique">
+                    <input type="text" id="custom_input_unique" placeholder="Quel sport recherches-tu ?">
+                    <a href="#" id="icon_area_unique">
+                        <i id="fa_search_unique" class="fa fa-search"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="container_videos_unique">
+            <div id="liste_videos_unique">
+                <!-- Les vidéos seront affichées ici dans un div "video_container_unique" -->
             </div>
         </div>
     </div>
+</div>
 
-    <div id="container_videos_unique">
-        <div id="liste_videos_unique">
-            <!-- Les vidéos seront affichées ici dans un div "video_container_unique" -->
-        </div>
-    </div>
+<!-- Contenu de l'onglet "Bonjour" -->
+<div id="bonjour_tab" class="tab_content" style="display:none;">
+    <h1>Futur planning</h1>
 </div>
 
 <script>
@@ -36,6 +50,12 @@
     const listeVideosUnique = document.getElementById("liste_videos_unique");
     const searchBarUnique = document.getElementById("custom_input_unique");
     let videosUnique = [];
+
+    // Basculement entre les onglets
+    function showTab(tabName) {
+        document.getElementById('videos_tab').style.display = (tabName === 'videos') ? 'block' : 'none';
+        document.getElementById('bonjour_tab').style.display = (tabName === 'bonjour') ? 'block' : 'none';
+    }
 
     // Récupérer les vidéos du serveur
     axios.get("http://localhost:1234/video/getVideos")
