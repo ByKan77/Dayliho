@@ -57,14 +57,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek', // Choisissez une vue qui montre les heures
-        headerToolbar: { // Ordre des outils du header du calendrier
+        headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek' // Incluez timeGridDay et timeGridWeek
+            right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek'
         },
-        eventColor: '#266763', // Couleur des événements
+        eventColor: '#fd9d1f',
+        slotMinTime: '10:00:00', // Heure de début de la plage horaire
+        slotMaxTime: '21:00:00', // Heure de fin de la plage horaire
         events: function(info, successCallback, failureCallback) {
-            fetch('../back/events.php') // Appel au fichier events.php
+            fetch('../back/events.php')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Erreur réseau');
@@ -85,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calendar.render(); // Rendu du calendrier
 });
+
 
 
 
