@@ -10,15 +10,18 @@
    require '../back/header.php';
    require '../requires/nav.php';
 ?>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script> 
 
 <div id="tab_navigation" style="display:flex;justify-content:center; margin:20vh 10vh 10vh 10vh">
     <!-- Onglets de navigation -->
-    <button onclick="showTab('videos')">Toutes les vidéos</button>
-    <button onclick="showTab('bonjour')">Planning</button>
+    <button onclick="showTab('videos')">Toutes les séances</button>
+    <button onclick="showTab('planning')">Planning</button>
 </div>
 
 <!-- Contenu de l'onglet "Vidéos" -->
-<div id="videos_tab" class="tab_content">
+<div id="videos_tab" class="tab_content" style="display:none;">
     <div id="videos_body_unique">
         <div id="container_videos_unique">
             <div id="search_area_unique">
@@ -39,12 +42,52 @@
     </div>
 </div>
 
-<!-- Contenu de l'onglet "Bonjour" -->
-<div id="bonjour_tab" class="tab_content" style="display:none;">
-    <h1>Futur planning</h1>
+<!-- Contenu de l'onglet "planning" -->
+<div id="planning_tab" class="tab_content">
+    <div id="calendrier" class="tab-content"> <!-- Enlever 'hidden' pour charger le calendrier dès le début -->
+        <div class="container">
+            <div id="calendar"></div> <!-- Rendu du calendrier dans la div -->
+        </div>
+    </div>
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek', // Choisissez une vue qui montre les heures
+        headerToolbar: { // Ordre des outils du header du calendrier
+            left: 'prev,next today',
+            center: 'title',
+            right: 'timeGridDay,timeGridWeek,dayGridMonth,listWeek' // Incluez timeGridDay et timeGridWeek
+        },
+        eventColor: '#266763', // Couleur des événements
+        events: function(info, successCallback, failureCallback) {
+            fetch('../back/events.php') // Appel au fichier events.php
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erreur réseau');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    successCallback(data); // Retourne les données au calendrier
+                })
+                .catch(error => failureCallback(error)); // Gestion des erreurs
+        },
+        eventContent: function(arg) {
+            return {
+                html: `<strong>${arg.event.title}</strong>` // Affiche le titre
+            };
+        }
+    });
+
+    calendar.render(); // Rendu du calendrier
+});
+
+
+
     const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
     console.log(userId);
     const listeVideosUnique = document.getElementById("liste_videos_unique");
@@ -54,7 +97,7 @@
     // Basculement entre les onglets
     function showTab(tabName) {
         document.getElementById('videos_tab').style.display = (tabName === 'videos') ? 'block' : 'none';
-        document.getElementById('bonjour_tab').style.display = (tabName === 'bonjour') ? 'block' : 'none';
+        document.getElementById('planning_tab').style.display = (tabName === 'planning') ? 'block' : 'none';
     }
 
     // Récupérer les vidéos du serveur

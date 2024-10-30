@@ -176,3 +176,20 @@
 #fa_search_unique {
     font-size: 20px;
 }
+
+#tab_navigation button {
+    margin-left: 20px;
+}
+
+#calendar {
+    margin: 10vh;
+    padding: 20px;
+    background-color: white; /* Fond blanc pour le calendrier */
+    border-radius: 20px;
+}
+
+/* Optionnel : Ajoutez un fond blanc aux événements */
+.fc-event {
+    background-color: #ffffff; /* Fond blanc pour les événements */
+    color: #000; /* Couleur du texte (noir) pour un bon contraste */
+}
