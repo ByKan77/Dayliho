@@ -1,0 +1,98 @@
+#profile-body {
+    background-color: black;
+}
+
+#profile-container {
+    margin-top: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 80%;
+}
+
+#profile-sidebar {
+    width: 250px;
+    min-height: 50vh;
+    background-color: #444;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#details-tab,
+#accounts-tab,
+#password-tab {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.menu-item.active,
+.menu-item:hover {
+    background-color: #1a2735;
+}
+
+#profile-content {
+    flex-grow: 1;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#profile-content h2 {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#accounts-table-container {
+    width: 90%;
+    margin: auto;
+}
+
+#accounts-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#accounts-table th, #accounts-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}

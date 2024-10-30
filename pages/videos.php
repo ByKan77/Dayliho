@@ -1,286 +1,103 @@
 <?php
    session_start();
 
-   // Redirect to login if the user is not authenticated
+   // Redirection vers la page de connexion si l'utilisateur n'est pas authentifié
    if (!isset($_SESSION['user_id'])) {
        header('Location: login.php');
        exit();
    }
-   
+
     require '../back/header.php';
     require '../requires/nav.php';
 ?>
-<style>
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css'); /* Font Awesome for search icon */
 
-body {
-    background-color: #000;
-    color: white;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+<div id="videos_body_unique">
+    <div id="container_videos_unique">
+        <div id="search_area_unique">
+            <div id="single_search_unique">
+                <input type="text" id="custom_input_unique" placeholder="Quel sport recherches-tu ?">
+                <a href="#" id="icon_area_unique">
+                    <i id="fa_search_unique" class="fa fa-search"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 
-.container {
-    padding-top: 90px;
-    display: flex;
-    justify-content: flex-start;
-    margin-left: 20px;
-}
-
-#listeVideos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 fixed columns */
-    gap: 30px;
-    justify-items: center;
-    padding: 0 20px;
-}
-
-.video-container {
-    display: flex;
-    align-items: flex-start;
-    background-color: #060e31;
-    padding: 25px;
-    border-radius: 10px;
-    box-sizing: border-box;
-    width: 100%; 
-    max-width: 500px; /* Width */
-    height: 220px; /* Fixed height */
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    position: relative;
-}
-
-.video-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0);
-    transition: background-color 0.3s ease;
-    border-radius: 10px; 
-    z-index: 1;
-}
-
-.video-container:hover::before {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.video-container:hover {
-    transform: scale(1.05);
-    z-index: 2;
-}
-
-@media (max-width: 1024px) {
-    #listeVideos {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
-    }
-}
-
-@media (max-width: 768px) {
-    #listeVideos {
-        grid-template-columns: 1fr; /* 1 column for mobile */
-    }
-}
-
-.blanc-block {
-    background-color: #fff;
-    width: 180px;
-    min-width: 180px;
-    height: 180px;
-    border-radius: 10px;
-    margin-right: 25px;
-    flex-shrink: 0;
-}
-
-.video-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex-grow: 2;
-    height: 100%; /* Fixed height to match .video-container */
-    overflow: hidden;
-}
-
-.titre-video, .description-video, .auteur-video {
-    background-color: black;
-    padding: 10px;
-    margin: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.titre-video h3 {
-    font-size: 1.5rem;
-    margin: 0;
-}
-
-.description-video {
-    font-size: 1rem;
-}
-
-.auteur-video {
-    font-size: 0.9rem;
-}
-
-/* Search Bar Styling */
-.wrapper, html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: #262626;
-}
-
-.search-area {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-    padding: 20px;
-    width: 100%;             /* Full width */
-}
-
-.single-search {
-    display: flex;
-    align-items: center;
-    border-radius: 30px;
-    background-color: white;
-    padding: 10px;
-    transition: width 0.4s linear;
-    width: 40px;
-    overflow: hidden;
-}
-
-.custom-input {
-    border: none;
-    outline: none;
-    width: 0;
-    transition: width 0.4s linear;
-    font-size: 18px;
-}
-
-.custom-input::placeholder {
-    color: #262626;
-}
-
-.single-search:hover {
-    width: 400px;
-}
-
-.single-search:hover .custom-input {
-    width: 350px;
-    padding-left: 10px;
-}
-
-a {
-    text-decoration: none; /* Enlève le soulignement */
-    }
-
-.icon-area {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #262626;
-}
-
-.fa-search {
-    font-size: 20px;
-}
-
-</style>
-
-<div class="container">
-   <div class="search-area">
-       <div class="single-search">
-           <input type="text" id="searchBar" class="custom-input" placeholder="Quel sport recherches tu ?">
-           <a href="#" class="icon-area">
-               <i class="fa fa-search"></i>
-           </a>
-       </div>
-   </div>
-</div>
-
-<div class="container">
-    <div id="listeVideos">
-        <!-- Videos will display here inside a "video-container" div -->
+    <div id="container_videos_unique">
+        <div id="liste_videos_unique">
+            <!-- Les vidéos seront affichées ici dans un div "video_container_unique" -->
+        </div>
     </div>
 </div>
 
 <script>
     const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
     console.log(userId);
-    const listeVideos = document.getElementById("listeVideos");
-    const searchBar = document.getElementById("searchBar");
-    let videos = [];
+    const listeVideosUnique = document.getElementById("liste_videos_unique");
+    const searchBarUnique = document.getElementById("custom_input_unique");
+    let videosUnique = [];
 
-    // Fetch videos from the server
+    // Récupérer les vidéos du serveur
     axios.get("http://localhost:1234/video/getVideos")
         .then(response => {
-            videos = response.data;
-            afficherVideos(videos); // Show all videos on load
+            videosUnique = response.data;
+            afficherVideosUnique(videosUnique); // Afficher toutes les vidéos au chargement
         })
         .catch(error => {
-            console.error('Error fetching videos:', error);
+            console.error('Erreur lors de la récupération des vidéos:', error);
         });
 
-    // Function to display videos in the list
-    function afficherVideos(videos) {
-        listeVideos.innerHTML = ''; // Clear current list
+    // Fonction pour afficher les vidéos dans la liste
+    function afficherVideosUnique(videos) {
+        listeVideosUnique.innerHTML = ''; // Vider la liste actuelle
 
         videos.forEach(video => {
-            // Create video container
+            // Créer le conteneur de la vidéo
             const videoContainer = document.createElement('div');
-            videoContainer.classList.add('video-container');
+            videoContainer.id = 'video_container_unique';
 
-            // White block (left side)
+            // Bloc blanc (côté gauche)
             const blancBlock = document.createElement('div');
-            blancBlock.classList.add('blanc-block');
+            blancBlock.id = 'blanc_block_unique';
 
-            // Video content (title, description, author)
+            // Contenu de la vidéo (titre, description, auteur)
             const videoContent = document.createElement('div');
-            videoContent.classList.add('video-content');
+            videoContent.id = 'video_content_unique';
 
-            // Video title
+            // Titre de la vidéo
             const titreVideo = document.createElement('div');
-            titreVideo.classList.add('titre-video');
+            titreVideo.id = 'titre_video_unique';
             const h3 = document.createElement('h3');
             h3.textContent = `${video.titre}`;
             titreVideo.appendChild(h3);
 
-            // Video description
+            // Description de la vidéo
             const descriptionVideo = document.createElement('div');
-            descriptionVideo.classList.add('description-video');
+            descriptionVideo.id = 'description_video_unique';
             descriptionVideo.textContent = `${video.description}`;
 
-            // Video author
+            // Auteur de la vidéo
             const auteurVideo = document.createElement('div');
-            auteurVideo.classList.add('auteur-video');
+            auteurVideo.id = 'auteur_video_unique';
             auteurVideo.textContent = `Auteur: ${video.auteur}`;
 
             videoContent.appendChild(titreVideo);
             videoContent.appendChild(descriptionVideo);
             videoContent.appendChild(auteurVideo);
 
-            // Add the white block and video content to the video container
+            // Ajouter le bloc blanc et le contenu de la vidéo au conteneur de la vidéo
             videoContainer.appendChild(blancBlock);
             videoContainer.appendChild(videoContent);
 
-            // Add each video to the list
-            listeVideos.appendChild(videoContainer);
+            // Ajouter chaque vidéo à la liste
+            listeVideosUnique.appendChild(videoContainer);
         });
     }
 
-    // Search bar event listener
-    searchBar.addEventListener('input', () => {
-        const searchQuery = searchBar.value.toLowerCase();
-        const filteredVideos = videos.filter(video => video.titre.toLowerCase().includes(searchQuery));
-        afficherVideos(filteredVideos); // Show only filtered videos
+    // Écouteur d'événement pour la barre de recherche
+    searchBarUnique.addEventListener('input', () => {
+        const searchQuery = searchBarUnique.value.toLowerCase();
+        const filteredVideos = videosUnique.filter(video => video.titre.toLowerCase().includes(searchQuery));
+        afficherVideosUnique(filteredVideos); // Afficher uniquement les vidéos filtrées
     });
 </script>

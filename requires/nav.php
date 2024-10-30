@@ -4,7 +4,7 @@
     <i class="lev fa-solid fa-house"></i>Accueil</a>
 
     <a href="../pages/videos.php" class="bouton_nav">
-    <i class="lev fa-solid fa-video"></i>Vidéos</a>
+    <i class="lev fa-solid fa-video"></i>Séances</a>
     
     <?php 
         // Si l'utilisateur est connecté, afficher le bouton Déconnexion
