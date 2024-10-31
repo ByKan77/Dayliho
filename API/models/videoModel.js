@@ -7,12 +7,12 @@ async function getAllVideos() {
     return rows;
 }
 
-async function pushNewVideo(title, description, auteur, date, fichier) {
+async function pushNewSeance(titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_sport, id_utilisateur, videoBuffer) { 
     let conn = await pool.getConnection();
-    const query = "INSERT INTO video (title, description, auteur, date, fichier) VALUES (?, ?, ?, ?, ?)";
-    const result = await conn.query(query, [title, description, auteur, date, fichier]);
+    const query = "INSERT INTO seancedesport (titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_sport, id_utilisateur, video) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    const result = await conn.query(query, [titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_sport, id_utilisateur, videoBuffer]);
     conn.release();
     return result;
 }
 
-module.exports = { getAllVideos, pushNewVideo };
+module.exports = { getAllVideos, pushNewSeance };
