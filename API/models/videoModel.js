@@ -2,7 +2,7 @@ let pool = require('../database.js');
 
 async function getAllVideos() {
     let conn = await pool.getConnection();
-    const rows = await conn.query("SELECT * FROM video");
+    const rows = await conn.query("SELECT * FROM seancedesport");
     conn.release();
     return rows;
 }

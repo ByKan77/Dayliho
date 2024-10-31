@@ -16,6 +16,7 @@
     margin: 0; /* Réinitialisation des marges pour tous les éléments */
     padding: 0; /* Réinitialisation des paddings pour tous les éléments */
     box-sizing: border-box; /* Gère le padding et les bordures */
+    scroll-behavior: smooth;
 }
 
 body {
