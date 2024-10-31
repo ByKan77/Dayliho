@@ -130,6 +130,14 @@ body {
     
 </div>
 
+<form id="ajoutVideoForm" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Titre de la vidéo" required>
+    <input type="text" name="description" placeholder="Description" required>
+    <input type="text" name="auteur" placeholder="Auteur" required>
+    <input type="date" name="date" required>
+    <input type="file" name="videoFile" required> <!-- Champ de fichier pour la vidéo -->
+    <button type="submit">Ajouter la vidéo</button>
+</form>
 
 <div class="container">
     <div id="listeVideos">
@@ -138,6 +146,30 @@ body {
 </div>
 
 <script>
+
+    document.getElementById('ajoutVideoForm').addEventListener('submit', (e) => {
+        e.preventDefault(); // Empêche le rechargement de la page
+
+        const formData = new FormData(e.target); // Crée un FormData à partir du formulaire
+
+        axios.post("http://localhost:1234/video/addVideo", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data' 
+            }
+        })
+        .then(response => {
+            console.log(response.data.message); // Message de confirmation
+            // Optionnel : Ajouter la nouvelle vidéo à la liste sans recharger la page
+            videos.push(response.data.result); // Ajoute la nouvelle vidéo aux vidéos existantes
+            afficherVideos(videos); // Met à jour l'affichage des vidéos
+        })
+        .catch(error => {
+            console.error("Erreur lors de l'ajout de la vidéo:", error);
+        });
+    });
+
+
+
     const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
     console.log(userId);
     const listeVideos = document.getElementById("listeVideos");

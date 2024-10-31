@@ -7,10 +7,10 @@ async function getAllVideos() {
     return rows;
 }
 
-async function pushNewVideo(title, description, auteur, date) {
+async function pushNewVideo(title, description, auteur, date, fichier) {
     let conn = await pool.getConnection();
-    const query = "INSERT INTO video (title, description, auteur, date) VALUES (?, ?, ?, ?)";
-    const result = await conn.query(query, [title, description, auteur, date]);
+    const query = "INSERT INTO video (title, description, auteur, date, fichier) VALUES (?, ?, ?, ?, ?)";
+    const result = await conn.query(query, [title, description, auteur, date, fichier]);
     conn.release();
     return result;
 }

@@ -10,10 +10,15 @@ async function getVideos(req, res) {
     }
 }
 
+const multer = require('multer');
+const upload = multer();
+
 async function addVideo(req, res) {
     try {
         const { title, description, auteur, date } = req.body;
-        const result = await videoModel.pushNewVideo(title, description, auteur, date);
+        const videoBuffer = req.file.buffer; // Récupère le fichier vidéo en tant que buffer
+
+        const result = await videoModel.pushNewVideo(title, description, auteur, date, videoBuffer);
         res.status(201).json({ success: true, message: "Vidéo ajoutée avec succès", result });
     } catch (error) {
         console.error("Erreur lors de l'ajout de la vidéo:", error);
