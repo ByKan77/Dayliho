@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
@@ -106,9 +105,82 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Écouteur d'événement pour la barre de recherche
     searchBarUnique.addEventListener('input', () => {
         const searchQuery = searchBarUnique.value.toLowerCase();
         const filteredVideos = videosUnique.filter(video => video.titre.toLowerCase().includes(searchQuery));
         afficherVideosUnique(filteredVideos); // Afficher uniquement les vidéos filtrées
     });
+
+    async function getUser(req) {
+        const userId = req.query.id;
+        return userId;
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        const modal = document.getElementById("session-modal");
+        const openModalBtn = document.getElementById("create-session-btn");
+        const closeModalBtn = document.getElementById("close-modal");
+        const submitBtn = document.getElementById("submitAddSeance");
+        
+    
+        openModalBtn.onclick = function() {
+            modal.style.display = "flex";
+        };
+    
+        closeModalBtn.onclick = function() {
+            modal.style.display = "none";
+        };
+    
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+    
+        submitBtn.addEventListener("click", async function(event) {
+            event.preventDefault();
+    
+            // Remplace cette partie par ta requête réelle pour obtenir userId
+            const req = { query: { id: '123' } }; // Exemple de requête
+            const userId = await getUser(req); // Récupère l'ID utilisateur
+    
+            const sessionData = {
+                titre: document.getElementById("session-name").value,
+                description: document.getElementById("session-name").value,
+                dateDebut: document.getElementById("session-dateDebut").value,
+                dateFin: document.getElementById("session-dateFin").value,
+                lieu: document.getElementById("session-lieu").value,
+                nombrePlaces: document.getElementById("session-taille").value,
+                id_sport: document.getElementById("session-sport").value,
+                userId: userId // Ajoute l'ID utilisateur
+            }; 
+
+            console.log(sessionData);
+            
+            const formData = new FormData();
+                formData.append('titre', sessionData.titre);
+                formData.append('description', sessionData.description);
+                formData.append('dateDebut', sessionData.dateDebut);
+                formData.append('dateFin', sessionData.dateFin);
+                formData.append('lieu', sessionData.lieu);
+                formData.append('nombrePlaces', sessionData.nombrePlaces);
+                formData.append('id_sport', sessionData.id_sport);
+                formData.append('id_utilisateur', sessionData.userId);
+
+
+
+            try {
+                
+                const response = await axios.post('http://localhost:1234/video/addSeance', formData,  
+                    {headers: {
+                    'Content-Type': 'application/json'
+                  }});
+                alert("Séance ajoutée avec succès !");
+                modal.style.display = "none";
+            } catch (error) {
+                console.error("Erreur lors de l'ajout de la séance:", error);
+                alert("Erreur lors de l'ajout de la séance.");
+            }
+        });
+    });
+    
