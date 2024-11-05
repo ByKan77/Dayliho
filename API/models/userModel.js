@@ -24,4 +24,12 @@ async function getAllUsers() {
     return rows;
 }
 
-module.exports = { getUserByEmail, getUserById, getAllUsers };
+// Met à jour le mot de passe de l'utilisateur
+async function updatePassword(id, nouveauMdp) {
+    let conn = await pool.getConnection();
+    const result = await conn.query("UPDATE utilisateur SET mot_de_passe = ? WHERE id = ?", [nouveauMdp, id]);
+    conn.release();
+    return result.affectedRows > 0; // Retourne true si la mise à jour a réussi
+}
+
+module.exports = { getUserByEmail, getUserById, getAllUsers, updatePassword };

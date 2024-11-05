@@ -1,12 +1,4 @@
 <?php
-   session_start();
-
-   // Redirection vers la page de connexion si l'utilisateur n'est pas authentifié
-   if (!isset($_SESSION['user_id'])) {
-       header('Location: login.php');
-       exit();
-   }
-
    require '../back/header.php';
    require '../requires/nav.php';
 ?>

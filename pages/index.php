@@ -1,6 +1,4 @@
-<?php 
-    session_start();
-
+<?php
     require_once '../back/header.php';
     require '../requires/nav.php';
     require '../requires/index_section_1.php';

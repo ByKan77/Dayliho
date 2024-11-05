@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Outils">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/documentations/Contexte_M2L/Organisation/Outils/MDL-Tous-les-schémas.zip!/" />
+      <root url="jar://$PROJECT_DIR$/documentations/Contexte_M2L/Organisation/Outils/M2L-SysResSalles.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

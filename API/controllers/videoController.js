@@ -15,6 +15,7 @@ const upload = multer();
 
 async function addSeance(req, res) {
     try {
+        console.log(req.user)
         console.log(req.body);
         
         const {titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_sport, id_utilisateur } = req.body;
