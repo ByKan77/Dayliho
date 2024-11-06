@@ -1,5 +1,5 @@
 #profile-body {
-    background-color: #262626;
+    background-color: black;
 }
 
 #profile-container {
@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #262626;
+    background-color: black;
     width: 80%;
     padding: 20px;
 }

@@ -14,10 +14,10 @@
     <!-- Onglets de navigation -->
     <button onclick="showTab('videos')">Toutes les séances</button>
     <button onclick="showTab('planning')">Planning</button>
+    <button id="create-session-btn">Créer une séance</button>
     
 </div>
 
-<button id="create-session-btn">Créer une séance</button>
 
 <!-- Fenêtre modale -->
 <div id="session-modal" class="modal">
