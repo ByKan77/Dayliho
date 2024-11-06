@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Ressources-Diverses-Projets">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/documentations/Contexte_M2L/PPE/Ressources-Diverses-Projets/M2L-Projet-FDERI.zip!/" />
+      <root url="jar://$PROJECT_DIR$/documentations/Contexte_M2L/PPE/Ressources-Diverses-Projets/M2L-Facture_Affran-Photocop.zip!/" />
+      <root url="jar://$PROJECT_DIR$/documentations/Contexte_M2L/PPE/Ressources-Diverses-Projets/M2L-Exemple_Convention_ODP.zip!/" />
+      <root url="jar://$PROJECT_DIR$/documentations/Contexte_M2L/PPE/Ressources-Diverses-Projets/M2L-Titre_de_Paiement_CR.zip!/" />
+      <root url="jar://$PROJECT_DIR$/documentations/Contexte_M2L/PPE/Ressources-Diverses-Projets/M2L-Convention-ODP.zip!/" />
+      <root url="jar://$PROJECT_DIR$/documentations/Contexte_M2L/PPE/Ressources-Diverses-Projets/M2L-Formations_CROSL_Sem1_2010.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

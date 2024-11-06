@@ -1,4 +1,6 @@
 const userModel = require('../models/userModel');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // Fonction pour vérifier l'utilisateur lors de la connexion
 async function checkUser(req, res) {
@@ -7,10 +9,12 @@ async function checkUser(req, res) {
     try {
         // Utilise le modèle pour récupérer l'utilisateur par email
         const utilisateur = await userModel.getUserByEmail(email);
-
+        console.log(utilisateur)
         if (utilisateur && utilisateur.mot_de_passe === mot_de_passe) {
             // Si l'utilisateur existe et que le mot de passe est correct
-            res.status(200).json({ success: true, user_id: utilisateur.id });
+            let token = jwt.sign({email: utilisateur.email, id: utilisateur.id}, 'enculer', {expiresIn: '1h'})
+            console.log(token)
+            res.status(201).json({ success: true, token: token });
         } else {
             // Si l'utilisateur n'est pas trouvé ou que le mot de passe est incorrect
             res.status(401).json({ success: false, message: 'Email ou mot de passe incorrect.' });
@@ -55,4 +59,50 @@ async function getUsers(req, res) {
     }
 }
 
-module.exports = { checkUser, getUser, getUsers };
+// Fonction pour changer le mot de passe
+async function changePassword(req, res) {
+    const { userId, ancienMdp, nouveauMdp, confirmNouveauMdp } = req.body;
+
+    try {
+        // Vérifie que les nouveaux mots de passe correspondent
+        if (nouveauMdp !== confirmNouveauMdp) {
+            return res.status(400).json({ success: false, message: 'Les nouveaux mots de passe ne correspondent pas.' });
+        }
+
+        // Récupère l'utilisateur par son ID
+        const utilisateur = await userModel.getUserById(userId);
+
+        // Vérifie si l'ancien mot de passe est correct
+        const passwordMatch = await bcrypt.compare(ancienMdp, utilisateur.mot_de_passe);
+        if (!passwordMatch) {
+            return res.status(401).json({ success: false, message: 'Mot de passe actuel incorrect.' });
+        }
+
+        // Hash le nouveau mot de passe
+        const hashedPassword = await bcrypt.hash(nouveauMdp, 10);
+
+        // Met à jour le mot de passe dans la base de données
+        const updateSuccess = await userModel.updatePassword(userId, hashedPassword);
+
+        if (updateSuccess) {
+            res.status(200).json({ success: true, message: 'Mot de passe changé avec succès.' });
+        } else {
+            res.status(500).json({ success: false, message: 'Erreur lors de la mise à jour du mot de passe.' });
+        }
+    } catch (error) {
+        console.error("Erreur lors du changement de mot de passe:", error);
+        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+    }
+}
+
+async function navbar(req,res){
+    if (req.user){
+        res.status(200).json({success: true, user: req.user});
+    }
+    else{
+        res.status(401).json({success: false});
+    }
+
+}
+
+module.exports = { checkUser, getUser, getUsers, changePassword, navbar };

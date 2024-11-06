@@ -10,15 +10,27 @@ async function getVideos(req, res) {
     }
 }
 
-async function addVideo(req, res) {
+const multer = require('multer');
+const upload = multer();
+
+async function addSeance(req, res) {
     try {
-        const { title, description, auteur, date } = req.body;
-        const result = await videoModel.pushNewVideo(title, description, auteur, date);
-        res.status(201).json({ success: true, message: "Vidéo ajoutée avec succès", result });
+        console.log(req.user)
+        console.log(req.body);
+        
+        const {titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_sport, id_utilisateur } = req.body;
+        //const videoBuffer = req.file.buffer; // Récupère le fichier vidéo en tant que buffer
+        
+        console.log(typeof(id_utilisateur), typeof(id_sport));
+        
+        const result = await videoModel.pushNewSeance(titre, description, dateDebut, dateFin, lieu, parseInt(nombrePlaces), parseInt(id_sport), parseInt(id_utilisateur));
+        
+        res.status(201).json({ success: true, message: "Séance ajoutée avec succès"});
     } catch (error) {
-        console.error("Erreur lors de l'ajout de la vidéo:", error);
+        console.log("Bonjour");
+        console.error("Erreur lors de l'ajout de la Séance:", error);
         res.status(500).json({ success: false, message: 'Erreur serveur.' });
     }
 }
 
-module.exports = { getVideos, addVideo };
+module.exports = { getVideos, addSeance };
