@@ -1,3 +1,6 @@
+<script>
+    localStorage.removeItem('redirected')
+</script>
 <?php
    require '../back/header.php';
    require '../requires/nav.php';

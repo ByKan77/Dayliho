@@ -1,5 +1,18 @@
 <script>
+    // Vérification de l'existence du token au chargement de la page
+    if (!localStorage.getItem('token')) {
+        // Si pas de token, redirection vers la page de connexion
+        window.location.href = "../pages/login.php";
+    } else {
+        // Sinon, charger nav.js pour initialiser la barre de navigation
+        // Charger le script nav.js uniquement si l'utilisateur est authentifié
+        const script = document.createElement('script');
+        script.src = "../scripts/nav.js";
+        document.head.appendChild(script);
+    }
+
     let index = document.getElementById("index");
+
     if(axios.get("http://localhost:1234/user/verifUser")===True){
         index.innerHTML= `
             <?php
