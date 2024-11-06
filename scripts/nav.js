@@ -15,8 +15,10 @@ const navbarUser = async () => {
             test.innerHTML += `
                 <a href="../pages/profile.php" class="bouton_nav">
                     <i class="lev fa-solid fa-user"></i>Profile
-                </a>`;
-            test.innerHTML += `
+                </a>
+                 <a href="../pages/videos.php" class="bouton_nav">
+                    <i class="lev fa-solid fa-user"></i>Séances
+                </a>
                 <a href="../pages/login.php" class="bouton_nav" onclick="localStorage.removeItem('token');">
                     <i class="lev fa-solid fa-user"></i>Deconnexion
                 </a>`;
