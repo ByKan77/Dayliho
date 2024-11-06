@@ -205,7 +205,12 @@
 }
 
 
-/* Style pour la fenêtre modale */
+
+
+
+/*Code testé */
+
+/* Style général pour la fenêtre modale */
 .modal {
     display: none; /* Masquée par défaut */
     position: fixed;
@@ -216,24 +221,90 @@
     background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* La valeur élevée permet d'être au premier plan */
+    z-index: 1000; /* Permet de passer au-dessus des autres éléments */
+    transition: opacity 0.3s ease; /* Animation douce pour l'apparition/disparition */
 }
 
+/* Effet d'apparition de la modale */
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
 
 /* Contenu de la fenêtre modale */
 .modal-content {
     background-color: #fff;
-    padding: 20px;
-    width: 400px;
-    border-radius: 8px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1001; /* Toujours légèrement plus élevé que .modal */
+    padding: 25px;
+    width: 500px; /* Largeur plus grande pour un meilleur confort */
+    max-width: 90%; /* Limite la largeur sur les petits écrans */
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre plus douce */
+    position: relative; /* Nécessaire pour le bouton de fermeture */
+    animation: fadeIn 0.3s ease-out; /* Animation d'apparition */
 }
 
-/* Bouton de fermeture */
+/* Animation de fadeIn pour l'apparition du contenu */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Style du bouton de fermeture */
 .close-btn {
-    float: right;
-    font-size: 1.5em;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.8em;
+    color: #ff4d4d; /* Rouge vif */
+    background: none;
+    border: none;
     cursor: pointer;
-    color: #333;
+    transition: transform 0.2s ease; /* Transition lors de l'effet hover */
+}
+
+.close-btn:hover {
+    transform: scale(1.1); /* Légère agrandissement au survol */
+    color: #d90000; /* Couleur plus foncée lors du survol */
+}
+
+/* Style du texte de la modale */
+.modal-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333; /* Texte foncé pour une bonne lisibilité */
+}
+
+/* En-tête de la modale */
+.modal-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #222; /* Couleur légèrement plus foncée pour l'en-tête */
+}
+
+/* Contenu personnalisé (si nécessaire) */
+.modal-content .modal-body {
+    max-height: 70vh;
+    overflow-y: auto; /* Permet de défiler si le contenu est trop grand */
+}
+
+/* Style de fond semi-transparent au survol */
+.modal:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Augmentation de la transparence au survol */
+}
+
+/* Responsive : Ajustement pour petits écrans */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 90%; /* Réduit la taille pour les petits écrans */
+        padding: 15px;
+    }
+    .close-btn {
+        font-size: 1.5em; /* Réduit la taille du bouton de fermeture */
+    }
 }
