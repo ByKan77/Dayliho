@@ -9,10 +9,13 @@ navbarUser = async () => {
             }
         });
         if (response.status === 200) {
-            test.innerHTML += `<a href="../pages/profile.php" class="bouton_nav">
-                                   <i class="lev fa-solid fa-user"></i>Profile</a>`;
-            test.innerHTML += `<a href="../pages/login.php" class="bouton_nav" onclick="localStorage.removeItem('token');">
-                                   <i class="lev fa-solid fa-user"></i>Deconnexion</a>`;
+            test.innerHTML += `    
+               <a href="../pages/profile.php" class="bouton_nav">
+               <i class="lev fa-solid fa-user"></i>Profile</a>    
+               <a href="../pages/videos.php" class="bouton_nav">
+               <i class="lev fa-solid fa-video"></i>Séances</a>
+               <a href="../pages/login.php" class="bouton_nav" onclick="localStorage.removeItem('token');">
+               <i class="lev fa-solid fa-user"></i>Deconnexion</a>`;
         }
     } catch (error) {
         // Gérer les erreurs ici

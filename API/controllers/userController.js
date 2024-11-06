@@ -12,7 +12,7 @@ async function checkUser(req, res) {
         console.log(utilisateur)
         if (utilisateur && utilisateur.mot_de_passe === mot_de_passe) {
             // Si l'utilisateur existe et que le mot de passe est correct
-            let token = jwt.sign({email: utilisateur.email, id: utilisateur.id}, 'enculer', {expiresIn: '1h'})
+            let token = jwt.sign({email: utilisateur.email, id: utilisateur.id}, 'secretKey', {expiresIn: '1h'})
             console.log(token)
             res.status(201).json({ success: true, token: token });
         } else {
@@ -95,7 +95,7 @@ async function changePassword(req, res) {
     }
 }
 
-async function navbar(req,res){
+async function verifConnexion(req,res){
     if (req.user){
         res.status(200).json({success: true, user: req.user});
     }
@@ -105,4 +105,4 @@ async function navbar(req,res){
 
 }
 
-module.exports = { checkUser, getUser, getUsers, changePassword, navbar };
+module.exports = { checkUser, getUser, getUsers, changePassword, verifConnexion };

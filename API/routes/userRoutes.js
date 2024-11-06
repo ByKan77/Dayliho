@@ -15,7 +15,8 @@ router.get("/getUsers", userController.getUsers);
 router.post("/changePassword", userController.changePassword);
 
 // Route pour la navbar
-router.get("/navbar", middleware.authentification, userController.navbar);
+router.get("/navbar", middleware.authentification, userController.verifConnexion);
 
+router.get("/verifUser", middleware.authentification, userController.verifConnexion);
 
 module.exports = router;

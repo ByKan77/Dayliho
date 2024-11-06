@@ -3,12 +3,12 @@ const userModel = require('../models/userModel');
 
 exports.authentification = async (req, res, next) => {
     const token = req.headers.authorization;
-    console.log(token)
     if (!token) {
         return res.status(401).json({success: false});
+        windows.location.href = "../../pages/login.php";
     }
     else{
-        jwt.verify(token, 'enculer', async (err, decoded) => {
+        jwt.verify(token, 'secretKey', async (err, decoded) => {
             if (err) {
                 return res.status(401).json({success: false});
             }
@@ -23,4 +23,11 @@ exports.authentification = async (req, res, next) => {
             }
         });
     }
+}
+
+exports.admin = async (req, res, next) => {
+    if(req.user.role === 'admin'){
+        next();
+    }
+
 }
