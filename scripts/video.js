@@ -167,13 +167,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 formData.append('id_sport', sessionData.id_sport);
                 formData.append('id_utilisateur', sessionData.userId);
 
-
+            console.log(localStorage.getItem("token"));
 
             try {
                 
                 const response = await axios.post('http://localhost:1234/video/addSeance', formData,  
                     {headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
                   }});
                 alert("Séance ajoutée avec succès !");
                 modal.style.display = "none";

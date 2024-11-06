@@ -19,7 +19,6 @@ async function addSeance(req, res) {
         console.log(req.body);
         
         const {titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_sport, id_utilisateur } = req.body;
-        //const videoBuffer = req.file.buffer; // Récupère le fichier vidéo en tant que buffer
         
         console.log(typeof(id_utilisateur), typeof(id_sport));
         
