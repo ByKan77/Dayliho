@@ -15,7 +15,7 @@
 #profile-sidebar {
     width: 250px;
     min-height: 50vh;
-    background-color: #262626;
+    background-color: #060e31;
     color: white;
     padding: 20px;
     display: flex;
@@ -23,6 +23,7 @@
     align-items: center;
     border-radius: 15px;
     border: 2px solid white;
+    margin-right: 50px; /* Espace de 20px entre la sidebar et la boîte d'infos */
 }
 
 #details-tab,
@@ -50,7 +51,7 @@
     font-size: 17px;
     transition: background-color 0.3s ease, color 0.3s ease;
     border-radius: 20%;
-    background-color: #262626;
+    background-color: #060e31;
 }
 
 #profile-sidebar .menu-item:hover {
@@ -73,8 +74,6 @@
 #profile-sidebar .menu-item:hover i {
     transform: scale(1.25);
 }
-
-
 
 .form-group {
     margin-bottom: 15px;
