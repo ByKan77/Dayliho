@@ -3,7 +3,7 @@
 }
 
 #profile-container {
-    margin-top: 15vh; /* Laissez une marge de 15% de la hauteur de la fenêtre */
+    margin-top: 15vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -39,20 +39,42 @@
 
 .menu-item.active,
 .menu-item:hover {
-    background-color: #1a2735;
+    background-color: #000000;
+}
+
+#profile-sidebar .menu-item {
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 20%;
+    background-color: #262626;
+}
+
+#profile-sidebar .menu-item:hover {
+    color: #fff;
+    transform: scale(1.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 #profile-content {
     flex-grow: 1;
     padding: 20px;
     background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
 }
 
-#profile-content h2 {
-    margin-top: 0;
+#profile-sidebar .menu-item i {
+    transition: transform 0.3s ease;
 }
+
+#profile-sidebar .menu-item:hover i {
+    transform: scale(1.25);
+}
+
+
 
 .form-group {
     margin-bottom: 15px;
