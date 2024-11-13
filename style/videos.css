@@ -25,13 +25,15 @@
     margin-left: 20px;
 }
 
+/* Liste des vidéos : Disposition des boxes */
 #liste_videos_unique {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes fixes */
+    grid-template-columns: repeat(3, minmax(250px, 1fr)); /* 3 colonnes, chaque box entre 250px et 1fr */
     gap: 30px;
     justify-items: center;
     padding: 0 20px;
 }
+
 
 #video_container_unique {
     display: flex;
@@ -72,16 +74,16 @@
 
 @media (max-width: 1024px) {
     #liste_videos_unique {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablettes */
     }
 }
 
+/* Pour les petits écrans (mobiles) */
 @media (max-width: 768px) {
     #liste_videos_unique {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* 1 seule colonne sur mobiles */
     }
 }
-
 #blanc_block_unique {
     background-color: #fff;
     width: 180px;
@@ -143,12 +145,14 @@
 #single_search_unique {
     display: flex;
     align-items: center;
+    justify-content: center; /* Assure que l'icône est centrée lorsque la barre est rétractée */
     border-radius: 30px;
-    background-color: white;
+    background-color: #ffffff; /* Fond blanc pur */
     padding: 10px;
     transition: width 0.4s linear;
-    width: 40px;
+    width: 40px; /* Taille initiale de la barre rétractée */
     overflow: hidden;
+    box-shadow: none;
 }
 
 #custom_input_unique {
@@ -157,6 +161,7 @@
     width: 0;
     transition: width 0.4s linear;
     font-size: 18px;
+    background-color: transparent; /* Pas de fond pour le champ de texte */
 }
 
 #custom_input_unique::placeholder {
@@ -164,7 +169,8 @@
 }
 
 #single_search_unique:hover {
-    width: 400px;
+    width: 400px; /* Taille étendue */
+    justify-content: flex-start; /* Place l'icône à gauche lorsqu'on survole pour étendre */
 }
 
 #single_search_unique:hover #custom_input_unique {
@@ -175,6 +181,7 @@
 #icon_area_unique {
     width: 40px;
     height: 40px;
+    min-width: 40px; /* Maintient la taille de l'icône */
     border-radius: 50%;
     background: white;
     display: flex;
@@ -186,6 +193,7 @@
 #fa_search_unique {
     font-size: 20px;
 }
+
 
 #tab_navigation button {
     margin-left: 20px;
@@ -350,20 +358,71 @@ button:hover {
     background-color: rgba(0, 0, 0, 0.6); /* Augmentation de la transparence au survol */
 }
 
-/* Responsivité pour les petits écrans */
+
+
+
+
+
+
+/* Fenêtre modale responsive */
 @media (max-width: 600px) {
+    /* Réduire la taille de la modale sur les petits écrans */
     .modal-content {
-        width: 90%;
-        padding: 20px;
+        width: 90%; /* Ajuste la largeur de la modale à 90% de l'écran */
+        max-width: 95%; /* Largeur maximale à 95% de l'écran pour éviter les débordements */
+        padding: 15px; /* Réduire le padding pour économiser de l'espace */
     }
 
-    .close-btn {
-        font-size: 1.4em;
+    /* Réduire la taille du texte dans la modale */
+    .modal-content h2 {
+        font-size: 1.5rem; /* Taille du titre réduite */
+        margin-bottom: 15px; /* Espacement plus petit */
+    }
+
+    label {
+        font-size: 0.9rem; /* Taille de la police des labels réduite */
+    }
+
+    input, select {
+        font-size: 0.9rem; /* Taille de la police des champs de texte réduite */
+        padding: 10px; /* Réduire un peu l'espace des champs de formulaire */
     }
 
     button {
-        padding: 12px;
-        font-size: 1rem;
+        padding: 10px 15px; /* Réduire la taille des boutons */
+        font-size: 1rem; /* Taille du texte des boutons réduite */
+    }
+
+    /* Bouton de fermeture plus petit */
+    .close-btn {
+        font-size: 1.4em; /* Réduire la taille du bouton de fermeture */
+    }
+
+    /* Ajuster la hauteur maximale du contenu modale pour éviter les débordements */
+    .modal-content .modal-body {
+        max-height: 60vh; /* Limite la hauteur du contenu à 60% de la hauteur de l'écran */
+        overflow-y: auto; /* Permet de défiler si nécessaire */
+    }
+}
+
+/* Pour les très petits écrans (ex. smartphones très compacts) */
+@media (max-width: 375px) {
+    /* Réduire davantage la taille de la modale */
+    .modal-content {
+        width: 90%; /* Toujours 90% pour une plus grande adaptabilité */
+        padding: 10px; /* Réduire le padding */
+    }
+
+    .modal-content h2 {
+        font-size: 1.3rem; /* Réduire un peu plus la taille du titre */
+    }
+
+    input, select {
+        font-size: 0.85rem; /* Taille de police des champs de texte plus petite */
+    }
+
+    button {
+        font-size: 0.9rem; /* Taille du texte des boutons encore plus petite */
     }
 }
 
