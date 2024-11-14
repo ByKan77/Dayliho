@@ -28,7 +28,7 @@
 /* Liste des vidéos : Disposition des boxes */
 #liste_videos_unique {
     display: grid;
-    grid-template-columns: repeat(3, minmax(250px, 1fr)); /* 3 colonnes, chaque box entre 250px et 1fr */
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
     gap: 30px;
     justify-items: center;
     padding: 0 20px;
@@ -72,16 +72,17 @@
     z-index: 2;
 }
 
+/* Pour les tablettes */
 @media (max-width: 1024px) {
     #liste_videos_unique {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablettes */
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 /* Pour les petits écrans (mobiles) */
 @media (max-width: 768px) {
     #liste_videos_unique {
-        grid-template-columns: 1fr; /* 1 seule colonne sur mobiles */
+        grid-template-columns: 1fr;
     }
 }
 #blanc_block_unique {
@@ -145,12 +146,12 @@
 #single_search_unique {
     display: flex;
     align-items: center;
-    justify-content: center; /* Assure que l'icône est centrée lorsque la barre est rétractée */
+    justify-content: center;
     border-radius: 30px;
-    background-color: #ffffff; /* Fond blanc pur */
+    background-color: #ffffff;
     padding: 10px;
     transition: width 0.4s linear;
-    width: 40px; /* Taille initiale de la barre rétractée */
+    width: 40px;
     overflow: hidden;
     box-shadow: none;
 }
@@ -161,7 +162,7 @@
     width: 0;
     transition: width 0.4s linear;
     font-size: 18px;
-    background-color: transparent; /* Pas de fond pour le champ de texte */
+    background-color: transparent;
 }
 
 #custom_input_unique::placeholder {
@@ -169,8 +170,8 @@
 }
 
 #single_search_unique:hover {
-    width: 400px; /* Taille étendue */
-    justify-content: flex-start; /* Place l'icône à gauche lorsqu'on survole pour étendre */
+    width: 400px;
+    justify-content: flex-start;
 }
 
 #single_search_unique:hover #custom_input_unique {
@@ -181,7 +182,7 @@
 #icon_area_unique {
     width: 40px;
     height: 40px;
-    min-width: 40px; /* Maintient la taille de l'icône */
+    min-width: 40px;
     border-radius: 50%;
     background: white;
     display: flex;
@@ -202,14 +203,14 @@
 #calendar {
     margin: 10vh;
     padding: 20px;
-    background-color: white; /* Fond blanc pour le calendrier */
+    background-color: white;
     border-radius: 20px;
 }
 
 /* Optionnel : Ajoutez un fond blanc aux événements */
 .fc-event {
-    background-color: #ffffff; /* Fond blanc pour les événements */
-    color: black; /* Couleur du texte (noir) pour un bon contraste */
+    background-color: #ffffff;
+    color: black;
 }
 
 
@@ -218,17 +219,17 @@
 
 /* Fenêtre modale de base */
 .modal {
-    display: none; /* Masquée par défaut */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Fond semi-transparent plus subtil */
+    background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    transition: opacity 0.3s ease; /* Douce transition pour l'apparition/disparition */
+    transition: opacity 0.3s ease;
 }
 
 /* Lorsque la modale est visible */
@@ -241,12 +242,12 @@
 .modal-content {
     background-color: #fff;
     padding: 30px;
-    width: 500px; /* Largeur confortable */
+    width: 500px;
     max-width: 90%;
-    border-radius: 12px; /* Coins arrondis */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Ombre plus douce et subtile */
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
     position: relative;
-    animation: fadeIn 0.4s ease-out; /* Animation plus fluide */
+    animation: fadeIn 0.4s ease-out;
 }
 
 /* Animation d'apparition de la modale */
@@ -267,16 +268,16 @@
     top: 15px;
     right: 15px;
     font-size: 1.6em;
-    color: #d32f2f; /* Rouge plus doux et professionnel */
+    color: #d32f2f;
     background: none;
     border: none;
     cursor: pointer;
-    transition: transform 0.3s ease; /* Animation douce au survol */
+    transition: transform 0.3s ease;
 }
 
 .close-btn:hover {
-    transform: scale(1.1); /* Effet d'agrandissement au survol */
-    color: #b71c1c; /* Couleur plus foncée lors du survol */
+    transform: scale(1.1);
+    color: #b71c1c;
 }
 
 /* Style des titres de la modale */
@@ -284,13 +285,13 @@
     font-size: 1.8rem;
     color: #333;
     margin-bottom: 20px;
-    font-weight: 600; /* Poids de police plus marqué */
+    font-weight: 600;
 }
 
 /* Style des champs de formulaire */
 label {
     font-size: 1rem;
-    color: #444; /* Couleur douce mais suffisamment visible */
+    color: #444;
     margin-bottom: 5px;
     display: block;
 }
@@ -302,21 +303,21 @@ input, select {
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
-    background-color: #f9f9f9; /* Fond clair et moderne */
-    transition: border-color 0.3s ease; /* Transition douce lors du focus */
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
 }
 
 input:focus, select:focus {
-    border-color: #007BFF; /* Bordure bleue sur focus */
-    background-color: #fff; /* Fond blanc sur focus */
-    outline: none; /* Supprimer le contour par défaut */
+    border-color: #007BFF;
+    background-color: #fff;
+    outline: none;
 }
 
 /* Style du bouton d'enregistrement */
 button {
     padding: 12px 20px;
     font-size: 1.1rem;
-    background-color: #060e31; /* Bleu vibrant */
+    background-color: #060e31;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -329,7 +330,7 @@ button {
 #submitAddSeance {
     padding: 12px 20px;
     font-size: 1.1rem;
-    background-color: #0056b3; /* Bleu vibrant */
+    background-color: #0056b3;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -344,7 +345,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3; /* Changement de couleur au survol */
+    background-color: #0056b3;
 }
 
 /* Contenu personnalisé de la modale (si nécessaire) */
@@ -355,7 +356,7 @@ button:hover {
 
 /* Effet de fond au survol */
 .modal:hover {
-    background-color: rgba(0, 0, 0, 0.6); /* Augmentation de la transparence au survol */
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 
@@ -364,65 +365,57 @@ button:hover {
 
 
 
-/* Fenêtre modale responsive */
 @media (max-width: 600px) {
-    /* Réduire la taille de la modale sur les petits écrans */
     .modal-content {
-        width: 90%; /* Ajuste la largeur de la modale à 90% de l'écran */
-        max-width: 95%; /* Largeur maximale à 95% de l'écran pour éviter les débordements */
-        padding: 15px; /* Réduire le padding pour économiser de l'espace */
+        width: 90%;
+        max-width: 95%;
+        padding: 15px;
     }
 
-    /* Réduire la taille du texte dans la modale */
     .modal-content h2 {
-        font-size: 1.5rem; /* Taille du titre réduite */
-        margin-bottom: 15px; /* Espacement plus petit */
+        font-size: 1.5rem;
+        margin-bottom: 15px;
     }
 
     label {
-        font-size: 0.9rem; /* Taille de la police des labels réduite */
+        font-size: 0.9rem;
     }
 
     input, select {
-        font-size: 0.9rem; /* Taille de la police des champs de texte réduite */
-        padding: 10px; /* Réduire un peu l'espace des champs de formulaire */
+        font-size: 0.9rem;
+        padding: 10px;
     }
 
     button {
-        padding: 10px 15px; /* Réduire la taille des boutons */
-        font-size: 1rem; /* Taille du texte des boutons réduite */
+        padding: 10px 15px;
+        font-size: 1rem;
     }
 
-    /* Bouton de fermeture plus petit */
     .close-btn {
-        font-size: 1.4em; /* Réduire la taille du bouton de fermeture */
+        font-size: 1.4em;
     }
 
-    /* Ajuster la hauteur maximale du contenu modale pour éviter les débordements */
     .modal-content .modal-body {
-        max-height: 60vh; /* Limite la hauteur du contenu à 60% de la hauteur de l'écran */
-        overflow-y: auto; /* Permet de défiler si nécessaire */
+        max-height: 60vh;
+        overflow-y: auto;
     }
 }
 
-/* Pour les très petits écrans (ex. smartphones très compacts) */
 @media (max-width: 375px) {
-    /* Réduire davantage la taille de la modale */
     .modal-content {
-        width: 90%; /* Toujours 90% pour une plus grande adaptabilité */
-        padding: 10px; /* Réduire le padding */
+        width: 90%;
+        padding: 10px;
     }
 
     .modal-content h2 {
-        font-size: 1.3rem; /* Réduire un peu plus la taille du titre */
+        font-size: 1.3rem;
     }
 
     input, select {
-        font-size: 0.85rem; /* Taille de police des champs de texte plus petite */
+        font-size: 0.85rem;
     }
 
     button {
-        font-size: 0.9rem; /* Taille du texte des boutons encore plus petite */
+        font-size: 0.9rem;
     }
 }
-
