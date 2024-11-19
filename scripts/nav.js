@@ -19,7 +19,7 @@ const navbarUser = async () => {
                  <a href="../pages/videos.php" class="bouton_nav">
                     <i class="lev fa-solid fa-user"></i>Séances
                 </a>
-                <a href="../pages/login.php" class="bouton_nav" onclick="localStorage.removeItem('token');">
+                <a href="../pages/login.php" class="bouton_nav" onclick="localStorage.removeItem('token');localStorage.removeItem('userId');">
                     <i class="lev fa-solid fa-user"></i>Deconnexion
                 </a>`;
         }
