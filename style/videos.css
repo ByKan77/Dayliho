@@ -45,7 +45,7 @@
 
 
 #container_videos_unique {
-    padding-top: 90px;
+    padding-top: 20px;
     display: flex;
     justify-content: flex-start;
     margin-left: 20px;
@@ -111,15 +111,7 @@
         grid-template-columns: 1fr;
     }
 }
-#blanc_block_unique {
-    background-color: #fff;
-    width: 180px;
-    min-width: 180px;
-    height: 180px;
-    border-radius: 10px;
-    margin-right: 25px;
-    flex-shrink: 0;
-}
+
 
 #video_content_unique {
     display: flex;
