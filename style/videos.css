@@ -16,10 +16,36 @@
 }
 
 
+#create-session-btn {
+    width: 60px; /* Largeur du bouton */
+    height: 60px; /* Hauteur du bouton (pour qu'il soit rond, largeur = hauteur) */
+    background-color: #060e31; /* Couleur de fond */
+    color: #fff; /* Couleur de l'icône */
+    border: none;
+    border-radius: 50%; /* Rend le bouton rond */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6em; /* Taille de l'icône */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#create-session-btn:hover {
+    background-color: #0056b3; /* Couleur au survol */
+}
+
+/* Pour l'icône à l'intérieur du bouton */
+#create-session-btn i {
+    font-size: 1.6em; /* Ajuster la taille de l'icône */
+}
+
+
 
 
 #container_videos_unique {
-    padding-top: 90px;
+    padding-top: 20px;
     display: flex;
     justify-content: flex-start;
     margin-left: 20px;
@@ -85,15 +111,7 @@
         grid-template-columns: 1fr;
     }
 }
-#blanc_block_unique {
-    background-color: #fff;
-    width: 180px;
-    min-width: 180px;
-    height: 180px;
-    border-radius: 10px;
-    margin-right: 25px;
-    flex-shrink: 0;
-}
+
 
 #video_content_unique {
     display: flex;
@@ -241,14 +259,17 @@
 /* Contenu de la fenêtre modale */
 .modal-content {
     background-color: #fff;
-    padding: 30px;
+    padding: 20px; /* Réduire la valeur de padding */
     width: 500px;
     max-width: 90%;
+    max-height: 650px; /* Limite la hauteur maximale */
     border-radius: 12px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
     position: relative;
     animation: fadeIn 0.4s ease-out;
+    overflow-y: auto; /* Permet de faire défiler le contenu si nécessaire */
 }
+
 
 /* Animation d'apparition de la modale */
 @keyframes fadeIn {

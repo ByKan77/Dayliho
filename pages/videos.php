@@ -12,9 +12,15 @@
 
 <div id="tab_navigation" style="display:flex;justify-content:center; margin:20vh 10vh 10vh 10vh">
     <!-- Onglets de navigation -->
+<<<<<<< HEAD
+    <button onclick="showTab('videos')">Toutes les séances</button>
+    <button onclick="showTab('planning')">Planning</button>
+    <button id="create-session-btn"><i class="fa-solid fa-plus"></i></button>
+=======
     <button onclick="showTab('videos')" style="margin:0 2vh 0 2vh;">Toutes les séances</button>
     <button onclick="showTab('planning')" style="margin:0 2vh 0 2vh">Planning</button>
     <button id="create-session-btn" style="margin:0 2vh 0 2vh">Créer une séance</button>
+>>>>>>> 08641a1682b227eb17536d455781e457f5baa5c9
     
 </div>
 
