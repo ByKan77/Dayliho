@@ -169,10 +169,10 @@
     background-color: #ffffff;
     padding: 5px 10px; /* Réduire la hauteur */
     transition: width 0.4s linear;
-    width: 40px;
+    width: 60px;
     overflow: hidden;
     box-shadow: none;
-    height: 35px; /* Réduire la hauteur */
+    height: 60px; /* Réduire la hauteur */
 }
 
 #custom_input_unique {
