@@ -26,7 +26,6 @@ async function addSeance(req, res) {
         
         res.status(201).json({ success: true, message: "Séance ajoutée avec succès"});
     } catch (error) {
-        console.log("Bonjour");
         console.error("Erreur lors de l'ajout de la Séance:", error);
         res.status(500).json({ success: false, message: 'Erreur serveur.' });
     }
