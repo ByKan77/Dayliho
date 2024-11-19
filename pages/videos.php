@@ -14,7 +14,7 @@
     <!-- Onglets de navigation -->
     <button onclick="showTab('videos')">Toutes les séances</button>
     <button onclick="showTab('planning')">Planning</button>
-    <button id="create-session-btn">Créer une séance</button>
+    <button id="create-session-btn"><i class="fa-solid fa-plus"></i></button>
     
 </div>
 
