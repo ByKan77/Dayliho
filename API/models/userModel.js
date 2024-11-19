@@ -9,9 +9,9 @@ async function getUserByEmail(email) {
 }
 
 // Récupère un utilisateur par ID
-async function getUserById(id) {
+async function getUserById(userId) {
     let conn = await pool.getConnection();
-    const rows = await conn.query("SELECT * FROM utilisateur WHERE id = ?", [id]);
+    const rows = await conn.query("SELECT * FROM utilisateur WHERE id = ?", [userId]);
     conn.release();
     return rows[0];
 }

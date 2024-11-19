@@ -9,13 +9,12 @@ async function checkUser(req, res) {
     try {
         // Utilise le modèle pour récupérer l'utilisateur par email
         const utilisateur = await userModel.getUserByEmail(email);
-        console.log(utilisateur)
+        console.log(utilisateur.id)
         if (utilisateur && utilisateur.mot_de_passe === mot_de_passe) {
-            // Si l'utilisateur existe et que le mot de passe est correct
-            let token = jwt.sign({email: utilisateur.email, id: utilisateur.id}, 'secretKey', {expiresIn: '1h'})
-            console.log(token)
-            res.status(201).json({ success: true, token: token });
-        } else {
+            let token = jwt.sign({ email: utilisateur.email, id: utilisateur.id }, 'secretKey', { expiresIn: '1h' });
+            res.status(201).json({ success: true, token: token, userId: utilisateur.id }); // Inclure l'ID dans la réponse
+        }
+        else {
             // Si l'utilisateur n'est pas trouvé ou que le mot de passe est incorrect
             res.status(401).json({ success: false, message: 'Email ou mot de passe incorrect.' });
         }

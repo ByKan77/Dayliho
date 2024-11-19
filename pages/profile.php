@@ -18,10 +18,7 @@
 
 <script src="../scripts/profile.js" defer></script>
 <script>
-    const userId = <?php echo json_encode($_SESSION['user_id']); ?>;
-    const tabs = document.querySelectorAll('.menu-item');
-    const profileContent = document.getElementById('profile-content');
-
+    const userId = localStorage.getItem('userId');
     function showDetails() {
         axios.get(`http://localhost:1234/user/getUserById?id=${userId}`)
             .then(response => {
