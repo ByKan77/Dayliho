@@ -58,6 +58,8 @@ async function getUsers(req, res) {
     }
 }
 
+
+
 // Fonction pour changer le mot de passe
 async function changePassword(req, res) {
     const { userId, ancienMdp, nouveauMdp, confirmNouveauMdp } = req.body;
