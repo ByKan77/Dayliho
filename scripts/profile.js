@@ -44,6 +44,22 @@ function showAccounts() {
         });
 }
 
+function deleteUser(id) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer ce compte ?")) {
+        axios.delete(`http://localhost:1234/user/delete?id=${id}`)
+            .then(response => {
+                alert("Compte supprimé avec succès.");
+                // Recharge la liste des utilisateurs
+                location.reload();
+            })
+            .catch(error => {
+                console.error("Erreur lors de la suppression du compte :", error);
+                alert("Une erreur s'est produite lors de la suppression du compte.");
+            });
+    }
+}
+
+
 function showPassword() {
     profileContent.innerHTML = `
         <h2>Changer le mot de passe</h2>
@@ -87,6 +103,4 @@ tabs.forEach(tab => {
 showDetails();
 
 
-function deleteUser(id) {
-    alert(`L'ID de l'utilisateur est : ${id}`);
-}
+

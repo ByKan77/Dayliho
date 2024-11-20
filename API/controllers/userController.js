@@ -104,4 +104,31 @@ async function verifConnexion(req,res){
 
 }
 
-module.exports = { checkUser, getUser, getUsers, changePassword, verifConnexion };
+async function deleteUser(req, res) {
+    const userId = req.params.id; // Récupère l'ID via les paramètres d'URL
+    console.log("ID de l'utilisateur à supprimer :", userId);
+
+    try {
+        if (userId) {
+            const utilisateur = await userModel.getUserById(userId);
+            if (utilisateur) {
+                const result = await userModel.deleteUserById(userId);
+                if (result.affectedRows > 0) {
+                    res.status(200).json({ success: true, message: "Utilisateur supprimé avec succès." });
+                } else {
+                    res.status(500).json({ success: false, message: "Impossible de supprimer l'utilisateur." });
+                }
+            } else {
+                res.status(404).json({ success: false, message: "Utilisateur non trouvé." });
+            }
+        } else {
+            res.status(400).json({ success: false, message: "ID utilisateur manquant." });
+        }
+    } catch (error) {
+        console.error("Erreur lors de la suppression de l'utilisateur :", error);
+        res.status(500).json({ success: false, message: "Erreur serveur." });
+    }
+};
+
+
+module.exports = { checkUser, getUser, getUsers, changePassword, verifConnexion, deleteUser};

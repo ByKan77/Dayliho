@@ -19,4 +19,7 @@ router.get("/navbar", middleware.authentification, userController.verifConnexion
 
 router.get("/verifUser", middleware.authentification, userController.verifConnexion);
 
+router.delete('/delete/:id', userController.deleteUser);
+
+
 module.exports = router;
