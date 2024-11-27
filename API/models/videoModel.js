@@ -1,3 +1,4 @@
+const { modifySeance } = require('../controllers/videoController.js');
 let pool = require('../database.js');
 
 async function getAllVideos() {
@@ -15,4 +16,24 @@ async function pushNewSeance(titre, description, dateDebut, dateFin, lieu, nombr
     return result;
 }
 
-module.exports = { getAllVideos, pushNewSeance };
+
+async function updateSeance(id, titre, description, lieu, id_sport, id_utilisateur) {
+    let conn = await pool.getConnection();
+
+    // SQL de mise à jour, avec condition sur l'ID
+    const query = `
+        UPDATE seancedesport
+        SET titre = ?, description = ?, lieu = ?, id_sport = ?, id_utilisateur = ?
+        WHERE id = ?
+    `;
+
+    const result = await conn.query(query, [titre, description, lieu, id_sport, id_utilisateur, id]);
+
+    conn.release();
+    return result;
+}
+
+
+
+
+module.exports = { getAllVideos, pushNewSeance, updateSeance };

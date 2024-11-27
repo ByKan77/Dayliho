@@ -92,6 +92,39 @@
     </div>
 </div>
 
+
+
+
+
+<!-- Fenêtre modale 2 -->
+<div id="edit-session-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" id="close-edit-modal">&times;</span>
+        <h2>Modifier La Séance</h2>
+        <form>
+            <label for="session-name">Nom de la séance :</label>
+            <input type="text" id="session-name" name="session-name" required><br><br>
+            
+            <label for="session-lieu">Lieu :</label>
+            <input type="text" id="session-lieu" name="session-lieu" required><br><br>
+
+            <label for="session-sport">Sport :</label>
+            <select id="session-sport" name="session-sport">
+                <option value="1">Football</option>
+                <option value="2">Basketball</option>
+                <option value="3">Tennis</option>
+                <option value="4">Natation</option>
+                <option value="5">Cyclisme</option>
+            </select><br><br>
+            
+            <button id="submitAddSeance" type="submit">Enregistrer</button>
+        </form>
+    </div>
+</div>
+
+
+
+
 <!-- Contenu de l'onglet "planning" -->
 <div id="planning_tab" class="tab_content">
     <div id="calendrier" class="tab-content"> <!-- Enlever 'hidden' pour charger le calendrier dès le début -->
