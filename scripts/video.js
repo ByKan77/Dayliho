@@ -188,6 +188,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     
 
+
+
+
+    
+
     document.addEventListener('DOMContentLoaded', function () {
         // Sélectionner l'élément de la modale de mise à jour
         const modal = document.getElementById("update-session-modal");
