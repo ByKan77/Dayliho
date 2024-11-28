@@ -8,41 +8,36 @@
     font-family: Arial, sans-serif;
 }
 
-#tab_navigation{
+#tab_navigation {
     background-color: rgb(0, 0, 0);
     padding: 20px;
     border: 2px solid white;
     border-radius: 25px;
 }
 
-
 #create-session-btn {
-    width: 60px; /* Largeur du bouton */
-    height: 60px; /* Hauteur du bouton (pour qu'il soit rond, largeur = hauteur) */
-    background-color: #060e31; /* Couleur de fond */
-    color: #fff; /* Couleur de l'icône */
+    width: 60px;
+    height: 60px;
+    background-color: #060e31;
+    color: #fff;
     border: none;
-    border-radius: 50%; /* Rend le bouton rond */
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.6em; /* Taille de l'icône */
+    font-size: 1.6em;
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #create-session-btn:hover {
-    background-color: #0056b3; /* Couleur au survol */
+    background-color: #0056b3;
 }
 
-/* Pour l'icône à l'intérieur du bouton */
 #create-session-btn i {
-    font-size: 1.6em; /* Ajuster la taille de l'icône */
+    font-size: 1.6em;
 }
-
-
-
 
 #container_videos_unique {
     padding-top: 20px;
@@ -51,7 +46,6 @@
     margin-left: 20px;
 }
 
-/* Liste des vidéos : Disposition des boxes */
 #liste_videos_unique {
     display: grid;
     grid-template-columns: repeat(3, minmax(250px, 1fr));
@@ -97,21 +91,6 @@
     z-index: 2;
 }
 
-/* Pour les tablettes */
-@media (max-width: 1024px) {
-    #liste_videos_unique {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Pour les petits écrans (mobiles) */
-@media (max-width: 768px) {
-    #liste_videos_unique {
-        grid-template-columns: 1fr;
-    }
-}
-
-
 #video_content_unique {
     display: flex;
     flex-direction: column;
@@ -143,7 +122,6 @@
     font-size: 0.9rem;
 }
 
-/* Barre de recherche */
 #search_area_unique, html, body {
     height: 100%;
     width: 100%;
@@ -164,14 +142,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50px; /* Bord arrondi */
+    border-radius: 50px;
     background-color: #ffffff;
-    padding: 5px 10px; /* Réduire la hauteur */
+    padding: 5px 10px;
     transition: width 0.4s linear;
     width: 60px;
     overflow: hidden;
     box-shadow: none;
-    height: 60px; /* Réduire la hauteur */
+    height: 60px;
 }
 
 #custom_input_unique {
@@ -213,7 +191,6 @@
     font-size: 20px;
 }
 
-
 #tab_navigation button {
     margin-left: 20px;
 }
@@ -225,17 +202,11 @@
     border-radius: 20px;
 }
 
-/* Optionnel : Ajoutez un fond blanc aux événements */
 .fc-event {
     background-color: #ffffff;
     color: black;
 }
 
-
-
-
-
-/* Fenêtre modale de base */
 .modal {
     display: none;
     position: fixed;
@@ -250,28 +221,24 @@
     transition: opacity 0.3s ease;
 }
 
-/* Lorsque la modale est visible */
 .modal.show {
     display: flex;
     opacity: 1;
 }
 
-/* Contenu de la fenêtre modale */
 .modal-content {
     background-color: #fff;
-    padding: 20px; /* Réduire la valeur de padding */
+    padding: 20px;
     width: 500px;
     max-width: 90%;
-    max-height: 650px; /* Limite la hauteur maximale */
+    max-height: 650px;
     border-radius: 12px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
     position: relative;
     animation: fadeIn 0.4s ease-out;
-    overflow-y: auto; /* Permet de faire défiler le contenu si nécessaire */
+    overflow-y: auto;
 }
 
-
-/* Animation d'apparition de la modale */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -283,7 +250,6 @@
     }
 }
 
-/* Style du bouton de fermeture */
 .close-btn {
     position: absolute;
     top: 15px;
@@ -301,7 +267,6 @@
     color: #b71c1c;
 }
 
-/* Style des titres de la modale */
 .modal-content h2 {
     font-size: 1.8rem;
     color: #333;
@@ -309,7 +274,6 @@
     font-weight: 600;
 }
 
-/* Style des champs de formulaire */
 label {
     font-size: 1rem;
     color: #444;
@@ -334,7 +298,6 @@ input:focus, select:focus {
     outline: none;
 }
 
-/* Style du bouton d'enregistrement */
 button {
     padding: 12px 20px;
     font-size: 1.1rem;
@@ -369,22 +332,14 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Contenu personnalisé de la modale (si nécessaire) */
 .modal-content .modal-body {
     max-height: 70vh;
     overflow-y: auto;
 }
 
-/* Effet de fond au survol */
 .modal:hover {
     background-color: rgba(0, 0, 0, 0.6);
 }
-
-
-
-
-
-
 
 @media (max-width: 600px) {
     .modal-content {
@@ -404,39 +359,159 @@ button:hover {
 
     input, select {
         font-size: 0.9rem;
-        padding: 10px;
+        padding: 10px
     }
 
     button {
         padding: 10px 15px;
         font-size: 1rem;
     }
+}
 
-    .close-btn {
-        font-size: 1.4em;
+
+
+
+/* Styles de la modale de mise à jour */
+#update-session-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Légère modification du fond */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+#update-session-modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.update-modal-content {
+    background-color: #1e2a47; /* Fond sombre, mais différent de l'autre modale */
+    padding: 30px;
+    width: 500px;
+    max-width: 90%;
+    max-height: 700px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeIn 0.4s ease-out;
+    overflow-y: auto;
+}
+
+.update-modal-content h2 {
+    font-size: 1.8rem;
+    color: #fff; /* Couleur de texte claire pour le titre */
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+#update-session-modal label {
+    font-size: 1rem;
+    color: #ddd; /* Texte gris clair */
+    margin-bottom: 5px;
+    display: block;
+}
+
+#update-session-modal input, #update-session-modal select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #2a3c5e; /* Fond plus foncé pour les inputs */
+    color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+#update-session-modal input:focus, #update-session-modal select:focus {
+    border-color: #5C6BC0; /* Couleur accentuée au focus */
+    background-color: #3c4b7b;
+    outline: none;
+}
+
+#update-session-modal button {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    background-color: #304ffe; /* Bleu spécifique pour la mise à jour */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#update-session-modal button:hover {
+    background-color: #1e40ff; /* Couleur légèrement plus sombre au hover */
+}
+
+.update-modal-content .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#update-session-modal .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.6em;
+    color: #f44336;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#update-session-modal .close-btn:hover {
+    transform: scale(1.1);
+    color: #b71c1c;
+}
+
+/* Animation spécifique à cette modale */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
     }
-
-    .modal-content .modal-body {
-        max-height: 60vh;
-        overflow-y: auto;
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-@media (max-width: 375px) {
-    .modal-content {
+/* Styles pour les petits écrans */
+@media (max-width: 600px) {
+    .update-modal-content {
         width: 90%;
-        padding: 10px;
+        max-width: 95%;
+        padding: 15px;
     }
 
-    .modal-content h2 {
-        font-size: 1.3rem;
+    .update-modal-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-size: 0.9rem;
     }
 
     input, select {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
+        padding: 10px
     }
 
     button {
-        font-size: 0.9rem;
+        padding: 10px 15px;
+        font-size: 1rem;
     }
 }
