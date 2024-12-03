@@ -62,7 +62,17 @@ body {
 .section {
     display: flex;
     height: 100vh;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
+
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 /* Section 1 */
 #section_1 {
@@ -369,3 +379,5 @@ footer p {
         text-align: center;
     }
 }
+
+
