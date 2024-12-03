@@ -26,7 +26,7 @@ const navbarUser = async () => {
     } catch (error) {
         console.error("Erreur lors de la récupération des informations de la barre de navigation :", error);
         test.innerHTML += `     <a href="../pages/login.php" class="bouton_nav">
-                                <i class="fa-solid fa-right-to-bracket"></i>Connexion</a>`;
+                                <i class="lev fa-solid fa-right-to-bracket"></i>Connexion</a>`;
         // Redirection en cas de 401, uniquement si l'utilisateur n'a pas encore été redirigé
         if (error.response && error.response.status === 401 && !localStorage.getItem('redirected')) {
             localStorage.setItem('redirected', 'true');  // Marque l'utilisateur comme redirigé
