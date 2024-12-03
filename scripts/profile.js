@@ -62,21 +62,43 @@ function deleteUser(id) {
 
 function showPassword() {
     profileContent.innerHTML = `
-        <h2>Changer le mot de passe</h2>
-        <h1 style="color:red;">NON FONCTIONNEL</h1>
+        <h2>Account Settings</h2>
         <form id="passwordForm">
-            <div id="form-group-oldPassword" class="form-group">
+            <div class="form-group">
                 <label for="oldPassword">Ancien mot de passe</label>
                 <input type="password" id="oldPassword" required>
             </div>
-            <div id="form-group-newPassword" class="form-group">
+            <div class="form-group">
                 <label for="newPassword">Nouveau mot de passe</label>
                 <input type="password" id="newPassword" required>
             </div>
-            <button type="button">Changer le mot de passe</button>
+            <button type="submit">Changer le mot de passe</button>
         </form>
     `;
+
+    const passwordForm = document.getElementById("passwordForm");
+    passwordForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const oldPassword = document.getElementById("oldPassword").value;
+        const newPassword = document.getElementById("newPassword").value;
+
+        try {
+            const response = await axios.put("http://localhost:1234/user/changePassword", {
+                oldPassword,
+                newPassword,
+            }, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } // Inclut le token d'authentification
+            });
+
+            alert(response.data.message);
+        } catch (error) {
+            alert(error.response?.data?.message || "Erreur serveur.");
+        }
+    });
 }
+
+
 
 tabs.forEach(tab => {
     tab.addEventListener('click', event => {

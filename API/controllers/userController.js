@@ -1,5 +1,5 @@
 const userModel = require('../models/userModel');
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 
 // Fonction pour vérifier l'utilisateur lors de la connexion
@@ -58,39 +58,37 @@ async function getUsers(req, res) {
     }
 }
 
-// Fonction pour changer le mot de passe
+
+// Fonction pour changer mdp
 async function changePassword(req, res) {
-    const { userId, ancienMdp, nouveauMdp, confirmNouveauMdp } = req.body;
+    const { oldPassword, newPassword } = req.body;
+    const userId = req.user.id; // Suppose que le middleware d'authentification remplit `req.user`
 
     try {
-        // Vérifie que les nouveaux mots de passe correspondent
-        if (nouveauMdp !== confirmNouveauMdp) {
-            return res.status(400).json({ success: false, message: 'Les nouveaux mots de passe ne correspondent pas.' });
+        // Récupérer le mot de passe haché de l'utilisateur
+        const hashedPassword = await userModel.getUserPasswordById(userId);
+
+        if (!hashedPassword) {
+            return res.status(404).json({ success: false, message: "Utilisateur non trouvé." });
         }
 
-        // Récupère l'utilisateur par son ID
-        const utilisateur = await userModel.getUserById(userId);
+        // Comparer l'ancien mot de passe avec le mot de passe haché
+        const passwordMatch = await bcrypt.compare(oldPassword, hashedPassword);
 
-        // Vérifie si l'ancien mot de passe est correct
-        const passwordMatch = await bcrypt.compare(ancienMdp, utilisateur.mot_de_passe);
         if (!passwordMatch) {
-            return res.status(401).json({ success: false, message: 'Mot de passe actuel incorrect.' });
+            return res.status(400).json({ success: false, message: "Ancien mot de passe incorrect." });
         }
 
-        // Hash le nouveau mot de passe
-        const hashedPassword = await bcrypt.hash(nouveauMdp, 10);
+        // Hacher le nouveau mot de passe
+        const newHashedPassword = await bcrypt.hash(newPassword, 10);
 
-        // Met à jour le mot de passe dans la base de données
-        const updateSuccess = await userModel.updatePassword(userId, hashedPassword);
+        // Mettre à jour le mot de passe dans la base de données
+        await userModel.updatePassword(userId, newHashedPassword);
 
-        if (updateSuccess) {
-            res.status(200).json({ success: true, message: 'Mot de passe changé avec succès.' });
-        } else {
-            res.status(500).json({ success: false, message: 'Erreur lors de la mise à jour du mot de passe.' });
-        }
+        res.status(200).json({ success: true, message: "Mot de passe changé avec succès." });
     } catch (error) {
-        console.error("Erreur lors du changement de mot de passe:", error);
-        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+        console.error("Erreur lors du changement de mot de passe :", error);
+        res.status(500).json({ success: false, message: "Erreur serveur." });
     }
 }
 
@@ -104,31 +102,4 @@ async function verifConnexion(req,res){
 
 }
 
-async function deleteUser(req, res) {
-    const userId = req.params.id; // Récupère l'ID via les paramètres d'URL
-    console.log("ID de l'utilisateur à supprimer :", userId);
-
-    try {
-        if (userId) {
-            const utilisateur = await userModel.getUserById(userId);
-            if (utilisateur) {
-                const result = await userModel.deleteUserById(userId);
-                if (result.affectedRows > 0) {
-                    res.status(200).json({ success: true, message: "Utilisateur supprimé avec succès." });
-                } else {
-                    res.status(500).json({ success: false, message: "Impossible de supprimer l'utilisateur." });
-                }
-            } else {
-                res.status(404).json({ success: false, message: "Utilisateur non trouvé." });
-            }
-        } else {
-            res.status(400).json({ success: false, message: "ID utilisateur manquant." });
-        }
-    } catch (error) {
-        console.error("Erreur lors de la suppression de l'utilisateur :", error);
-        res.status(500).json({ success: false, message: "Erreur serveur." });
-    }
-};
-
-
-module.exports = { checkUser, getUser, getUsers, changePassword, verifConnexion, deleteUser};
+module.exports = { checkUser, getUser, getUsers, verifConnexion, changePassword };
