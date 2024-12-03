@@ -1,4 +1,3 @@
-const { modifySeance } = require('../controllers/videoController.js');
 let pool = require('../database.js');
 
 async function getAllVideos() {
