@@ -113,7 +113,9 @@
     </div>
 </div>
 
-<style>/* Style pour le modal */
+<style>
+
+/* Style pour le modal */
 .modal {
     display: none; /* Cacher le modal par défaut */
     position: fixed;

@@ -26,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         eventContent: function(arg) {
             return {
-                html: `<strong>${arg.event.extendedProps.sport}</strong>` // Affiche le sport lié à la séance
+                html: `<strong>${arg.event.title}</strong>
+                <br>${arg.event.extendedProps.sport}
+                <br>${arg.event.extendedProps.description}` // Affiche le sport lié à la séance
             };
         },
         eventClick: function(info) {
