@@ -17,10 +17,10 @@ const navbarUser = async () => {
                     <i class="lev fa-solid fa-user"></i>Profile
                 </a>
                  <a href="../pages/videos.php" class="bouton_nav">
-                    <i class="lev fa-solid fa-user"></i>Séances
+                    <i class="lev fa-solid fa-dumbbell"></i>Séances
                 </a>
                 <a href="../pages/login.php" class="bouton_nav" onclick="localStorage.removeItem('token');localStorage.removeItem('userId');">
-                    <i class="lev fa-solid fa-user"></i>Deconnexion
+                    <i class="lev fa-solid fa-arrow-right-to-bracket"></i>Deconnexion
                 </a>`;
         }
     } catch (error) {
