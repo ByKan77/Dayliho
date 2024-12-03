@@ -17,8 +17,10 @@ try {
     // Établir la connexion à la base de données
     $pdo = new PDO($dsn, $user, $pass, $options);
 
-    // Récupérer les séances de sport
-    $stmt = $pdo->query("SELECT * FROM seancedesport");
+    // Récupérer les séances de sport avec le sport lié
+    $stmt = $pdo->query("SELECT seancedesport.*, sport.intitule AS sport_nom 
+                         FROM seancedesport 
+                         JOIN sport ON seancedesport.id_sport = sport.id");
     $seances = $stmt->fetchAll();
 
     // Convertir les séances en format JSON
@@ -31,6 +33,9 @@ try {
             'title' => $seance['titre'], // Changez 'titre' en 'title' pour FullCalendar
             'start' => $dateDebut->format('Y-m-d H:i:s'), // Formaté pour FullCalendar
             'end' => $dateFin->format('Y-m-d H:i:s'), // Formaté pour FullCalendar
+            'sport' => $seance['sport_nom'], // Ajout du nom du sport
+            'lieu' => $seance['lieu'], // Ajout du nom du sport
+            'description' => $seance['description'], // Ajout du nom du sport
         );
     }
 
@@ -41,3 +46,4 @@ try {
     http_response_code(500); // Code d'erreur interne
     echo json_encode(['error' => $e->getMessage()]);
 }
+?>

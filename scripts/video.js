@@ -26,13 +26,41 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         eventContent: function(arg) {
             return {
-                html: `<strong>${arg.event.title}</strong>` // Affiche le titre
+                html: `<strong>${arg.event.extendedProps.sport}</strong>` // Affiche le sport lié à la séance
             };
+        },
+        eventClick: function(info) {
+            // Récupérer les informations de l'événement cliqué
+            var event = info.event;
+
+            // Mettre à jour le modal avec les informations de l'événement
+            document.getElementById('eventId').textContent = event.id;
+            document.getElementById('eventTitle').textContent = event.title;
+            document.getElementById('eventSport').textContent = event.extendedProps.sport;
+            document.getElementById('eventStart').textContent = event.start.toLocaleString(); // Affiche l'heure locale
+            document.getElementById('eventEnd').textContent = event.end.toLocaleString(); // Affiche l'heure locale
+
+            // Afficher le modal
+            document.getElementById('eventModal').style.display = 'block';
         }
     });
 
     calendar.render(); // Rendu du calendrier
+
+    // Fermer le modal quand on clique sur le bouton de fermeture
+    document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('eventModal').style.display = 'none';
+    });
+
+    // Fermer le modal quand on clique en dehors du contenu
+    window.onclick = function(event) {
+        if (event.target === document.getElementById('eventModal')) {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+    }
 });
+
+
 
 
 
