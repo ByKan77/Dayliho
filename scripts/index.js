@@ -26,3 +26,27 @@
         disableOnInteraction: false, // Continue autoplay after user interactions
     },
 });
+
+
+
+// Animation entre les pages 
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.section');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible'); // Optionnel, pour réinitialiser
+            }
+        });
+    }, {
+        threshold: 0.3 // Déclenche lorsque 20% de la section est visible
+    });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});

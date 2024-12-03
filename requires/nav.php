@@ -2,7 +2,7 @@
     <a href="../pages/index.php" class="bouton_nav">
     <i class="lev fa-solid fa-house"></i>Accueil</a>
     <a href="../pages/login.php" class="bouton_nav">
-        <i class="lev fa-solid fa-house"></i>Connexion</a>
+    <i class="lev fa-solid fa-user"></i>Connexion</a>
 
 
     <style>
