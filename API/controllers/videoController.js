@@ -31,28 +31,5 @@ async function addSeance(req, res) {
     }
 }
 
-async function modifySeance(req, res) {
-    try {
-        console.log(req.user)
-        console.log(req.body);
-
-        // Récupère l'ID de la séance à partir des paramètres de l'URL
-        const { id } = req.params;
-        const { titre, description, lieu, id_sport, id_utilisateur } = req.body;
-
-        console.log(typeof(id_utilisateur), typeof(id_sport));
-
-        const result = await videoModel.updateSeance(id, titre, description, lieu, parseInt(id_sport), parseInt(id_utilisateur));
-
-        res.status(200).json({ success: true, message: "Modification effectuée avec succès" });
-    } catch (error) {
-        console.error("Erreur lors de la modification de la Séance:", error);
-        res.status(500).json({ success: false, message: 'Erreur serveur.' });
-    }
-}
-
-
-
-
-module.exports = { getVideos, addSeance, modifySeance };
+module.exports = { getVideos, addSeance};
 

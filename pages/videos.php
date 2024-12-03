@@ -16,7 +16,6 @@
     <button onclick="showTab('videos')">Toutes les séances</button>
     <button onclick="showTab('planning')">Planning</button>
     <button id="create-session-btn"><i class="fa-solid fa-plus"></i></button>
-    <button id="update-session-btn"><i class="fa-solid fa-gear fa-spin"></i></button>
 
     
 </div>
@@ -132,47 +131,6 @@
                 <!-- Les vidéos seront affichées ici dans un div "video_container_unique" -->
             </div>
         </div>
-    </div>
-</div>
-
-
-<!-- Modale pour modifier une séance -->
-<div id="update-session-modal" class="modal" style="display:none;">
-    <div class="modal-content">
-        <span class="close-btn" id="close-update-modal">&times;</span>
-        <h2>Modifier la Séance</h2>
-        <form id="update-session-form">
-            <label for="update-session-name">Nom de la séance :</label>
-            <input type="text" id="update-session-name" name="update-session-name" required><br><br>
-            
-            <label for="update-session-lieu">Lieu :</label>
-            <input type="text" id="update-session-lieu" name="update-session-lieu" required><br><br>
-
-            <label for="update-session-sport">Sport :</label>
-            <select id="update-session-sport" name="update-session-sport">
-                <option value="1">Football</option>
-                <option value="2">Basketball</option>
-                <option value="3">Tennis</option>
-                <option value="4">Natation</option>
-                <option value="5">Cyclisme</option>
-            </select><br><br>
-
-            <label for="update-session-taille">Nombre de Places :</label>
-            <select id="update-session-taille" name="update-session-taille">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select><br><br>
-
-            <label for="update-session-dateDebut">Date de début :</label>
-            <input type="datetime-local" id="update-session-dateDebut" name="update-session-dateDebut"><br><br>
-
-            <label for="update-session-dateFin">Date de fin :</label>
-            <input type="datetime-local" id="update-session-dateFin" name="update-session-dateFin"><br><br>
-
-            <button type="button" id="submitUpdateSeance">Mettre à jour</button>
-        </form>
     </div>
 </div>
 
