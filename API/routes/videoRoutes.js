@@ -5,6 +5,6 @@ const middleware = require('../middlewares/middleware');
 
 router.get("/getVideos", videoController.getVideos);
 router.post("/addSeance", middleware.authentification, videoController.addSeance);
-router.put("/modifySeance/:id", middleware.authentification, videoController.modifySeance);
+
 
 module.exports = router;
