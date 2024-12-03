@@ -2,7 +2,9 @@
     require_once '../back/header.php';
     require '../requires/nav.php';
     require '../requires/index_section_1.php';
+    require '../requires/index_section_4.php';
     require '../requires/index_section_2.php';
+    require '../requires/index_section_5.php';
     require '../requires/index_section_3.php';
     require '../requires/index_footer.php';
 ?>

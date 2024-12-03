@@ -2,7 +2,8 @@
 <div class="section" id="section_3">
     <div id="contact_form">
         <h2>Contactez-nous</h2>
-        <form action="contact.php" method="post">
+        <!-- Formulaire avec l'action de Formspree -->
+        <form action="https://formspree.io/f/xldezroq" method="post">
             <div class="form-group">
                 <label for="name">Nom:</label>
                 <input type="text" id="name" name="name" placeholder="Ex: Dupont" required>

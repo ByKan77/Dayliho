@@ -141,6 +141,11 @@ body {
     top: 40%;
 }
 
+
+
+
+
+
 /* Section 2 */
 #section_2 {
     background-color: var(--black);
@@ -149,7 +154,7 @@ body {
     justify-content: center;
     align-items: center;
     color: var(--white);
-    border-bottom: 2px solid white;
+    height: 100vh;
 }
 
 #titre_section_2 {
@@ -218,13 +223,99 @@ body {
     color: white;
 }
 
+
+
+/* Section 4 */
+*#section_4 {
+    background-color: #060e31;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    height: 50vh;
+    background-image: url('../addons/section4.png');
+    background-size: 50%;
+    background-position: left top;
+    background-repeat: no-repeat;
+}
+
+.box_droite {
+    width: 35%;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    color: var(--black);
+    text-align: left;
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+.box_droite h2 {
+    font-size: 1.8em;
+    color: var(--principale);
+    margin-bottom: 10px;
+}
+
+.box_droite p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Section 5 */
+#section_5 {
+    background-color: #060e31;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--white);
+    height: 50vh;
+    background-image: url('../addons/section5.png');
+    background-size: 50%;
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+.box_gauche {
+    width: 35%;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    color: var(--black);
+    text-align: left;
+    margin-right: auto;
+    margin-left: 50px;
+}
+
+.box_gauche h2 {
+    font-size: 1.8em;
+    color: var(--principale);
+    margin-bottom: 10px;
+}
+
+.box_gauche p {
+    font-size: 1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
 /* Section 3 */
 #section_3 {
-    background-color: #060e31;
+    background-color: #000000;
     color: var(--footer-text);
     padding: 50px 20px;
     text-align: center;
-    border-bottom: 2px solid white;
     margin-bottom: 0;
     display: flex;
     flex-direction: column;
@@ -271,7 +362,6 @@ body {
 #contact_form textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: var(--radius2);
     font-size: 16px;
     font-family: 'Kanit', sans-serif;
@@ -304,7 +394,7 @@ body {
 }
 
 footer {
-    background-color: #000000;
+    background-color: #060e31;
     margin: 0;
 }
 
@@ -323,6 +413,8 @@ footer p {
     justify-content: center;
     align-items: center;
 }
+
+
 
 
 
