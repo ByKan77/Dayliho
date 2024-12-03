@@ -34,7 +34,7 @@
             <input type="text" id="session-lieu" name="session-lieu" required><br><br>
 
             <label for="session-sport">Sport :</label>
-            <select id="session-sport" name="session-sport">
+            <select required id="session-sport" name="session-sport">
                 <option value=1>Football</option>
                 <option value=2>Basketball</option>
                 <option value=3>Tennis</option>
@@ -43,7 +43,7 @@
             </select><br><br>
 
             <label for="session-taille">Nombre de Places</label>
-            <select id="session-taille" name="session-taille">
+            <select required id="session-taille" name="session-taille">
                 <option value=1>1</option>
                 <option value=2>2</option>
                 <option value=3>3</option>
