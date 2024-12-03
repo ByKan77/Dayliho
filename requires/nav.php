@@ -1,10 +1,6 @@
 <div id="nav_bar">
     <a href="../pages/index.php" class="bouton_nav">
     <i class="lev fa-solid fa-house"></i>Accueil</a>
-    <a href="../pages/login.php" class="bouton_nav">
-        <i class="lev fa-solid fa-house"></i>Connexion</a>
-
-
     <style>
         .lev
         {
