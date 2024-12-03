@@ -17,16 +17,16 @@ const navbarUser = async () => {
                     <i class="lev fa-solid fa-user"></i>Profile
                 </a>
                  <a href="../pages/videos.php" class="bouton_nav">
-                    <i class="lev fa-solid fa-user"></i>Séances
+                    <i class="lev fa-solid fa-dumbbell"></i>Séances
                 </a>
                 <a href="../pages/login.php" class="bouton_nav" onclick="localStorage.removeItem('token');localStorage.removeItem('userId');">
-                    <i class="lev fa-solid fa-user"></i>Deconnexion
+                    <i class="lev fa-solid fa-right-from-bracket"></i>Deconnexion
                 </a>`;
         }
     } catch (error) {
         console.error("Erreur lors de la récupération des informations de la barre de navigation :", error);
         test.innerHTML += `     <a href="../pages/login.php" class="bouton_nav">
-                                <i class="fa-solid fa-arrow-right-to-bracket"></i>    Connexion</a>`;
+                                <i class="fa-solid fa-right-to-bracket"></i>Connexion</a>`;
         // Redirection en cas de 401, uniquement si l'utilisateur n'a pas encore été redirigé
         if (error.response && error.response.status === 401 && !localStorage.getItem('redirected')) {
             localStorage.setItem('redirected', 'true');  // Marque l'utilisateur comme redirigé
