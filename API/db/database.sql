@@ -75,34 +75,6 @@ INSERT INTO `pratiquant` (`id_sport`, `id_utilisateur`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `seancedesport`
---
-
-CREATE TABLE `seancedesport` (
-  `id` int(11) NOT NULL,
-  `titre` varchar(50) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `dateDebut` datetime NOT NULL,
-  `dateFin` datetime NOT NULL,
-  `lieu` varchar(50) NOT NULL,
-  `nombrePlaces` int(11) NOT NULL,
-  `id_sport` int(11) NOT NULL,
-  `id_utilisateur` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `seancedesport`
---
-
-INSERT INTO `seancedesport` (`id`, `titre`, `description`, `dateDebut`, `dateFin`, `lieu`, `nombrePlaces`, `id_sport`, `id_utilisateur`) VALUES
-(1, 'Entrainement technique football', 'Entrainement technique football', '2024-10-22 14:22:00', '2024-10-22 16:22:00', 'Stade de la Source', 10, 1, 1),
-(2, 'Match de basket', 'Match de basket', '2024-10-30 10:00:00', '2024-10-30 12:00:00', 'Gymnase de la Source', 10, 2, 2),
-(3, 'Entrainement de tennis', 'Entrainement de tennis', '2024-10-30 14:00:00', '2024-10-30 16:00:00', 'Tennis Club de la Source', 10, 3, 3),
-(4, 'Entrainement de natation', 'Entrainement de natation', '2024-10-25 09:00:00', '2024-10-25 11:00:00', 'Piscine de la Source', 10, 4, 1),
-(5, 'Entrainement de cyclisme', 'Entrainement de cyclisme', '2024-10-28 17:00:00', '2024-10-28 19:00:00', 'Stade de la Source', 10, 5, 2);
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `sport`
@@ -125,6 +97,36 @@ INSERT INTO `sport` (`id`, `intitule`) VALUES
 (5, 'Cyclisme');
 
 -- --------------------------------------------------------
+
+--
+-- Structure de la table `seancedesport`
+--
+
+CREATE TABLE `seancedesport` (
+  `id` int(11) NOT NULL,
+  `titre` varchar(50) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `dateDebut` datetime NOT NULL,
+  `dateFin` datetime NOT NULL,
+  `lieu` varchar(50) NOT NULL,
+  `nombrePlaces` int(11) NOT NULL,
+  `id_sport` int(11) NOT NULL,
+  `id_utilisateur` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `seancedesport`
+--
+
+INSERT INTO `seancedesport` (`id`, `titre`, `description`, `dateDebut`, `dateFin`, `lieu`, `nombrePlaces`, `id_sport`, `id_utilisateur`) VALUES
+(1, 'Entrainement technique', 'Entrainement technique football', '2024-12-02 14:22:00', '2024-12-02 16:22:00', 'Stade de la Source', 10, 1, 1),
+(2, 'Match', 'Match de basket', '2024-12-03 10:00:00', '2024-12-03 12:00:00', 'Gymnase de la Source', 10, 2, 2),
+(3, 'Entrainement', 'Entrainement de tennis', '2024-12-04 14:00:00', '2024-12-04 16:00:00', 'Tennis Club de la Source', 10, 3, 3),
+(4, 'Entrainement 100m', 'Entrainement de natation', '2024-12-05 09:00:00', '2024-12-05 11:00:00', 'Piscine de la Source', 10, 4, 1),
+(5, 'Entrainement 12km alterné', 'Entrainement de cyclisme', '2024-12-06 17:00:00', '2024-12-06 19:00:00', 'Stade de la Source', 10, 5, 2);
+
+-- --------------------------------------------------------
+
 
 --
 -- Structure de la table `utilisateur`
