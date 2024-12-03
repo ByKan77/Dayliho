@@ -15,8 +15,11 @@ document.getElementById('formulaire_de_connexion').addEventListener('submit', as
                 }
             });
 
-            console.log(response);
             localStorage.setItem('token', response.data.token);
+            console.log(response.data.token);
+
+            localStorage.setItem('userId', response.data.userId);
+            console.log(response.data.userId);
             if(response.status === 201) {
                 window.location.href = "../pages/index.php";
             }
