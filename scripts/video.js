@@ -143,12 +143,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // Remplace cette partie par ta requête réelle pour obtenir userId
             const req = { query: { id: '123' } }; // Exemple de requête
             const userId = await getUser(req); // Récupère l'ID utilisateur
-    
+            const dateFin = document.getElementById("session-dateDebut").value
             const sessionData = {
                 titre: document.getElementById("session-name").value,
                 description: document.getElementById("session-name").value,
                 dateDebut: document.getElementById("session-dateDebut").value,
-                dateFin: document.getElementById("session-dateFin").value,
+                dateFin,
                 lieu: document.getElementById("session-lieu").value,
                 nombrePlaces: document.getElementById("session-taille").value,
                 id_sport: document.getElementById("session-sport").value,
@@ -184,4 +184,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
