@@ -29,6 +29,7 @@ INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role
 (4, 'DUPONT', 'Nicolas', 'nicolas@gmail.com', 'mdp', 'joueur'),
 (5, 'AMIEN', 'Julie', 'julie@gmail.com', 'mdp', 'coach');
 
+
 --
 -- Base de données : `dayliho`
 --
@@ -131,26 +132,6 @@ INSERT INTO `seancedesport` (`id`, `titre`, `description`, `dateDebut`, `dateFin
 --
 -- Structure de la table `utilisateur`
 --
-
-CREATE TABLE `utilisateur` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(50) NOT NULL,
-  `prenom` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `mot_de_passe` varchar(50) NOT NULL,
-  `role` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `utilisateur`
---
-
-INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role`) VALUES
-(1, 'DENEUCHATEL', 'Dorian', 'dorian@gmail.com', 'mdp', 'administrateur'),
-(2, 'OUADAH', 'Sofiane', 'sofiane@gmail.com', 'mdp', 'administrateur'),
-(3, 'NOUET', 'Flavien', 'flavien@gmail.com', 'mdp', 'administrateur'),
-(4, 'DUPONT', 'Nicolas', 'nicolas@gmail.com', 'mdp', 'joueur'),
-(5, 'AMIEN', 'Julie', 'julie@gmail.com', 'mdp', 'coach');
 
 --
 -- Index pour les tables déchargées

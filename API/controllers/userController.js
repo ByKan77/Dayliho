@@ -106,4 +106,24 @@ async function verifConnexion(req,res){
 
 }
 
-module.exports = { checkUser, getUser, getUsers, changePassword, verifConnexion };
+async function deleteUser(req, res) {
+    const userId = req.params.id;
+
+    try {
+        const result = await userModel.deleteUserById(userId);
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
+        }
+
+        res.status(200).json({ message: 'Utilisateur supprimé avec succès' });
+
+    } catch (error) {
+        console.error('Erreur lors de la suppression de l\'utilisateur:', error);
+        res.status(500).json({ message: 'Erreur interne du serveur' });
+    }
+}
+
+
+
+module.exports = { checkUser, getUser, getUsers, changePassword, verifConnexion, deleteUser };

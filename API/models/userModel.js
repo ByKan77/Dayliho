@@ -32,4 +32,25 @@ async function updatePassword(id, nouveauMdp) {
     return result.affectedRows > 0; // Retourne true si la mise à jour a réussi
 }
 
-module.exports = { getUserByEmail, getUserById, getAllUsers, updatePassword };
+// Supprime l'utilisateur par ID
+async function deleteUserById(userId) {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+
+        // Supprimer l'utilisateur
+        const result = await conn.query("DELETE FROM utilisateur WHERE id = ?", [userId]);
+
+        // Retourner le résultat de la suppression
+        return result;
+
+    } catch (error) {
+        console.error('Erreur dans le modèle de suppression de l\'utilisateur:', error);
+        throw error; // Relancer l'erreur pour être capturée par le controller
+    } finally {
+        if (conn) conn.release();
+    }
+}
+
+
+module.exports = { getUserByEmail, getUserById, getAllUsers, updatePassword, deleteUserById };

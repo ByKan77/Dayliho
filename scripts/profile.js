@@ -44,6 +44,20 @@ function showAccounts() {
         });
 }
 
+function deleteUser(id) {
+    axios.delete(`http://localhost:1234/user/deleteUser/${id}`)
+        .then(response => {
+            alert('Utilisateur supprimé avec succès');
+            showAccounts();
+        })
+        .catch(error => {
+            console.error('Erreur lors de la suppression de l\'utilisateur:', error);
+            alert('Une erreur est survenue lors de la suppression');
+        });
+}
+
+
+
 function showPassword() {
     profileContent.innerHTML = `
         <h2>Changer le mot de passe</h2>
@@ -87,6 +101,4 @@ tabs.forEach(tab => {
 showDetails();
 
 
-function deleteUser(id) {
-    alert(`L'ID de l'utilisateur est : ${id}`);
-}
+
