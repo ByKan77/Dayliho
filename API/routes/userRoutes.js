@@ -23,4 +23,5 @@ router.get("/verifUser", middleware.authentification, userController.verifConnex
 router.delete('/deleteUser/:id', userController.deleteUser);
 
 
+
 module.exports = router;

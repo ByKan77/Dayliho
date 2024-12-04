@@ -33,24 +33,38 @@ async function updatePassword(id, nouveauMdp) {
 }
 
 // Supprime l'utilisateur par ID
-async function deleteUserById(userId) {
+async function deleteUserById(userId, role) {
     let conn;
     try {
         conn = await pool.getConnection();
 
-        // Supprimer l'utilisateur
+        const [user] = await conn.query("SELECT * FROM utilisateur WHERE id = ?", [userId]); // Vérif que l'utilisateur avec l'id spécifié existe bien
+
+        if (!user) { // Si non alors..
+            throw new Error('Utilisateur non trouvé');
+        }
+
+        // Si oui alors...
+        if (role === 'coach') { // SI c'est un coach on doit supprimer ses séances de sport mais avant les inscriptions à ses séances, dans l'autre sens ça ne marche pas
+
+            await conn.query("DELETE FROM participant WHERE id_seance IN (SELECT id FROM seancedesport WHERE id_utilisateur = ?)", [userId]); // Supprime les inscriptions aux séances du coach
+
+            await conn.query("DELETE FROM seancedesport WHERE id_utilisateur = ?", [userId]); // Puis supprime la / les séance(s)
+        }
+
+        // Pour un utilisateur non coac
         const result = await conn.query("DELETE FROM utilisateur WHERE id = ?", [userId]);
 
-        // Retourner le résultat de la suppression
         return result;
 
     } catch (error) {
         console.error('Erreur dans le modèle de suppression de l\'utilisateur:', error);
-        throw error; // Relancer l'erreur pour être capturée par le controller
+        throw error; 
     } finally {
         if (conn) conn.release();
     }
 }
+
 
 
 module.exports = { getUserByEmail, getUserById, getAllUsers, updatePassword, deleteUserById };

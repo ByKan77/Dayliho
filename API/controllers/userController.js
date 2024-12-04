@@ -108,11 +108,12 @@ async function verifConnexion(req,res){
 
 async function deleteUser(req, res) {
     const userId = req.params.id;
+    const { role } = req.body;  // Récupère le role envoyé
 
     try {
-        const result = await userModel.deleteUserById(userId);
+        const result = await userModel.deleteUserById(userId, role); // Appel le model pour supprimer l'utilisateur
 
-        if (result.affectedRows === 0) {
+        if (result.affectedRows === 0) { // Si y'a pas d'utilisateur à cet id
             return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
 
@@ -123,6 +124,9 @@ async function deleteUser(req, res) {
         res.status(500).json({ message: 'Erreur interne du serveur' });
     }
 }
+
+
+
 
 
 
