@@ -29,12 +29,13 @@ function showAccounts() {
             allUsers.forEach(user => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${user.nom}</td>
-                    <td>${user.prenom}</td>
-                    <td>${user.email}</td>
-                     <td>${user.role}</td>
-                    <td><button id="deleteButton" onclick="deleteUser('${user.id}')">Supprimer</button></td>
-                `;
+                <td>${user.nom}</td>
+                <td>${user.prenom}</td>
+                <td>${user.email}</td>
+                <td>${user.role}</td>
+                <td><button id="deleteButton" onclick="deleteUser('${user.id}', '${user.role}')">Supprimer</button></td>
+            `;         
+
                 accountsTableBody.appendChild(row);
             });
         })
@@ -43,6 +44,24 @@ function showAccounts() {
             profileContent.innerHTML = '<p>Erreur lors de la récupération de la liste des comptes.</p>';
         });
 }
+
+function deleteUser(id, role) {
+    axios.delete(`http://localhost:1234/user/deleteUser/${id}`, {
+        data: { role: role } // Envoi aussi le role pour faire la vérificcation plus tard
+    })
+    .then(response => {
+        alert('Utilisateur supprimé avec succès');
+        console.log(id,role);
+        showAccounts(); // Actualise la liste des comptes
+    })
+    .catch(error => {
+        console.error('Erreur lors de la suppression de l\'utilisateur:', error);
+        alert('Une erreur est survenue lors de la suppression');
+    });
+}
+
+
+
 
 function showPassword() {
     profileContent.innerHTML = `
@@ -87,6 +106,4 @@ tabs.forEach(tab => {
 showDetails();
 
 
-function deleteUser(id) {
-    alert(`L'ID de l'utilisateur est : ${id}`);
-}
+
