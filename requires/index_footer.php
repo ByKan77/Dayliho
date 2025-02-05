@@ -1,3 +1,3 @@
 <footer>
-    <p>&copy; 2025 Dayliho</p>
+    <p>&copy; 2025 Daylihoo</p>
 </footer>
