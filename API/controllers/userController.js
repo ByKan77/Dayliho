@@ -106,6 +106,12 @@ async function verifConnexion(req,res){
 
 }
 
+
+// Récupère les Utilisateurs inscrit à une séance
+async function getUserSub(req, res) {
+
+}
+
 async function deleteUser(req, res) {
     const userId = req.params.id;
     const { role } = req.body;  // Récupère le role envoyé
