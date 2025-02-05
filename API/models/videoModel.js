@@ -15,4 +15,12 @@ async function pushNewSeance(titre, description, dateDebut, dateFin, lieu, nombr
     return result;
 }
 
-module.exports = { getAllVideos, pushNewSeance};
+async function bookSeance(id_utilisateur, id_seance) { 
+    let conn = await pool.getConnection();
+    const query = "INSERT INTO participant (id_seance, id_utilisateur) VALUES (?, ?)";
+    const result = await conn.query(query, [id_seance, id_utilisateur]);
+    conn.release();
+    return result;
+}
+
+module.exports = {getAllVideos, pushNewSeance, bookSeance};

@@ -31,5 +31,23 @@ async function addSeance(req, res) {
     }
 }
 
-module.exports = { getVideos, addSeance};
+async function bookSeance(req, res) {
+    console.log("bite");
+    
+    console.log(req.params);
+    
+    try {
+        const { id_utilisateur, id_seance } = req.params;
+        const result = await videoModel.bookSeance(id_utilisateur, id_seance);
+        const serializedResult = JSON.parse(JSON.stringify(result, (_, value) =>
+            typeof value === "bigint" ? value.toString() : value
+        ));
+        res.json(serializedResult);
+    } catch (err) {
+        console.error("Erreur lors de la réservation de la Séance:", err);
+        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+    }
+};
+
+module.exports = { getVideos, addSeance,bookSeance};
 
