@@ -49,5 +49,16 @@ async function bookSeance(req, res) {
     }
 };
 
-module.exports = { getVideos, addSeance,bookSeance};
+async function getBookedSeances(req, res) {
+    const id_utilisateur = req.params;
+    try {        
+        const videos = await videoModel.getBookedSeances(id_utilisateur.id_utilisateur);
+        res.status(200).json(videos);
+    } catch (error) {
+        console.error("Erreur lors de la récupération des vidéos:", error);
+        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+    }
+}
+
+module.exports = { getVideos, addSeance,bookSeance, getBookedSeances};
 

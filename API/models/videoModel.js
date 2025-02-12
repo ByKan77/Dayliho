@@ -23,4 +23,13 @@ async function bookSeance(id_utilisateur, id_seance) {
     return result;
 }
 
-module.exports = {getAllVideos, pushNewSeance, bookSeance};
+async function getBookedSeances(id_utilisateur) {
+    console.log(id_utilisateur);
+    
+    let conn = await pool.getConnection();
+    const rows = await conn.query("SELECT id_seance FROM `participant` WHERE id_utilisateur= ? GROUP BY id_seance", [id_utilisateur]);
+    conn.release();
+    return rows;
+}
+
+module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances};
