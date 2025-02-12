@@ -32,4 +32,18 @@ async function getBookedSeances(id_utilisateur) {
     return rows;
 }
 
-module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances};
+async function getBookedSeancesDetailed(id_utilisateur) {
+    let conn = await pool.getConnection();
+    const seanceIds = await conn.query("SELECT id_seance FROM `participant` WHERE id_utilisateur= ? GROUP BY id_seance", [id_utilisateur]);
+    if (seanceIds.length === 0) {
+        conn.release();
+        return [];
+    }
+    const ids = seanceIds.map(row => row.id_seance);
+    const query = "SELECT * FROM seancedesport WHERE id IN (?)";
+    const seances = await conn.query(query, [ids]);
+    conn.release();
+    return seances;
+}
+
+module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed};

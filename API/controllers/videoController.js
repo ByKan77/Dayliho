@@ -60,5 +60,15 @@ async function getBookedSeances(req, res) {
     }
 }
 
-module.exports = { getVideos, addSeance,bookSeance, getBookedSeances};
+async function getBookedSeancesDetailed(req, res) {
+    try {
+        const id_utilisateur = req.params.id_utilisateur;
+        const seances = await videoModel.getBookedSeancesDetailed(id_utilisateur);
+        res.json(seances);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
+module.exports = { getVideos, addSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed };
 
