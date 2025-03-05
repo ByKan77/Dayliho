@@ -28,14 +28,14 @@
             <label for="session-lieu">Lieu :</label>
             <input type="text" id="session-lieu" name="session-lieu" required><br><br>
 
-            <label for="session-sport">Sport :</label>
+            <!-- <label for="session-sport">Sport :</label>
             <select id="session-sport" name="session-sport">
                 <option value=1>Football</option>
                 <option value=2>Basketball</option>
                 <option value=3>Tennis</option>
                 <option value=4>Natation</option>
                 <option value=5>Cyclisme</option>
-            </select><br><br>
+            </select><br><br> -->
 
             <label for="session-taille">Nombre de Places</label>
             <select id="session-taille" name="session-taille">
@@ -107,7 +107,7 @@
         <h2>Détails de la séance</h2>
         <p><strong>ID :</strong> <span id="eventId"></span></p>
         <p><strong>Titre :</strong> <span id="eventTitle"></span></p>
-        <p><strong>Sport :</strong> <span id="eventSport"></span></p>
+        <p><strong>Description :</strong> <span id="eventDesc"></span></p>
         <p><strong>Début :</strong> <span id="eventStart"></span></p>
         <p><strong>Fin :</strong> <span id="eventEnd"></span></p>
     </div>

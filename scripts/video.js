@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         slotMinTime: '10:00:00', 
         slotMaxTime: '21:00:00', 
         events: function(info, successCallback, failureCallback) {
-            fetch('../back/events.php')
+            fetch('http://localhost:1234/video/getVideos')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Erreur réseau');
@@ -20,15 +20,25 @@ document.addEventListener('DOMContentLoaded', function() {
                     return response.json();
                 })
                 .then(data => {
-                    successCallback(data); // Retourne les données au calendrier
+                    // Map the data to the format expected by FullCalendar
+                    const events = data.map(event => ({
+                        id: event.id,
+                        title: event.titre,
+                        start: event.dateDebut,
+                        end: event.dateFin,
+                        extendedProps: {
+                            description: event.description,
+                            lieu: event.lieu
+                        }
+                    }));
+                    successCallback(events); // Retourne les données au calendrier
                 })
                 .catch(error => failureCallback(error)); // Gestion des erreurs
         },
         eventContent: function(arg) {
             return {
                 html: `<strong>${arg.event.title}</strong>
-                <br>${arg.event.extendedProps.sport}
-                <br>${arg.event.extendedProps.description}` // Affiche le sport lié à la séance
+                <br>${arg.event.extendedProps.description}` // Affiche la description de la séance
             };
         },
         eventClick: function(info) {
@@ -38,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Mettre à jour le modal avec les informations de l'événement
             document.getElementById('eventId').textContent = event.id;
             document.getElementById('eventTitle').textContent = event.title;
-            document.getElementById('eventSport').textContent = event.extendedProps.sport;
+            document.getElementById('eventDesc').textContent = event.extendedProps.description;
             document.getElementById('eventStart').textContent = event.start.toLocaleString(); // Affiche l'heure locale
             document.getElementById('eventEnd').textContent = event.end.toLocaleString(); // Affiche l'heure locale
 
