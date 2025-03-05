@@ -18,9 +18,8 @@ try {
     $pdo = new PDO($dsn, $user, $pass, $options);
 
     // Récupérer les séances de sport avec le sport lié
-    $stmt = $pdo->query("SELECT seancedesport.*, sport.intitule AS sport_nom 
-                         FROM seancedesport 
-                         JOIN sport ON seancedesport.id_sport = sport.id");
+    $stmt = $pdo->query("SELECT seance.* 
+                         FROM seance");
     $seances = $stmt->fetchAll();
 
     // Convertir les séances en format JSON
