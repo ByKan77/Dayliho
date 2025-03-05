@@ -17,7 +17,7 @@
 </div>
 
 <!-- Fenêtre modale -->
-<div id="session-modal" class="modal">
+<div id="session-modal" class="modal"  style="z-index:1000;">
     <div class="modal-content">
         <span class="close-btn" id="close-modal">&times;</span>
         <h2>Nouvelle Séance</h2>

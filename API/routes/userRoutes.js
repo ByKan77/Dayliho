@@ -19,4 +19,9 @@ router.get("/navbar", middleware.authentification, userController.verifConnexion
 
 router.get("/verifUser", middleware.authentification, userController.verifConnexion);
 
+// Route pour supprimer un utilisateur
+router.delete('/deleteUser/:id', userController.deleteUser);
+
+
+
 module.exports = router;

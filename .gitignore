@@ -1,0 +1,6 @@
+./API/node_modules
+/API/node_modules
+/API/node_modules/*
+./API/node_modules/*
+
+./API/database.js
