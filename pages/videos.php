@@ -70,7 +70,7 @@
         <div id="container_videos_unique">
             <div id="search_area_unique">
                 <div id="single_search_unique">
-                    <input type="text" id="custom_input_unique" placeholder="Quel sport recherches-tu ?">
+                    <input type="text" id="custom_input_unique" placeholder="Rechercher une séance...">
                     <a href="#" id="icon_area_unique">
                         <i id="fa_search_unique" class="fa fa-search"></i>
                     </a>

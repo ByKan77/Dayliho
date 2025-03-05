@@ -105,7 +105,7 @@ function afficherVideosUnique(videos) {
         const blancBlock = document.createElement('div');
         blancBlock.id = 'blanc_block_unique';
 
-        // Contenu de la vidéo (titre, description, auteur)
+        // Contenu de la vidéo (titre, description)
         const videoContent = document.createElement('div');
         videoContent.id = 'video_content_unique';
 
@@ -121,14 +121,8 @@ function afficherVideosUnique(videos) {
         descriptionVideo.id = 'description_video_unique';
         descriptionVideo.textContent = `${video.description}`;
 
-        // Auteur de la vidéo
-        const auteurVideo = document.createElement('div');
-        auteurVideo.id = 'auteur_video_unique';
-        auteurVideo.textContent = `Auteur: ${video.auteur}`;
-
         videoContent.appendChild(titreVideo);
         videoContent.appendChild(descriptionVideo);
-        videoContent.appendChild(auteurVideo);
 
         // Ajouter le bloc blanc et le contenu de la vidéo au conteneur de la vidéo
         videoContainer.appendChild(blancBlock);
