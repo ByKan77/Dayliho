@@ -9,7 +9,8 @@ async function checkUser(req, res) {
     try {
         // Utilise le modèle pour récupérer l'utilisateur par email
         const utilisateur = await userModel.getUserByEmail(email);
-        if (utilisateur && await bcrypt.compare(mot_de_passe, utilisateur.mot_de_passe)) {
+        const mdp = await bcrypt.compareSync(mot_de_passe, utilisateur.mot_de_passe)
+        if (utilisateur && mdp) {
             let token = jwt.sign({ email: utilisateur.email, id: utilisateur.id }, 'secretKey', { expiresIn: '1h' });
             res.status(201).json({ success: true, token: token, userId: utilisateur.id }); // Inclure l'ID dans la réponse
         }

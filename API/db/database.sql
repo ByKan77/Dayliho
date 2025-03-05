@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 05 mars 2025 à 13:05
+-- Généré le : mer. 05 mars 2025 à 13:56
 -- Version du serveur : 8.0.41-0ubuntu0.24.04.1
 -- Version de PHP : 8.3.6
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `participant` (
   `id_seance` int NOT NULL,
   `id_utilisateur` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `participant`
@@ -50,7 +50,7 @@ INSERT INTO `participant` (`id_seance`, `id_utilisateur`) VALUES
 CREATE TABLE `pratiquant` (
   `id_sport` int NOT NULL,
   `id_utilisateur` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `pratiquant`
@@ -132,12 +132,12 @@ CREATE TABLE `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role`) VALUES
-(1, 'DENEUCHATEL', 'Dorian', 'dorian@gmail.com', '$2a$16$K2kdxDWJGREMyW/5wCWaouV2d3akPJb5YyhHqJoPc6/OeoEXi9AxG', 'administrateur'),
-(2, 'OUADAH', 'Sofiane', 'sofiane@gmail.com', '$2a$04$LXlPGNBUoeL704.o6CQv/.v7nEFGWU0y4wlLltl64n4ZwBXlUNNLa', 'administrateur'),
-(3, 'NOUET', 'Flavien', 'flavien@gmail.com', '$2a$04$LXlPGNBUoeL704.o6CQv/.v7nEFGWU0y4wlLltl64n4ZwBXlUNNLa', 'administrateur'),
-(4, 'DUPONT', 'Nicolas', 'nicolas@gmail.com', '$2a$04$LXlPGNBUoeL704.o6CQv/.v7nEFGWU0y4wlLltl64n4ZwBXlUNNLa', 'joueur'),
-(5, 'TEST1', 'TEST1', 'TEST1@gmail.com', '$2a$04$LXlPGNBUoeL704.o6CQv/.v7nEFGWU0y4wlLltl64n4ZwBXlUNNLa', 'coach'),
-(6, 'TEST2', 'TEST2', 'TEST2@gmail.com', '$2a$04$LXlPGNBUoeL704.o6CQv/.v7nEFGWU0y4wlLltl64n4ZwBXlUNNLa', 'coach');
+(1, 'DENEUCHATEL', 'Dorian', 'dorian@gmail.com', '$2a$04$G9DjWriyvE0lzU2E3V.i.eIL4n5D0VyjmUf18MtyZBJm/CHjKWrEO', 'administrateur'),
+(2, 'OUADAH', 'Sofiane', 'sofiane@gmail.com', '$2a$04$G9DjWriyvE0lzU2E3V.i.eIL4n5D0VyjmUf18MtyZBJm/CHjKWrEO', 'administrateur'),
+(3, 'NOUET', 'Flavien', 'flavien@gmail.com', '$2a$04$G9DjWriyvE0lzU2E3V.i.eIL4n5D0VyjmUf18MtyZBJm/CHjKWrEO', 'administrateur'),
+(4, 'DUPONT', 'Nicolas', 'nicolas@gmail.com', '$2a$04$G9DjWriyvE0lzU2E3V.i.eIL4n5D0VyjmUf18MtyZBJm/CHjKWrEO', 'joueur'),
+(5, 'TEST1', 'TEST1', 'TEST1@gmail.com', '$2a$04$G9DjWriyvE0lzU2E3V.i.eIL4n5D0VyjmUf18MtyZBJm/CHjKWrEO', 'coach'),
+(6, 'TEST2', 'TEST2', 'TEST2@gmail.com', '$2a$04$G9DjWriyvE0lzU2E3V.i.eIL4n5D0VyjmUf18MtyZBJm/CHjKWrEO', 'coach');
 
 --
 -- Index pour les tables déchargées
@@ -185,7 +185,7 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `seancedesport`
 --
 ALTER TABLE `seancedesport`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `sport`
