@@ -45,9 +45,9 @@ async function deleteUserById(userId, role) {
         }
         if (role === 'coach') { // SI c'est un coach on doit supprimer ses séances de sport mais avant les inscriptions à ses séances, dans l'autre sens ça ne marche pas
 
-            await conn.query("DELETE FROM participant WHERE id_seance IN (SELECT id FROM seancedesport WHERE id_utilisateur = ?)", [userId]); // Supprime les inscriptions aux séances du coach
+            await conn.query("DELETE FROM reservation WHERE id_seance IN (SELECT id FROM seance WHERE id_utilisateur = ?)", [userId]); // Supprime les inscriptions aux séances du coach
 
-            await conn.query("DELETE FROM seancedesport WHERE id_utilisateur = ?", [userId]); // Puis supprime la / les séance(s)
+            await conn.query("DELETE FROM seance WHERE id_utilisateur = ?", [userId]); // Puis supprime la / les séance(s)
         }
 
         // Pour un utilisateur non coac
@@ -66,7 +66,7 @@ async function deleteUserById(userId, role) {
 // Récupère les inscriptions à sa séance d'un utilisateur
 async function getUserSub(userId) {
     let conn = await pool.getConnection();
-    const rows = await conn.query("SELECT * FROM participant WHERE id_utilisateur = ?", [userId]);
+    const rows = await conn.query("SELECT * FROM reservation WHERE id_utilisateur = ?", [userId]);
     conn.release();
     return rows[0];
 }

@@ -24,19 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `participant`
+-- Structure de la table `reservation`
 --
 
-CREATE TABLE `participant` (
+CREATE TABLE `reservation` (
   `id_seance` int NOT NULL,
   `id_utilisateur` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `participant`
+-- Déchargement des données de la table `reservation`
 --
 
-INSERT INTO `participant` (`id_seance`, `id_utilisateur`) VALUES
+INSERT INTO `reservation` (`id_seance`, `id_utilisateur`) VALUES
 (1, 1),
 (4, 2),
 (5, 3);
@@ -64,10 +64,10 @@ INSERT INTO `pratiquant` (`id_sport`, `id_utilisateur`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `seancedesport`
+-- Structure de la table `seance`
 --
 
-CREATE TABLE `seancedesport` (
+CREATE TABLE `seance` (
   `id` int NOT NULL,
   `titre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `description` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -80,10 +80,10 @@ CREATE TABLE `seancedesport` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `seancedesport`
+-- Déchargement des données de la table `seance`
 --
 
-INSERT INTO `seancedesport` (`id`, `titre`, `description`, `dateDebut`, `dateFin`, `lieu`, `nombrePlaces`, `id_sport`, `id_utilisateur`) VALUES
+INSERT INTO `seance` (`id`, `titre`, `description`, `dateDebut`, `dateFin`, `lieu`, `nombrePlaces`, `id_sport`, `id_utilisateur`) VALUES
 (1, 'Entrainement technique', 'Entrainement technique football', '2024-12-02 14:22:00', '2024-12-02 16:22:00', 'Stade de la Source', 10, 1, 1),
 (2, 'Match', 'Match de basket', '2024-12-03 10:00:00', '2024-12-03 12:00:00', 'Gymnase de la Source', 10, 2, 2),
 (3, 'Entrainement', 'Entrainement de tennis', '2024-12-04 14:00:00', '2024-12-04 16:00:00', 'Tennis Club de la Source', 10, 3, 3),
@@ -144,11 +144,11 @@ INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role
 --
 
 --
--- Index pour la table `participant`
+-- Index pour la table `reservation`
 --
-ALTER TABLE `participant`
+ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id_seance`,`id_utilisateur`),
-  ADD KEY `participant_utilisateur0_FK` (`id_utilisateur`);
+  ADD KEY `reservation_utilisateur0_FK` (`id_utilisateur`);
 
 --
 -- Index pour la table `pratiquant`
@@ -158,12 +158,12 @@ ALTER TABLE `pratiquant`
   ADD KEY `pratiquant_utilisateur0_FK` (`id_utilisateur`);
 
 --
--- Index pour la table `seancedesport`
+-- Index pour la table `seance`
 --
-ALTER TABLE `seancedesport`
+ALTER TABLE `seance`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `seanceDeSport_sport_FK` (`id_sport`),
-  ADD KEY `seanceDeSport_utilisateur0_FK` (`id_utilisateur`);
+  ADD KEY `seance_sport_FK` (`id_sport`),
+  ADD KEY `seance_utilisateur0_FK` (`id_utilisateur`);
 
 --
 -- Index pour la table `sport`
@@ -182,9 +182,9 @@ ALTER TABLE `utilisateur`
 --
 
 --
--- AUTO_INCREMENT pour la table `seancedesport`
+-- AUTO_INCREMENT pour la table `seance`
 --
-ALTER TABLE `seancedesport`
+ALTER TABLE `seance`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
@@ -204,11 +204,11 @@ ALTER TABLE `utilisateur`
 --
 
 --
--- Contraintes pour la table `participant`
+-- Contraintes pour la table `reservation`
 --
-ALTER TABLE `participant`
-  ADD CONSTRAINT `participant_seanceDeSport_FK` FOREIGN KEY (`id_seance`) REFERENCES `seancedesport` (`id`),
-  ADD CONSTRAINT `participant_utilisateur0_FK` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+ALTER TABLE `reservation`
+  ADD CONSTRAINT `reservation_seance_FK` FOREIGN KEY (`id_seance`) REFERENCES `seance` (`id`),
+  ADD CONSTRAINT `reservation_utilisateur0_FK` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
 -- Contraintes pour la table `pratiquant`
@@ -218,11 +218,11 @@ ALTER TABLE `pratiquant`
   ADD CONSTRAINT `pratiquant_utilisateur0_FK` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 
 --
--- Contraintes pour la table `seancedesport`
+-- Contraintes pour la table `seance`
 --
-ALTER TABLE `seancedesport`
-  ADD CONSTRAINT `seanceDeSport_sport_FK` FOREIGN KEY (`id_sport`) REFERENCES `sport` (`id`),
-  ADD CONSTRAINT `seanceDeSport_utilisateur0_FK` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
+ALTER TABLE `seance`
+  ADD CONSTRAINT `seance_sport_FK` FOREIGN KEY (`id_sport`) REFERENCES `sport` (`id`),
+  ADD CONSTRAINT `seance_utilisateur0_FK` FOREIGN KEY (`id_utilisateur`) REFERENCES `utilisateur` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

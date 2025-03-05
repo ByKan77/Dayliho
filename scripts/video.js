@@ -175,7 +175,6 @@ document.addEventListener("DOMContentLoaded", function() {
             dateFin: document.getElementById("session-dateFin").value,
             lieu: document.getElementById("session-lieu").value,
             nombrePlaces: document.getElementById("session-taille").value,
-            id_sport: document.getElementById("session-sport").value,
             userId: userId // Ajoute l'ID utilisateur
         }; 
 
@@ -188,7 +187,6 @@ document.addEventListener("DOMContentLoaded", function() {
             formData.append('dateFin', sessionData.dateFin);
             formData.append('lieu', sessionData.lieu);
             formData.append('nombrePlaces', sessionData.nombrePlaces);
-            formData.append('id_sport', sessionData.id_sport);
             formData.append('id_utilisateur', sessionData.userId);
 
         console.log(localStorage.getItem("token"));
