@@ -31,9 +31,7 @@ async function addSeance(req, res) {
     }
 }
 
-async function bookSeance(req, res) {
-    console.log("bite");
-    
+async function bookSeance(req, res) {    
     console.log(req.params);
     
     try {
