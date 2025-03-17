@@ -21,6 +21,7 @@ CREATE TABLE `seance` (
   `lieu` varchar(50) NOT NULL,
   `nombrePlaces` int NOT NULL,
   `id_utilisateur` int NOT NULL,
+    `URL_photo` varchar(255) DEFAULT NULL
   PRIMARY KEY (`id`),
   KEY `seanceDeSport_utilisateur0_FK` (`id_utilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
