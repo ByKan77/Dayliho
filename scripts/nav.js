@@ -14,7 +14,7 @@ const navbarUser = async () => {
         if (response.status === 200) {
             test.innerHTML += `
                 <a href="../pages/profile.php" class="bouton_nav">
-                    <i class="lev fa-solid fa-user"></i>Profile
+                    <i class="lev fa-solid fa-user"></i>Profil
                 </a>
                  <a href="../pages/videos.php" class="bouton_nav">
                     <i class="lev fa-solid fa-dumbbell"></i>Séances
