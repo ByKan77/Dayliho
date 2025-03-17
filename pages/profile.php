@@ -25,18 +25,18 @@
                 const utilisateur = response.data;
                 if (utilisateur) {
                     profileContent.innerHTML = `
-                        <h2>Account Settings</h2>
+                        <h2>Informations du compte</h2>
                         <form id="profileForm">
                             <div id="form-group-email" class="form-group">
-                                <label for="email">Email address</label>
+                                <label for="email">Adresse email</label>
                                 <input type="email" id="email" value="${utilisateur.email}" readonly>
                             </div>
                             <div id="form-group-firstName" class="form-group">
-                                <label for="firstName">First name</label>
+                                <label for="firstName">Prénom</label>
                                 <input type="text" id="firstName" value="${utilisateur.prenom}" readonly>
                             </div>
                             <div id="form-group-lastName" class="form-group">
-                                <label for="lastName">Last name</label>
+                                <label for="lastName">Nom</label>
                                 <input type="text" id="lastName" value="${utilisateur.nom}" readonly>
                             </div>
                         </form>
