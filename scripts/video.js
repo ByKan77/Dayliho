@@ -167,46 +167,57 @@ document.addEventListener("DOMContentLoaded", function() {
 
     submitBtn.addEventListener("click", async function(event) {
         event.preventDefault();
-
-        // Remplace cette partie par ta requête réelle pour obtenir userId
-        const req = { query: { id: '123' } }; // Exemple de requête
-        const userId = await getUser(req); // Récupère l'ID utilisateur
-
-        const sessionData = {
-            titre: document.getElementById("session-name").value,
-            description: document.getElementById("session-name").value,
-            dateDebut: document.getElementById("session-dateDebut").value,
-            dateFin: document.getElementById("session-dateFin").value,
-            lieu: document.getElementById("session-lieu").value,
-            nombrePlaces: document.getElementById("session-taille").value,
-            userId: userId // Ajoute l'ID utilisateur
-        }; 
-
-        console.log(sessionData);
-        
-        const formData = new FormData();
-            formData.append('titre', sessionData.titre);
-            formData.append('description', sessionData.description);
-            formData.append('dateDebut', sessionData.dateDebut);
-            formData.append('dateFin', sessionData.dateFin);
-            formData.append('lieu', sessionData.lieu);
-            formData.append('nombrePlaces', sessionData.nombrePlaces);
-            formData.append('id_utilisateur', sessionData.userId);
-
-        console.log(localStorage.getItem("token"));
-
+    
         try {
+            // Envoie d'une requête GET pour récupérer les informations de l'utilisateur
+            const response = await axios.get(`http://localhost:1234/user/getUserById?id=${localStorage.getItem("userId")}`);
             
-            const response = await axios.post('http://localhost:1234/video/addSeance', formData,  
-                {headers: {
-                'Content-Type': 'application/json',
-                'Authorization': localStorage.getItem('token')
-                }});
-            alert("Séance ajoutée avec succès !");
-            modal.style.display = "none";
+            if (response.data) {
+                const utilisateur = response.data;  // Récupère l'utilisateur depuis la réponse
+                const userIdFromAPI = utilisateur.id;  // L'ID de l'utilisateur
+    
+                const sessionData = {
+                    titre: document.getElementById("session-name").value,
+                    description: document.getElementById("session-name").value,
+                    dateDebut: document.getElementById("session-dateDebut").value,
+                    dateFin: document.getElementById("session-dateFin").value,
+                    lieu: document.getElementById("session-lieu").value,
+                    nombrePlaces: document.getElementById("session-taille").value,
+                    userId: userIdFromAPI // Ajoute l'ID utilisateur
+                };
+    
+                console.log(sessionData);
+                
+                const formData = new FormData();
+                formData.append('titre', sessionData.titre);
+                formData.append('description', sessionData.description);
+                formData.append('dateDebut', sessionData.dateDebut);
+                formData.append('dateFin', sessionData.dateFin);
+                formData.append('lieu', sessionData.lieu);
+                formData.append('nombrePlaces', sessionData.nombrePlaces);
+                formData.append('id_utilisateur', sessionData.userId);
+    
+                console.log(localStorage.getItem("token"));
+    
+                try {
+                    const axiosResponse = await axios.post('http://localhost:1234/video/addSeance', formData, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': localStorage.getItem('token')
+                        }
+                    });
+                    alert("Séance ajoutée avec succès !");
+                    modal.style.display = "none";
+                } catch (error) {
+                    console.error("Erreur lors de l'ajout de la séance:", error);
+                    alert("Erreur lors de l'ajout de la séance.");
+                }
+            } else {
+                throw new Error("Utilisateur non trouvé");
+            }
         } catch (error) {
-            console.error("Erreur lors de l'ajout de la séance:", error);
-            alert("Erreur lors de l'ajout de la séance.");
+            console.error("Erreur de récupération de l'utilisateur:", error);
+            alert("Erreur lors de la récupération de l'utilisateur.");
         }
     });
 });
