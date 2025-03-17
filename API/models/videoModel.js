@@ -9,7 +9,7 @@ async function getAllVideos() {
 
 async function pushNewSeance(titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_utilisateur) { 
     let conn = await pool.getConnection();
-    const query = "INSERT INTO seance (titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_utilisateur) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    const query = "INSERT INTO seance (titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_utilisateur) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const result = await conn.query(query, [titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_utilisateur]);
     conn.release();
     return result;

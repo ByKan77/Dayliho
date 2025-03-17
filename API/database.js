@@ -8,6 +8,7 @@ const pool = mariadb.createPool({
     user: process.env.LOGIN,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
+    allowPublicKeyRetrieval: true,
 });
 
 module.exports = pool;
