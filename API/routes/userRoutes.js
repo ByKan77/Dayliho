@@ -8,6 +8,9 @@ router.post("/checkUser", userController.checkUser);
 // Route pour récupérer les infos de l'utilisateur
 router.get("/getUserById", userController.getUser);
 
+//Route pour récupérer les infos de l'utilisateur par son email
+router.get("/getUserByEmail", userController.getUserByEmail);
+
 // Route pour récupérer un utilisateur spécifique
 router.get("/getUsers", userController.getUsers);
 

@@ -33,19 +33,28 @@ async function addSeance(req, res) {
 
 async function bookSeance(req, res) {    
     console.log(req.params);
-    
+
     try {
         const { id_utilisateur, id_seance } = req.params;
+
+        // Vérifie si la réservation existe déjà
+        const reservationExists = await videoModel.checkIfReservationExists(id_utilisateur, id_seance);
+
+        if (reservationExists) {
+            return res.status(409).json({ success: false, message: "Cette séance est déjà réservée." });
+        }
+
+        // Si elle n'existe pas, on la crée
         const result = await videoModel.bookSeance(id_utilisateur, id_seance);
-        const serializedResult = JSON.parse(JSON.stringify(result, (_, value) =>
-            typeof value === "bigint" ? value.toString() : value
-        ));
-        res.json(serializedResult);
+
+        res.status(201).json({ success: true, message: "Réservation effectuée avec succès." });
     } catch (err) {
         console.error("Erreur lors de la réservation de la Séance:", err);
         res.status(500).json({ success: false, message: 'Erreur serveur.' });
     }
-};
+}
+
+
 
 async function getBookedSeances(req, res) {
     const id_utilisateur = req.params;

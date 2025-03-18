@@ -58,7 +58,29 @@ async function getUsers(req, res) {
     }
 }
 
+async function getUserByEmail(req, res) {
+    const { email } = req.query;
 
+    try {
+        if (!email) {
+            return res.status(400).json({ success: false, message: "Email utilisateur manquant" });
+        }
+
+        const utilisateur = await userModel.getUserByEmail(email);
+
+        if (!utilisateur) {
+            return res.status(404).json({ success: false, message: "Utilisateur non trouvé" });
+        }
+
+        // Ne pas renvoyer le mot de passe
+        delete utilisateur.mot_de_passe;
+
+        res.status(200).json(utilisateur);
+    } catch (error) {
+        console.error("Erreur lors de la récupération de l'utilisateur par email:", error);
+        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+    }
+}
 
 // Fonction pour changer le mot de passe
 async function changePassword(req, res) {
@@ -136,4 +158,4 @@ async function deleteUser(req, res) {
 
 
 
-module.exports = { checkUser, getUser, getUsers, changePassword, verifConnexion, deleteUser };
+module.exports = { checkUser, getUser, getUsers, changePassword, verifConnexion, deleteUser, getUserByEmail};
