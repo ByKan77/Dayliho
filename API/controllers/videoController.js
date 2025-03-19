@@ -77,5 +77,16 @@ async function getBookedSeancesDetailed(req, res) {
     }
 }
 
-module.exports = { getVideos, addSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed };
+async function deleteReservation(req, res) {
+    try {
+        const { id_utilisateur, id_seance } = req.params;
+        const result = await videoModel.deleteReservation(id_utilisateur, id_seance);
+        res.status(200).json({ success: true, message: "Réservation supprimée avec succès." });
+    } catch (error) {
+        console.error("Erreur lors de la suppression de la réservation:", error);
+        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+    }
+}
+
+module.exports = { getVideos, addSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, deleteReservation };
 
