@@ -46,4 +46,23 @@ async function getBookedSeancesDetailed(id_utilisateur) {
     return seances;
 }
 
-module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed};
+async function checkIfReservationExists(id_utilisateur, id_seance) {
+    let conn = await pool.getConnection();
+    const query = "SELECT COUNT(*) as count FROM reservation WHERE id_utilisateur = ? AND id_seance = ?";
+    const [rows] = await conn.query(query, [id_utilisateur, id_seance]);
+    conn.release();
+    
+    return rows.count > 0;
+}
+
+async function deleteReservation(id_utilisateur, id_seance) {
+    let conn = await pool.getConnection();
+    const query = "DELETE FROM reservation WHERE id_utilisateur = ? AND id_seance = ?";
+    const result = await conn.query(query, [id_utilisateur, id_seance]);
+
+    conn.release();
+
+    return result;
+}
+
+module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, checkIfReservationExists, deleteReservation};
