@@ -3,7 +3,7 @@
     <div id="contact_form">
         <h2>Contactez-nous</h2>
         <!-- Formulaire avec l'action de Formspree -->
-        <form action="https://formspree.io/f/xldezroq" method="post">
+        <form action="https://formspree.io/f/xrbpavpe" method="post">
             <div class="form-group">
                 <label for="name">Nom:</label>
                 <input type="text" id="name" name="name" placeholder="Ex: Dupont" required>
