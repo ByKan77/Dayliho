@@ -46,7 +46,7 @@ INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `role
 (1, 'DENEUCHATEL', 'Dorian', 'dorian@gmail.com', '$2a$12$aUGMazAexWLP.4tU.415n.mNxD1wRp/6ow77Q2MtO5onvc1ydMotG', 'utilisateur'),
 (2, 'OUADAH', 'Sofiane', 'sofiane@gmail.com', '$2a$12$5dZqKlRpHtvKaY2kaqPJ9OIT21Y4rNTjus0pTk.kYOlShdm2Zh4JG', 'utilisateur'),
 (3, 'NOUET', 'Flavien', 'flavien@gmail.com', '$2a$12$lNpXWSB9EDb1ZMMwcFkOz.FqbMqgss1h6gnGNliczO5JciBwbeUs6', 'utilisateur'),
-(4, 'ADMIN', 'Compte', 'admin@dayliho.com', '$2a$12$YHCcaBQGB558Cz.QCC0S5u2vSlYCL9027XNF3iC7qZwSV6zzoZNqi', 'administrateur');
+(4, 'ADMIN', 'Compte', 'admin@dayliho.com', '$2a$12$YHCcaBQGB558Cz.QCC0S5u2vSlYCL9027XNF3iC7qZwSV6zzoZNqi', 'daylidmin');
 
 ALTER TABLE `reservation`
   ADD CONSTRAINT `participant_seanceDeSport_FK` FOREIGN KEY (`id_seance`) REFERENCES `seance` (`id`),

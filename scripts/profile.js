@@ -73,7 +73,7 @@ tabs.forEach(tab => {
                 showDetails();
                 break;
             case 'accounts-tab':
-                if (localStorage.getItem('role') === 'administrateur') {
+                if (localStorage.getItem('role') === 'daylidmin') {
                     showAccounts();
                 } else {
                     alert("Vous n'êtes pas autorisé à accéder à cette section.");
