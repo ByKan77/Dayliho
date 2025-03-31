@@ -62,25 +62,6 @@ function deleteUser(id, role) {
 
 
 
-
-function showPassword() {
-    profileContent.innerHTML = `
-        <h2>Changer le mot de passe</h2>
-        <h1 style="color:red;">NON FONCTIONNEL</h1>
-        <form id="passwordForm">
-            <div id="form-group-oldPassword" class="form-group">
-                <label for="oldPassword">Ancien mot de passe</label>
-                <input type="password" id="oldPassword" required>
-            </div>
-            <div id="form-group-newPassword" class="form-group">
-                <label for="newPassword">Nouveau mot de passe</label>
-                <input type="password" id="newPassword" required>
-            </div>
-            <button type="button">Changer le mot de passe</button>
-        </form>
-    `;
-}
-
 tabs.forEach(tab => {
     tab.addEventListener('click', event => {
         event.preventDefault();
@@ -93,9 +74,6 @@ tabs.forEach(tab => {
                 break;
             case 'accounts-tab':
                 showAccounts();
-                break;
-            case 'password-tab':
-                showPassword();
                 break;
             default:
                 showDetails();

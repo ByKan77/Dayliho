@@ -82,42 +82,6 @@ async function getUserByEmail(req, res) {
     }
 }
 
-// Fonction pour changer le mot de passe
-async function changePassword(req, res) {
-    const { userId, ancienMdp, nouveauMdp, confirmNouveauMdp } = req.body;
-
-    try {
-        // Vérifie que les nouveaux mots de passe correspondent
-        if (nouveauMdp !== confirmNouveauMdp) {
-            return res.status(400).json({ success: false, message: 'Les nouveaux mots de passe ne correspondent pas.' });
-        }
-
-        // Récupère l'utilisateur par son ID
-        const utilisateur = await userModel.getUserById(userId);
-
-        // Vérifie si l'ancien mot de passe est correct
-        const passwordMatch = await bcrypt.compare(ancienMdp, utilisateur.mot_de_passe);
-        if (!passwordMatch) {
-            return res.status(401).json({ success: false, message: 'Mot de passe actuel incorrect.' });
-        }
-
-        // Hash le nouveau mot de passe
-        const hashedPassword = await bcrypt.hash(nouveauMdp, 10);
-
-        // Met à jour le mot de passe dans la base de données
-        const updateSuccess = await userModel.updatePassword(userId, hashedPassword);
-
-        if (updateSuccess) {
-            res.status(200).json({ success: true, message: 'Mot de passe changé avec succès.' });
-        } else {
-            res.status(500).json({ success: false, message: 'Erreur lors de la mise à jour du mot de passe.' });
-        }
-    } catch (error) {
-        console.error("Erreur lors du changement de mot de passe:", error);
-        res.status(500).json({ success: false, message: 'Erreur serveur.' });
-    }
-}
-
 async function verifConnexion(req,res){
     if (req.user){
         res.status(200).json({success: true, user: req.user});
@@ -125,12 +89,6 @@ async function verifConnexion(req,res){
     else{
         res.status(401).json({success: false});
     }
-
-}
-
-
-// Récupère les Utilisateurs inscrit à une séance
-async function getUserSub(req, res) {
 
 }
 
@@ -158,4 +116,4 @@ async function deleteUser(req, res) {
 
 
 
-module.exports = { checkUser, getUser, getUsers, changePassword, verifConnexion, deleteUser, getUserByEmail};
+module.exports = { checkUser, getUser, getUsers, verifConnexion, deleteUser, getUserByEmail};

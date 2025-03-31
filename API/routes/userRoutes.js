@@ -14,9 +14,6 @@ router.get("/getUserByEmail", userController.getUserByEmail);
 // Route pour récupérer un utilisateur spécifique
 router.get("/getUsers", userController.getUsers);
 
-// Route pour le changement de mot de passe
-router.post("/changePassword", userController.changePassword);
-
 // Route pour la navbar
 router.get("/navbar", middleware.authentification, userController.verifConnexion);
 

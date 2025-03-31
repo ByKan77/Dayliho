@@ -50,7 +50,7 @@ async function deleteUserById(userId, role) {
             await conn.query("DELETE FROM seance WHERE id_utilisateur = ?", [userId]); // Puis supprime la / les séance(s)
         }
 
-        // Pour un utilisateur non coac
+        // Pour un utilisateur non coach
         const result = await conn.query("DELETE FROM utilisateur WHERE id = ?", [userId]);
 
         return result;
