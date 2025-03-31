@@ -19,7 +19,10 @@ document.getElementById('formulaire_de_connexion').addEventListener('submit', as
             console.log(response.data.token);
 
             localStorage.setItem('userId', response.data.userId);
-            console.log(response.data.userId);
+            console.log(response.data.userId); 
+
+            localStorage.setItem('role', response.data.role);
+
             if(response.status === 201) {
                 window.location.href = "../pages/index.php";
             }

@@ -12,7 +12,7 @@ async function checkUser(req, res) {
         const mdp = await bcrypt.compareSync(mot_de_passe, utilisateur.mot_de_passe)
         if (utilisateur && mdp) {
             let token = jwt.sign({ email: utilisateur.email, id: utilisateur.id }, 'secretKey', { expiresIn: '1h' });
-            res.status(201).json({ success: true, token: token, userId: utilisateur.id }); // Inclure l'ID dans la réponse
+            res.status(201).json({ success: true, token: token, userId: utilisateur.id, role: utilisateur.role }); // Inclure l'ID et le rôle dans la réponse
         }
         else {
             // Si l'utilisateur n'est pas trouvé ou que le mot de passe est incorrect

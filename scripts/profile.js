@@ -73,7 +73,12 @@ tabs.forEach(tab => {
                 showDetails();
                 break;
             case 'accounts-tab':
-                showAccounts();
+                if (localStorage.getItem('role') === 'administrateur') {
+                    showAccounts();
+                } else {
+                    alert("Vous n'êtes pas autorisé à accéder à cette section.");
+                    tab.classList.remove('active');
+                }
                 break;
             default:
                 showDetails();
