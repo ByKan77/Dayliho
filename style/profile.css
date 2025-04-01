@@ -59,13 +59,12 @@
 
 /* Contenu principal */
 #profile-content {
-    max-width: 500px;
+    max-width: auto;
     width: 100%;
     padding: 20px;
     background: white;
     border-radius: 8px;
     margin-top: 10px;
-    text-align: center;
 }
 
 /* Formulaires */
@@ -103,6 +102,7 @@ button:hover {
 #accounts-table-container {
     width: 90%;
     margin: auto;
+    overflow-x: auto;
 }
 
 #accounts-table {
@@ -149,5 +149,9 @@ button:hover {
     #profile-content {
         max-width: 90%;
         padding: 15px;
+    }
+    
+    #accounts-table {
+        min-width: 600px;
     }
 }
