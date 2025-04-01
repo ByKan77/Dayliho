@@ -471,5 +471,28 @@ footer p {
         text-align: center;
     }
 }
+@media (max-width: 768px) {
+    #section_4, #section_5 {
+        flex-direction: column; /* Affichage en colonne */
+        height: auto; /* Hauteur ajustable */
+        background-size: cover; /* Ajustement de l'image */
+        background-position: center; /* Centrage */
+        padding: 40px 20px; /* Ajustement des marges */
+    }
 
+    .box_droite, .box_gauche {
+        width: 90%; /* Ajustement de la largeur */
+        text-align: center; /* Centrage du texte */
+        margin: 20px auto; /* Centrage automatique */
+        padding: 20px; /* Ajustement du padding */
+    }
+
+    .box_droite h2, .box_gauche h2 {
+        font-size: 1.5em; /* Réduction de la taille du titre */
+    }
+
+    .box_droite p, .box_gauche p {
+        font-size: 1em; /* Ajustement de la taille du texte */
+    }
+}
 

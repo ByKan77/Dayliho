@@ -67,3 +67,34 @@
     margin-top: 10px;
     font-size: 14px;
 }
+
+@media (max-width: 768px) {
+    #login-body {
+        justify-content: center; /* Centre le contenu sur mobile */
+        padding: 20px; /* Ajoute un espace autour */
+    }
+
+    #connexion {
+        width: 90%; /* Formulaire plus large sur mobile */
+        margin: 20px auto; /* Réduction des marges */
+        padding: 15px; /* Ajustement du padding */
+    }
+
+    #connexion h1 {
+        font-size: 1.5em; /* Réduction de la taille du titre */
+    }
+
+    #connexion input {
+        width: 100%; /* S'assure que l'input prend toute la largeur */
+        padding: 12px; /* Légère augmentation pour le confort */
+    }
+
+    #connexion .btn {
+        width: 100%; /* Ajustement du bouton */
+        padding: 12px;
+    }
+
+    .alert {
+        font-size: 12px; /* Texte d'alerte plus petit */
+    }
+}

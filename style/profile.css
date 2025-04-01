@@ -1,86 +1,74 @@
+/* Style général */
 #profile-body {
     background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 #profile-container {
-    margin-top: 15vh;
+    margin-top: 10vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: black;
-    width: 80%;
+    width: 60%;
     padding: 20px;
 }
 
+/* Sidebar (Boîte bleue) */
 #profile-sidebar {
-    width: 250px;
-    min-height: 50vh;
+    width: 200px;
+    max-height: 30vh;
     background-color: #060e31;
     color: white;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 15px;
     border: 2px solid white;
-    margin-right: 50px;
-    position: fixed;
-    top: 15vh; 
-    left: 0;
-    z-index: 10;
-    margin-left: 25px;
-}
-
-#details-tab,
-#accounts-tab,
-#password-tab {
-    display: block;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-}
-
-.menu-item.active,
-.menu-item:hover {
-    background-color: #000000;
+    margin-bottom: 20px;
+    overflow: hidden;
 }
 
 #profile-sidebar .menu-item {
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 10px 12px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 14px;
     transition: background-color 0.3s ease, color 0.3s ease;
-    border-radius: 20%;
+    border-radius: 10px;
     background-color: #060e31;
+    width: 100%;
 }
 
-#profile-sidebar .menu-item:hover {
-    color: #fff;
-    transform: scale(1.1);
+.menu-item.active,
+.menu-item:hover {
+    background-color: #000000;
+    transform: scale(1.05);
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
+#profile-sidebar .menu-item:hover i {
+    transform: scale(1.2);
+}
+
+/* Contenu principal */
 #profile-content {
-    flex-grow: 1;
+    max-width: 500px;
+    width: 100%;
     padding: 20px;
     background: white;
     border-radius: 8px;
-    margin-left: 300px;
+    margin-top: 10px;
+    text-align: center;
 }
 
-#profile-sidebar .menu-item i {
-    transition: transform 0.3s ease;
-}
-
-#profile-sidebar .menu-item:hover i {
-    transform: scale(1.25);
-}
-
+/* Formulaires */
 .form-group {
     margin-bottom: 15px;
 }
@@ -111,6 +99,7 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Table */
 #accounts-table-container {
     width: 90%;
     margin: auto;
@@ -125,4 +114,40 @@ button:hover {
     border: 1px solid black;
     padding: 8px;
     text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    #profile-container {
+        width: 80%;
+    }
+    
+    #profile-sidebar {
+        width: 180px;
+        padding: 10px;
+    }
+    
+    #profile-content {
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+    #profile-container {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    #profile-sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        max-height: 60px;
+        overflow: hidden;
+    }
+    
+    #profile-content {
+        max-width: 90%;
+        padding: 15px;
+    }
 }
