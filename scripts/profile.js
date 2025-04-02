@@ -73,8 +73,16 @@ tabs.forEach(tab => {
                 showDetails();
                 break;
             case 'accounts-tab':
-                if (localStorage.getItem('role') === 'daylidmin') {
-                    showAccounts();
+                const token = localStorage.getItem('token');
+                if (token) {
+                    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+                    console.log("User role:", decodedToken.role);
+                    if (decodedToken.role === 'daylidmin') {
+                        showAccounts();
+                    } else {
+                        alert("Vous n'êtes pas autorisé à accéder à cette section.");
+                        tab.classList.remove('active');
+                    }
                 } else {
                     alert("Vous n'êtes pas autorisé à accéder à cette section.");
                     tab.classList.remove('active');
