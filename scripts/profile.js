@@ -60,7 +60,34 @@ function deleteUser(id, role) {
     });
 }
 
+function showUpdatePasswordForm() {
+    profileContent.innerHTML = `
+        <h2>Modifier votre mot de passe</h2>
+        <form id="update-password-form">
+            <label for="oldPassword">Ancien mot de passe:</label>
+            <input type="password" id="oldPassword" name="oldPassword" required>
+            <label for="newPassword">Nouveau mot de passe:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+            <button type="submit">Mettre à jour</button>
+        </form>
+    `;
 
+    document.getElementById('update-password-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const oldPassword = document.getElementById('oldPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const userId = localStorage.getItem('userId');
+
+        axios.put('http://localhost:1234/user/updatePassword', { userId, oldPassword, newPassword })
+            .then(response => {
+                alert(response.data.message);
+            })
+            .catch(error => {
+                console.error('Erreur lors de la mise à jour du mot de passe:', error);
+                alert('Une erreur est survenue lors de la mise à jour du mot de passe.');
+            });
+    });
+}
 
 tabs.forEach(tab => {
     tab.addEventListener('click', event => {
@@ -79,6 +106,9 @@ tabs.forEach(tab => {
                     alert("Vous n'êtes pas autorisé à accéder à cette section.");
                     tab.classList.remove('active');
                 }
+                break;
+            case 'update-password-tab':
+                showUpdatePasswordForm();
                 break;
             default:
                 showDetails();

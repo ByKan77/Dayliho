@@ -22,6 +22,7 @@ router.get("/verifUser", middleware.authentification, userController.verifConnex
 // Route pour supprimer un utilisateur
 router.delete('/deleteUser/:id', userController.deleteUser);
 
-
+// Route pour mettre à jour le mot de passe
+router.put('/updatePassword', userController.updatePassword);
 
 module.exports = router;

@@ -100,9 +100,11 @@ async function deleteUser(req, res) {
         const result = await userModel.deleteUserById(userId, role); // Appel le model pour supprimer l'utilisateur
 
         if (result.affectedRows === 0) { // Si y'a pas d'utilisateur à cet id
+            console.log('Echec de la suppression - aucune ligne affectée pour l\'ID:', userId);
             return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }
 
+        console.log('Utilisateur supprimé avec succès pour l\'ID:', userId);
         res.status(200).json({ message: 'Utilisateur supprimé avec succès' });
 
     } catch (error) {
@@ -111,9 +113,34 @@ async function deleteUser(req, res) {
     }
 }
 
+async function updatePassword(req, res) {
+    try {
+        const { userId, oldPassword, newPassword } = req.body;
+        const utilisateur = await userModel.getUserById(userId);
 
+        if (!utilisateur) {
+            return res.status(404).json({ success: false, message: 'Utilisateur introuvable.' });
+        }
 
+        const mdpValide = await bcrypt.compare(oldPassword, utilisateur.mot_de_passe);
+        if (!mdpValide) {
+            return res.status(401).json({ success: false, message: 'Ancien mot de passe incorrect.' });
+        }
 
+        const hashNouveau = await bcrypt.hash(newPassword, 10);
+        const success = await userModel.updatePassword(userId, hashNouveau);
 
+        if (success) {
+            console.log('Mot de passe mis à jour avec succès pour l\'utilisateur ID:', userId);
+            return res.status(200).json({ success: true, message: 'Mot de passe mis à jour avec succès.' });
+        } else {
+            console.log('Echec de la mise à jour du mot de passe - aucune ligne affectée pour l\'ID:', userId);
+            return res.status(500).json({ success: false, message: 'Erreur lors de la mise à jour.' });
+        }
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour du mot de passe:', error);
+        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+    }
+}
 
-module.exports = { checkUser, getUser, getUsers, verifConnexion, deleteUser, getUserByEmail};
+module.exports = { checkUser, getUser, getUsers, verifConnexion, deleteUser, getUserByEmail, updatePassword };
