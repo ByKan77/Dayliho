@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 // Fonction pour vérifier l'utilisateur lors de la connexion
 async function checkUser(req, res) {
     const { email, mot_de_passe } = req.body;
-
+    console.log("Email reçu:", email);  // Pour déboguer
+    
     try {
         // Utilise le modèle pour récupérer l'utilisateur par email
         const utilisateur = await userModel.getUserByEmail(email);
@@ -48,7 +49,7 @@ async function getUser(req, res) {
 
 
 // Fonction pour récupérer tous les utilisateurs
-async function getUsers(req, res) {
+async function getUsers(req, res) {    
     try {
         const users = await userModel.getAllUsers();
         res.status(200).json(users);

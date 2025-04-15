@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         slotMinTime: '10:00:00', 
         slotMaxTime: '21:00:00', 
         events: function(info, successCallback, failureCallback) {
-            fetch('http://localhost:1234/video/getVideos')
+            fetch('http://10.74.2.10::1234/video/getVideos')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Erreur réseau');
@@ -83,7 +83,7 @@ function showTab(tabName) {
 }
 
 // Récupérer les vidéos du serveur
-axios.get("http://localhost:1234/video/getVideos")
+axios.get("http://10.74.2.10:1234/video/getVideos")
     .then(response => {
         videosUnique = response.data;
         afficherVideosUnique(videosUnique); // Afficher toutes les vidéos au chargement
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
         try {
             // Envoie d'une requête GET pour récupérer les informations de l'utilisateur
-            const response = await axios.get(`http://localhost:1234/user/getUserById?id=${localStorage.getItem("userId")}`);
+            const response = await axios.get(`http://10.74.2.10:1234/user/getUserById?id=${localStorage.getItem("userId")}`);
             
             if (response.data) {
                 const utilisateur = response.data;  // Récupère l'utilisateur depuis la réponse
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.log(localStorage.getItem("token"));
     
                 try {
-                    const axiosResponse = await axios.post('http://localhost:1234/video/addSeance', formData, {
+                    const axiosResponse = await axios.post('http://10.74.2.10:1234/video/addSeance', formData, {
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': localStorage.getItem('token')

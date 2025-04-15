@@ -2,7 +2,7 @@ let test = document.getElementById("nav_bar");
 
 const navbarUser = async () => {
     try {
-        const response = await axios.get('http://localhost:1234/user/navbar', {
+        const response = await axios.get('http://10.74.2.10:1234/user/navbar', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')

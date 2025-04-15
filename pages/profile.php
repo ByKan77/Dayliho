@@ -20,7 +20,7 @@
 <script>
     const userId = localStorage.getItem('userId');
     function showDetails() {
-        axios.get(`http://localhost:1234/user/getUserById?id=${userId}`)
+        axios.get(`http://10.74.2.10:1234/user/getUserById?id=${userId}`)
             .then(response => {
                 const utilisateur = response.data;
                 if (utilisateur) {

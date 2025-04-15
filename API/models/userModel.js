@@ -19,7 +19,11 @@ async function getUserById(userId) {
 // Récupère tous les utilisateurs
 async function getAllUsers() {
     let conn = await pool.getConnection();
+    console.log("Récupération de tous les utilisateurs");  // Pour déboguer
+    
     const rows = await conn.query("SELECT * FROM utilisateur");
+    console.log("Utilisateurs récupérés:", rows);  // Pour déboguer
+    
     conn.release();
     return rows;
 }

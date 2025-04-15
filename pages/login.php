@@ -1,6 +1,7 @@
 <?php
     require '../back/header.php';
     require '../requires/nav.php';
+
 ?>
 
 <div id="login-body">
@@ -18,4 +19,5 @@
     </div>
 </div>
 
-<script src="../scripts/login.js" defer></script>
+<script src="../scripts/index.js" defer></script><script src="../scripts/login.js" defer></script>
+
