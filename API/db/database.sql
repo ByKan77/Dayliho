@@ -6,6 +6,7 @@ CREATE TABLE `utilisateur` (
   `email` varchar(50) NOT NULL,
   `mot_de_passe` varchar(255) NOT NULL,
   `role` varchar(50) NOT NULL,
+  `estBloque` int DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

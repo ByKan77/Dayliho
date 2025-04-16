@@ -12,7 +12,9 @@ function showAccounts() {
                         <th>Prénom</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th>Action</th>
+                        <th>Est bloqué</th>
+                        <th>Bloquer / débloquer</th>
+                        <th>Supprimer</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -33,7 +35,9 @@ function showAccounts() {
                 <td>${user.prenom}</td>
                 <td>${user.email}</td>
                 <td>${user.role}</td>
-                <td><button id="deleteButton" onclick="deleteUser('${user.id}', '${user.role}')">Supprimer</button></td>
+                <td>${user.estBloque}</td>
+                <td><button id="banButton" onclick="banUser('${user.id}', '${user.role}')">X</button></td>
+                 <td><button id="deleteButton" onclick="deleteUser('${user.id}', '${user.role}')">X</button></td>
             `;         
 
                 accountsTableBody.appendChild(row);
@@ -43,6 +47,19 @@ function showAccounts() {
             console.error("Erreur lors de la récupération de la liste des comptes:", error);
             profileContent.innerHTML = '<p>Erreur lors de la récupération de la liste des comptes.</p>';
         });
+}
+
+function banUser(id, role) {
+    if(role === 'daylidmin') {
+        alert("Vous ne pouvez pas bloquer un administrateur, vous devez plutôt supprimer son compte.");
+        return;
+    }
+    
+    console.log('1 - Envoie de la requête de blocage / déblocage pour l\'utilisateur avec ID:', id);
+    
+    axios.patch(`http://localhost:1234/user/banUser/${id}`, {
+        data: { role: role } // Envoi aussi le role pour faire la vérificcation plus tard
+    })    
 }
 
 function deleteUser(id, role) {

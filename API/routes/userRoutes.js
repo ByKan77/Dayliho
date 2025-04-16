@@ -25,4 +25,7 @@ router.delete('/deleteUser/:id', userController.deleteUser);
 // Route pour mettre à jour le mot de passe
 router.put('/updatePassword', userController.updatePassword);
 
+// Route pour supprimer un utilisateur
+router.patch('/banUser/:id', userController.banUser);
+
 module.exports = router;

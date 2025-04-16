@@ -92,6 +92,40 @@ async function verifConnexion(req,res){
 
 }
 
+async function banUser(req, res) {
+    const userId = req.params.id;
+    console.log("2 - ID utilisateur reçu pour blocage / déblocage:", userId);  // Pour déboguer
+    
+    try {
+        // Vérifie si l'utilisateur est déjà bloqué ou non, pour savoir s'il faut envoyer 0 ou 1 en paramètre de "estBloque"
+        const utilisateur = await userModel.getUserById(userId);
+
+        if (!utilisateur) {
+            console.log("Utilisateur introuvable !");
+        }
+
+        if(utilisateur.estBloque === 0) { // Si l'utilisateur n'est pas bloqué
+            var etatCompte = 1; // On le bloque
+        } else {
+            var etatCompte = 0; // Sinon on le débloque
+        }
+        
+        const result = await userModel.banUserById(userId, etatCompte); // Appel le model pour bloquer ou débloquer l'utilisateur
+      
+        if (result.affectedRows === 0) { // Si y'a pas d'utilisateur avec cet id
+            console.log('Echec de la mise à jour - aucune ligne affectée pour l\'ID:', userId);
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
+        }
+
+        console.log('Utilisateur bloqué / débloqué avec succès pour l\'ID:', userId);
+        res.status(200).json({ message: 'Utilisateur bloqué / débloqué avec succès' });
+
+    } catch (error) {
+        console.error('Erreur lors du blocage / déblocage de l\'utilisateur:', error);
+        res.status(500).json({ message: 'Erreur interne du serveur' });
+    }
+}
+
 async function deleteUser(req, res) {
     const userId = req.params.id;
     const { role } = req.body;  // Récupère le role envoyé
@@ -143,4 +177,4 @@ async function updatePassword(req, res) {
     }
 }
 
-module.exports = { checkUser, getUser, getUsers, verifConnexion, deleteUser, getUserByEmail, updatePassword };
+module.exports = { checkUser, getUser, getUsers, verifConnexion, deleteUser, getUserByEmail, updatePassword, banUser };

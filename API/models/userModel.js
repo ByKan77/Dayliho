@@ -32,6 +32,28 @@ async function updatePassword(id, nouveauMdp) {
     return result.affectedRows > 0;
 }
 
+// Bloque / débloque l'utilisateur par ID
+async function banUserById(userId, etatCompte) {
+    let conn;
+    try {
+        conn = await pool.getConnection();
+        
+        const [user] = await conn.query("UPDATE utilisateur SET estBloque = ? WHERE id = ?", [etatCompte, userId]); // Vérif que l'utilisateur avec l'id spécifié existe bien
+
+        if (!user) {
+            throw new Error('Utilisateur non trouvé');
+        }
+
+        return user;
+
+    } catch (error) {
+        console.error('Erreur dans le modèle de blocage / déblocage de l\'utilisateur:', error);
+        throw error; 
+    } finally {
+        if (conn) conn.release();
+    }
+}
+
 // Supprime l'utilisateur par ID
 async function deleteUserById(userId, role) {
     let conn;
@@ -73,4 +95,4 @@ async function getUserSub(userId) {
 
 
 
-module.exports = { getUserByEmail, getUserById, getAllUsers, updatePassword, deleteUserById, getUserSub };  // Exporte les fonctions pour les utiliser dans les controllers
+module.exports = { getUserByEmail, getUserById, getAllUsers, updatePassword, deleteUserById, getUserSub, banUserById };  // Exporte les fonctions pour les utiliser dans les controllers

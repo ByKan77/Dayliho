@@ -11,7 +11,7 @@
             <input type="email" id="email" name="email" required>
             <br>
             <label for="mot_de_passe">Mot de passe :</label>
-            <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+            <input type="text" id="mot_de_passe" name="mot_de_passe" required>
             <br>
             <button type="submit" class="btn">Se connecter</button>
         </form>
