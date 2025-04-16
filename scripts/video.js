@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         slotMinTime: '10:00:00', 
         slotMaxTime: '21:00:00', 
         events: function(info, successCallback, failureCallback) {
-            fetch('http://10.74.2.10::1234/video/getVideos')
+            fetch('http://10.74.2.10:1234/video/getVideos')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Erreur réseau');
