@@ -6,7 +6,7 @@ document.getElementById('formulaire_de_connexion').addEventListener('submit', as
 
     const authentification = async () => {
         try {
-            const response = await axios.post('http://10.74.2.10:1234/user/checkUser', {
+            const response = await axios.post('http://192.168.30.10:1234/user/checkUser', {
                 email: formEmail,
                 mot_de_passe: formPassword
             }, {

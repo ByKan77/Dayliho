@@ -20,7 +20,7 @@ function showAccounts() {
         </div>
     `;
 
-    axios.get('http://10.74.2.10:1234/user/getUsers')
+    axios.get('http://192.168.30.10:1234/user/getUsers')
         .then(response => {
             const allUsers = response.data;
             const accountsTableBody = document.getElementById('accounts-table').querySelector('tbody');
@@ -46,7 +46,7 @@ function showAccounts() {
 }
 
 function deleteUser(id, role) {
-    axios.delete(`http://10.74.2.10:1234/user/deleteUser/${id}`, {
+    axios.delete(`http://192.168.30.10:1234/user/deleteUser/${id}`, {
         data: { role: role } // Envoi aussi le role pour faire la vérificcation plus tard
     })
     .then(response => {
