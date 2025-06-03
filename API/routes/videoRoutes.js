@@ -8,5 +8,6 @@ router.post("/addSeance", middleware.authentification, videoController.addSeance
 router.post("/bookSeance/:id_utilisateur/:id_seance", videoController.bookSeance);
 router.get("/getBookedSeances/:id_utilisateur", videoController.getBookedSeancesDetailed);
 router.delete("/deleteReservation/:id_utilisateur/:id_seance", videoController.deleteReservation);
+router.delete("/deleteSeance/:id", videoController.deleteSeance);
 
 module.exports = router;

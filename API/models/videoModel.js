@@ -59,10 +59,16 @@ async function deleteReservation(id_utilisateur, id_seance) {
     let conn = await pool.getConnection();
     const query = "DELETE FROM reservation WHERE id_utilisateur = ? AND id_seance = ?";
     const result = await conn.query(query, [id_utilisateur, id_seance]);
-
     conn.release();
-
     return result;
 }
 
-module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, checkIfReservationExists, deleteReservation};
+async function deleteSeance(id) {
+    let conn = await pool.getConnection();
+    const query = "DELETE FROM seance WHERE id = ?";
+    const result = await conn.query(query, [id]);
+    conn.release();
+    return result;
+}
+
+module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, checkIfReservationExists, deleteReservation, deleteSeance};
