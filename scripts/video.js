@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridWeek', // Choisissez une vue qui montre les heures
+        initialView: 'timeGridWeek',
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     return response.json();
                 })
                 .then(data => {
-                    // Map the data to the format expected by FullCalendar
                     const events = data.map(event => ({
                         id: event.id,
                         title: event.titre,
@@ -31,40 +30,33 @@ document.addEventListener('DOMContentLoaded', function() {
                             lieu: event.lieu
                         }
                     }));
-                    successCallback(events); // Retourne les données au calendrier
+                    successCallback(events);
                 })
-                .catch(error => failureCallback(error)); // Gestion des erreurs
+                .catch(error => failureCallback(error));
         },
         eventContent: function(arg) {
             return {
                 html: `<strong>${arg.event.title}</strong>
-                <br>${arg.event.extendedProps.description}` // Affiche la description de la séance
+                <br>${arg.event.extendedProps.description}`
             };
         },
         eventClick: function(info) {
-            // Récupérer les informations de l'événement cliqué
             var event = info.event;
-
-            // Mettre à jour le modal avec les informations de l'événement
             document.getElementById('eventId').textContent = event.id;
             document.getElementById('eventTitle').textContent = event.title;
             document.getElementById('eventDesc').textContent = event.extendedProps.description;
-            document.getElementById('eventStart').textContent = event.start.toLocaleString(); // Affiche l'heure locale
-            document.getElementById('eventEnd').textContent = event.end.toLocaleString(); // Affiche l'heure locale
-
-            // Afficher le modal
+            document.getElementById('eventStart').textContent = event.start.toLocaleString();
+            document.getElementById('eventEnd').textContent = event.end.toLocaleString();
             document.getElementById('eventModal').style.display = 'block';
         }
     });
 
-    calendar.render(); // Rendu du calendrier
+    calendar.render();
 
-    // Fermer le modal quand on clique sur le bouton de fermeture
     document.getElementById('closeModal').addEventListener('click', function() {
         document.getElementById('eventModal').style.display = 'none';
     });
 
-    // Fermer le modal quand on clique en dehors du contenu
     window.onclick = function(event) {
         if (event.target === document.getElementById('eventModal')) {
             document.getElementById('eventModal').style.display = 'none';
@@ -76,59 +68,82 @@ const listeVideosUnique = document.getElementById("liste_videos_unique");
 const searchBarUnique = document.getElementById("custom_input_unique");
 let videosUnique = [];
 
-// Basculement entre les onglets
 function showTab(tabName) {
     document.getElementById('videos_tab').style.display = (tabName === 'videos') ? 'block' : 'none';
     document.getElementById('planning_tab').style.display = (tabName === 'planning') ? 'block' : 'none';
 }
 
-// Récupérer les vidéos du serveur
+function deleteSeance(id) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette séance ?')) {
+        axios.delete(`http://localhost:1234/video/deleteSeance/${id}`)
+            .then(response => {
+                alert('Séance supprimée avec succès');
+                // Rafraîchir la liste des séances
+                axios.get("http://localhost:1234/video/getVideos")
+                    .then(response => {
+                        videosUnique = response.data;
+                        afficherVideosUnique(videosUnique);
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de la récupération des vidéos:', error);
+                    });
+            })
+            .catch(error => {
+                console.error('Erreur lors de la suppression de la séance:', error);
+                alert('Une erreur est survenue lors de la suppression');
+            });
+    }
+}
+
 axios.get("http://localhost:1234/video/getVideos")
     .then(response => {
         videosUnique = response.data;
-        afficherVideosUnique(videosUnique); // Afficher toutes les vidéos au chargement
+        afficherVideosUnique(videosUnique);
     })
     .catch(error => {
         console.error('Erreur lors de la récupération des vidéos:', error);
     });
 
-// Fonction pour afficher les vidéos dans la liste
 function afficherVideosUnique(videos) {
-    listeVideosUnique.innerHTML = ''; // Vider la liste actuelle
+    listeVideosUnique.innerHTML = '';
 
     videos.forEach(video => {
-        // Créer le conteneur de la vidéo
         const videoContainer = document.createElement('div');
         videoContainer.id = 'video_container_unique';
 
-        // Bloc blanc (côté gauche)
         const blancBlock = document.createElement('div');
         blancBlock.id = 'blanc_block_unique';
 
-        // Contenu de la vidéo (titre, description)
         const videoContent = document.createElement('div');
         videoContent.id = 'video_content_unique';
 
-        // Titre de la vidéo
         const titreVideo = document.createElement('div');
         titreVideo.id = 'titre_video_unique';
         const h3 = document.createElement('h3');
         h3.textContent = `${video.titre}`;
         titreVideo.appendChild(h3);
 
-        // Description de la vidéo
         const descriptionVideo = document.createElement('div');
         descriptionVideo.id = 'description_video_unique';
         descriptionVideo.textContent = `${video.description}`;
 
+        // Ajout du bouton de suppression
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Supprimer';
+        deleteButton.className = 'delete-btn';
+        deleteButton.onclick = () => deleteSeance(video.id);
+        deleteButton.style.backgroundColor = '#ff4444';
+        deleteButton.style.marginTop = '10px';
+        deleteButton.style.width = 'auto';
+        deleteButton.style.padding = '5px 10px';
+
         videoContent.appendChild(titreVideo);
         videoContent.appendChild(descriptionVideo);
+        videoContent.appendChild(deleteButton);
 
-        // Ajouter le bloc blanc et le contenu de la vidéo au conteneur de la vidéo
         videoContainer.appendChild(blancBlock);
         videoContainer.appendChild(videoContent);
 
-        // Ajouter chaque vidéo à la liste
         listeVideosUnique.appendChild(videoContainer);
     });
 }
@@ -136,7 +151,7 @@ function afficherVideosUnique(videos) {
 searchBarUnique.addEventListener('input', () => {
     const searchQuery = searchBarUnique.value.toLowerCase();
     const filteredVideos = videosUnique.filter(video => video.titre.toLowerCase().includes(searchQuery));
-    afficherVideosUnique(filteredVideos); // Afficher uniquement les vidéos filtrées
+    afficherVideosUnique(filteredVideos);
 });
 
 async function getUser(req) {
@@ -150,7 +165,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeModalBtn = document.getElementById("close-modal");
     const submitBtn = document.getElementById("submitAddSeance");
     
-
     openModalBtn.onclick = function() {
         modal.style.display = "flex";
     };
@@ -169,12 +183,11 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
     
         try {
-            // Envoie d'une requête GET pour récupérer les informations de l'utilisateur
             const response = await axios.get(`http://localhost:1234/user/getUserById?id=${localStorage.getItem("userId")}`);
             
             if (response.data) {
-                const utilisateur = response.data;  // Récupère l'utilisateur depuis la réponse
-                const userIdFromAPI = utilisateur.id;  // L'ID de l'utilisateur
+                const utilisateur = response.data;
+                const userIdFromAPI = utilisateur.id;
     
                 const sessionData = {
                     titre: document.getElementById("session-name").value,
@@ -183,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     dateFin: document.getElementById("session-dateFin").value,
                     lieu: document.getElementById("session-lieu").value,
                     nombrePlaces: document.getElementById("session-taille").value,
-                    userId: userIdFromAPI // Ajoute l'ID utilisateur
+                    userId: userIdFromAPI
                 };
     
                 console.log(sessionData);

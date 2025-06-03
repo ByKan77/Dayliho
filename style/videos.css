@@ -63,32 +63,18 @@
     box-sizing: border-box;
     width: 100%; 
     max-width: 500px;
-    /*height: 220px;*/
     overflow: hidden;
-    transition: transform 0.3s ease;
     position: relative;
 }
 
-#video_container_unique::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0);
-    transition: background-color 0.3s ease;
-    border-radius: 10px; 
-    z-index: 1;
+.delete-btn {
+    z-index: 10;
+    position: relative;
+    cursor: pointer;
 }
 
-#video_container_unique:hover::before {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-#video_container_unique:hover {
-    transform: scale(1.05);
-    z-index: 2;
+.delete-btn:hover {
+    background-color: #cc0000 !important;
 }
 
 #video_content_unique {
@@ -369,10 +355,6 @@ button:hover {
     }
 }
 
-
-
-
-/* Styles de la modale update de mise à jour */
 #update-session-modal {
     display: none;
     position: fixed;
@@ -380,7 +362,7 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Légère modification du fond */
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -393,7 +375,7 @@ button:hover {
 }
 
 .update-modal-content {
-    background-color: #1e2a47; /* Fond sombre, mais différent de l'autre modale */
+    background-color: #1e2a47;
     padding: 30px;
     width: 500px;
     max-width: 90%;
@@ -407,7 +389,7 @@ button:hover {
 
 .update-modal-content h2 {
     font-size: 1.8rem;
-    color: #fff; /* Couleur de texte claire pour le titre */
+    color: #fff;
     margin-bottom: 20px;
     font-weight: 600;
     text-align: center;
@@ -415,7 +397,7 @@ button:hover {
 
 #update-session-modal label {
     font-size: 1rem;
-    color: #ddd; /* Texte gris clair */
+    color: #ddd;
     margin-bottom: 5px;
     display: block;
 }
@@ -427,13 +409,13 @@ button:hover {
     border: 1px solid #333;
     border-radius: 8px;
     font-size: 1rem;
-    background-color: #2a3c5e; /* Fond plus foncé pour les inputs */
+    background-color: #2a3c5e;
     color: #fff;
     transition: border-color 0.3s ease;
 }
 
 #update-session-modal input:focus, #update-session-modal select:focus {
-    border-color: #5C6BC0; /* Couleur accentuée au focus */
+    border-color: #5C6BC0;
     background-color: #3c4b7b;
     outline: none;
 }
@@ -441,7 +423,7 @@ button:hover {
 #update-session-modal button {
     padding: 12px 20px;
     font-size: 1.1rem;
-    background-color: #304ffe; /* Bleu spécifique pour la mise à jour */
+    background-color: #304ffe;
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -452,7 +434,7 @@ button:hover {
 }
 
 #update-session-modal button:hover {
-    background-color: #1e40ff; /* Couleur légèrement plus sombre au hover */
+    background-color: #1e40ff;
 }
 
 .update-modal-content .modal-body {
@@ -477,19 +459,6 @@ button:hover {
     color: #b71c1c;
 }
 
-/* Animation spécifique à cette modale */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Styles pour les petits écrans */
 @media (max-width: 600px) {
     .update-modal-content {
         width: 90%;
