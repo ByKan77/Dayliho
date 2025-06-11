@@ -63,32 +63,8 @@
     box-sizing: border-box;
     width: 100%; 
     max-width: 500px;
-    /*height: 220px;*/
     overflow: hidden;
-    transition: transform 0.3s ease;
     position: relative;
-}
-
-#video_container_unique::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0);
-    transition: background-color 0.3s ease;
-    border-radius: 10px; 
-    z-index: 1;
-}
-
-#video_container_unique:hover::before {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-#video_container_unique:hover {
-    transform: scale(1.05);
-    z-index: 2;
 }
 
 #video_content_unique {
@@ -100,7 +76,7 @@
     overflow: hidden;
 }
 
-#titre_video_unique, #description_video_unique, #auteur_video_unique {
+#titre_video_unique, #description_video_unique, #auteur_video_unique, #lieu_video_unique, #date_video_unique {
     background-color: black;
     padding: 10px;
     margin: 0;
@@ -114,12 +90,28 @@
     margin: 0;
 }
 
-#description_video_unique {
+#description_video_unique, #lieu_video_unique, #date_video_unique {
     font-size: 1rem;
 }
 
 #auteur_video_unique {
     font-size: 0.9rem;
+}
+
+.modify-btn {
+    background-color: #fd9d1f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.modify-btn:hover {
+    background-color: #bd6e06;
 }
 
 #search_area_unique, html, body {
@@ -368,9 +360,6 @@ button:hover {
         font-size: 1rem;
     }
 }
-
-
-
 
 /* Styles de la modale update de mise à jour */
 #update-session-modal {

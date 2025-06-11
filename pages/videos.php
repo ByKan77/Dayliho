@@ -16,7 +16,7 @@
     <button id="create-session-btn"><i class="fa-solid fa-plus"></i></button>
 </div>
 
-<!-- Fenêtre modale -->
+<!-- Fenêtre modale pour créer une séance -->
 <div id="session-modal" class="modal"  style="z-index:1000;">
     <div class="modal-content">
         <span class="close-btn" id="close-modal">&times;</span>
@@ -27,15 +27,6 @@
             
             <label for="session-lieu">Lieu :</label>
             <input type="text" id="session-lieu" name="session-lieu" required><br><br>
-
-            <!-- <label for="session-sport">Sport :</label>
-            <select id="session-sport" name="session-sport">
-                <option value=1>Football</option>
-                <option value=2>Basketball</option>
-                <option value=3>Tennis</option>
-                <option value=4>Natation</option>
-                <option value=5>Cyclisme</option>
-            </select><br><br> -->
 
             <label for="session-taille">Nombre de Places</label>
             <select id="session-taille" name="session-taille">
@@ -51,8 +42,6 @@
                 <option value=10>10</option>
             </select><br><br>
 
-
-
             <label for="session-dateDebut">Date et heure de début :</label>
             <input type="datetime-local" id="session-dateDebut" name="session-dateDebut" required><br><br>
 
@@ -60,6 +49,43 @@
             <input type="datetime-local" id="session-dateFin" name="session-dateFin" required><br><br>
             
             <button id="submitAddSeance" type="submit">Enregistrer</button>
+        </form>
+    </div>
+</div>
+
+<!-- Fenêtre modale pour modifier une séance -->
+<div id="update-session-modal" class="modal" style="z-index:1000;">
+    <div class="update-modal-content">
+        <span class="close-btn" id="close-update-modal">&times;</span>
+        <h2>Modifier la Séance</h2>
+        <form>
+            <label for="update-session-name">Nom de la séance :</label>
+            <input type="text" id="update-session-name" name="update-session-name" required><br><br>
+            
+            <label for="update-session-lieu">Lieu :</label>
+            <input type="text" id="update-session-lieu" name="update-session-lieu" required><br><br>
+
+            <label for="update-session-taille">Nombre de Places</label>
+            <select id="update-session-taille" name="update-session-taille">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+                <option value=7>7</option>
+                <option value=8>8</option>
+                <option value=9>9</option>
+                <option value=10>10</option>
+            </select><br><br>
+
+            <label for="update-session-dateDebut">Date et heure de début :</label>
+            <input type="datetime-local" id="update-session-dateDebut" name="update-session-dateDebut" required><br><br>
+
+            <label for="update-session-dateFin">Date et heure de fin :</label>
+            <input type="datetime-local" id="update-session-dateFin" name="update-session-dateFin" required><br><br>
+            
+            <button id="submitUpdateSeance" type="submit">Modifier</button>
         </form>
     </div>
 </div>
@@ -153,6 +179,5 @@
     cursor: pointer;
 }
 </style>
-
 
 <script src="../scripts/video.js" defer></script>

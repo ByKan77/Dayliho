@@ -31,6 +31,31 @@ async function addSeance(req, res) {
     }
 }
 
+async function updateSeance(req, res) {
+    try {
+        const seanceId = req.params.id;
+        const { titre, description, dateDebut, dateFin, lieu, nombrePlaces } = req.body;
+        const userId = req.user.id;
+
+        // Vérifier que l'utilisateur est bien le créateur de la séance
+        const seance = await videoModel.getSeanceById(seanceId);
+        if (!seance) {
+            return res.status(404).json({ success: false, message: "Séance non trouvée" });
+        }
+
+        if (seance.id_utilisateur !== userId) {
+            return res.status(403).json({ success: false, message: "Vous n'êtes pas autorisé à modifier cette séance" });
+        }
+
+        const result = await videoModel.updateSeance(seanceId, titre, description, dateDebut, dateFin, lieu, parseInt(nombrePlaces));
+        
+        res.status(200).json({ success: true, message: "Séance modifiée avec succès" });
+    } catch (error) {
+        console.error("Erreur lors de la modification de la séance:", error);
+        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+    }
+}
+
 async function bookSeance(req, res) {    
     console.log(req.params);
 
@@ -53,8 +78,6 @@ async function bookSeance(req, res) {
         res.status(500).json({ success: false, message: 'Erreur serveur.' });
     }
 }
-
-
 
 async function getBookedSeances(req, res) {
     const id_utilisateur = req.params;
@@ -88,5 +111,4 @@ async function deleteReservation(req, res) {
     }
 }
 
-module.exports = { getVideos, addSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, deleteReservation };
-
+module.exports = { getVideos, addSeance, updateSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, deleteReservation };
