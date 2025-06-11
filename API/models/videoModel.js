@@ -7,10 +7,25 @@ async function getAllVideos() {
     return rows;
 }
 
+async function getSeanceById(seanceId) {
+    let conn = await pool.getConnection();
+    const rows = await conn.query("SELECT * FROM seance WHERE id = ?", [seanceId]);
+    conn.release();
+    return rows[0];
+}
+
 async function pushNewSeance(titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_utilisateur) { 
     let conn = await pool.getConnection();
     const query = "INSERT INTO seance (titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_utilisateur) VALUES (?, ?, ?, ?, ?, ?, ?)";
     const result = await conn.query(query, [titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_utilisateur]);
+    conn.release();
+    return result;
+}
+
+async function updateSeance(seanceId, titre, description, dateDebut, dateFin, lieu, nombrePlaces) {
+    let conn = await pool.getConnection();
+    const query = "UPDATE seance SET titre = ?, description = ?, dateDebut = ?, dateFin = ?, lieu = ?, nombrePlaces = ? WHERE id = ?";
+    const result = await conn.query(query, [titre, description, dateDebut, dateFin, lieu, nombrePlaces, seanceId]);
     conn.release();
     return result;
 }
@@ -65,4 +80,4 @@ async function deleteReservation(id_utilisateur, id_seance) {
     return result;
 }
 
-module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, checkIfReservationExists, deleteReservation};
+module.exports = {getAllVideos, getSeanceById, pushNewSeance, updateSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, checkIfReservationExists, deleteReservation};

@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const listeVideosUnique = document.getElementById("liste_videos_unique");
 const searchBarUnique = document.getElementById("custom_input_unique");
 let videosUnique = [];
+let currentUserId = localStorage.getItem('userId');
 
 // Basculement entre les onglets
 function showTab(tabName) {
@@ -121,8 +122,31 @@ function afficherVideosUnique(videos) {
         descriptionVideo.id = 'description_video_unique';
         descriptionVideo.textContent = `${video.description}`;
 
+        // Lieu de la vidéo
+        const lieuVideo = document.createElement('div');
+        lieuVideo.id = 'lieu_video_unique';
+        lieuVideo.textContent = `Lieu: ${video.lieu}`;
+
+        // Date de la vidéo
+        const dateVideo = document.createElement('div');
+        dateVideo.id = 'date_video_unique';
+        const dateDebut = new Date(video.dateDebut).toLocaleString();
+        const dateFin = new Date(video.dateFin).toLocaleString();
+        dateVideo.textContent = `Du ${dateDebut} au ${dateFin}`;
+
         videoContent.appendChild(titreVideo);
         videoContent.appendChild(descriptionVideo);
+        videoContent.appendChild(lieuVideo);
+        videoContent.appendChild(dateVideo);
+
+        // Ajouter le bouton modifier si l'utilisateur est le créateur de la séance
+        if (video.id_utilisateur == currentUserId) {
+            const modifyButton = document.createElement('button');
+            modifyButton.textContent = 'Modifier';
+            modifyButton.className = 'modify-btn';
+            modifyButton.onclick = () => openUpdateModal(video);
+            videoContent.appendChild(modifyButton);
+        }
 
         // Ajouter le bloc blanc et le contenu de la vidéo au conteneur de la vidéo
         videoContainer.appendChild(blancBlock);
@@ -131,6 +155,26 @@ function afficherVideosUnique(videos) {
         // Ajouter chaque vidéo à la liste
         listeVideosUnique.appendChild(videoContainer);
     });
+}
+
+// Fonction pour ouvrir le modal de modification
+function openUpdateModal(video) {
+    document.getElementById('update-session-name').value = video.titre;
+    document.getElementById('update-session-lieu').value = video.lieu;
+    document.getElementById('update-session-taille').value = video.nombrePlaces;
+    
+    // Convertir les dates au format datetime-local
+    const dateDebut = new Date(video.dateDebut);
+    const dateFin = new Date(video.dateFin);
+    
+    document.getElementById('update-session-dateDebut').value = dateDebut.toISOString().slice(0, 16);
+    document.getElementById('update-session-dateFin').value = dateFin.toISOString().slice(0, 16);
+    
+    // Stocker l'ID de la séance pour la modification
+    document.getElementById('update-session-modal').setAttribute('data-seance-id', video.id);
+    
+    // Afficher le modal
+    document.getElementById('update-session-modal').style.display = 'flex';
 }
 
 searchBarUnique.addEventListener('input', () => {
@@ -146,11 +190,13 @@ async function getUser(req) {
 
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("session-modal");
+    const updateModal = document.getElementById("update-session-modal");
     const openModalBtn = document.getElementById("create-session-btn");
     const closeModalBtn = document.getElementById("close-modal");
+    const closeUpdateModalBtn = document.getElementById("close-update-modal");
     const submitBtn = document.getElementById("submitAddSeance");
+    const submitUpdateBtn = document.getElementById("submitUpdateSeance");
     
-
     openModalBtn.onclick = function() {
         modal.style.display = "flex";
     };
@@ -159,12 +205,20 @@ document.addEventListener("DOMContentLoaded", function() {
         modal.style.display = "none";
     };
 
+    closeUpdateModalBtn.onclick = function() {
+        updateModal.style.display = "none";
+    };
+
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
+        if (event.target == updateModal) {
+            updateModal.style.display = "none";
+        }
     };
 
+    // Gestion de l'ajout de séance
     submitBtn.addEventListener("click", async function(event) {
         event.preventDefault();
     
@@ -208,6 +262,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     });
                     alert("Séance ajoutée avec succès !");
                     modal.style.display = "none";
+                    // Recharger les séances
+                    location.reload();
                 } catch (error) {
                     console.error("Erreur lors de l'ajout de la séance:", error);
                     alert("Erreur lors de l'ajout de la séance.");
@@ -218,6 +274,43 @@ document.addEventListener("DOMContentLoaded", function() {
         } catch (error) {
             console.error("Erreur de récupération de l'utilisateur:", error);
             alert("Erreur lors de la récupération de l'utilisateur.");
+        }
+    });
+
+    // Gestion de la modification de séance
+    submitUpdateBtn.addEventListener("click", async function(event) {
+        event.preventDefault();
+        
+        const seanceId = document.getElementById('update-session-modal').getAttribute('data-seance-id');
+        
+        const updateData = {
+            titre: document.getElementById("update-session-name").value,
+            description: document.getElementById("update-session-name").value,
+            dateDebut: document.getElementById("update-session-dateDebut").value,
+            dateFin: document.getElementById("update-session-dateFin").value,
+            lieu: document.getElementById("update-session-lieu").value,
+            nombrePlaces: document.getElementById("update-session-taille").value
+        };
+
+        try {
+            const response = await axios.put(`http://localhost:1234/video/updateSeance/${seanceId}`, updateData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
+                }
+            });
+            
+            alert("Séance modifiée avec succès !");
+            updateModal.style.display = "none";
+            // Recharger les séances
+            location.reload();
+        } catch (error) {
+            console.error("Erreur lors de la modification de la séance:", error);
+            if (error.response && error.response.status === 403) {
+                alert("Vous n'êtes pas autorisé à modifier cette séance.");
+            } else {
+                alert("Erreur lors de la modification de la séance.");
+            }
         }
     });
 });
