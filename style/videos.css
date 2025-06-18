@@ -71,10 +71,24 @@
     z-index: 10;
     position: relative;
     cursor: pointer;
+    background-color: #ff4444 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 8px 15px !important;
+    font-size: 0.9rem !important;
+    margin-top: 15px !important;
+    transition: background-color 0.3s ease !important;
+    width: auto !important;
 }
 
 .delete-btn:hover {
     background-color: #cc0000 !important;
+    transform: scale(1.05);
+}
+
+.delete-btn:active {
+    transform: scale(0.95);
 }
 
 #video_content_unique {

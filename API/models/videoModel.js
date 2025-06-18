@@ -63,12 +63,51 @@ async function deleteReservation(id_utilisateur, id_seance) {
     return result;
 }
 
-async function deleteSeance(id) {
+async function getSeanceById(id) {
     let conn = await pool.getConnection();
-    const query = "DELETE FROM seance WHERE id = ?";
-    const result = await conn.query(query, [id]);
-    conn.release();
-    return result;
+    try {
+        console.log('getSeanceById appelé avec ID:', id, 'Type:', typeof id);
+        const query = "SELECT * FROM seance WHERE id = ?";
+        const rows = await conn.query(query, [parseInt(id)]);
+        console.log('Résultat de la requête:', rows);
+        // rows peut être un tableau ou un objet selon le driver
+        if (Array.isArray(rows) && rows.length > 0) {
+            return rows[0];
+        } else if (rows && rows[0] && Array.isArray(rows[0]) && rows[0].length > 0) {
+            return rows[0][0];
+        } else {
+            return null;
+        }
+    } finally {
+        conn.release();
+    }
 }
 
-module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, checkIfReservationExists, deleteReservation, deleteSeance};
+async function deleteSeance(id) {
+    let conn = await pool.getConnection();
+    try {
+        // Commencer une transaction
+        await conn.beginTransaction();
+        
+        // Supprimer d'abord les réservations associées
+        const deleteReservationsQuery = "DELETE FROM reservation WHERE id_seance = ?";
+        await conn.query(deleteReservationsQuery, [id]);
+        
+        // Ensuite supprimer la séance
+        const deleteSeanceQuery = "DELETE FROM seance WHERE id = ?";
+        const result = await conn.query(deleteSeanceQuery, [id]);
+        
+        // Valider la transaction
+        await conn.commit();
+        
+        return result;
+    } catch (error) {
+        // En cas d'erreur, annuler la transaction
+        await conn.rollback();
+        throw error;
+    } finally {
+        conn.release();
+    }
+}
+
+module.exports = {getAllVideos, pushNewSeance, bookSeance, getBookedSeances, getBookedSeancesDetailed, checkIfReservationExists, deleteReservation, deleteSeance, getSeanceById};

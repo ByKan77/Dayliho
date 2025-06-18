@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    window.calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
         headerToolbar: {
             left: 'prev,next today',
@@ -62,6 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('eventModal').style.display = 'none';
         }
     }
+
+    // Initialiser l'onglet "videos" par défaut
+    showTab('videos');
 });
 
 const listeVideosUnique = document.getElementById("liste_videos_unique");
@@ -76,22 +79,27 @@ function showTab(tabName) {
 function deleteSeance(id) {
     if (confirm('Êtes-vous sûr de vouloir supprimer cette séance ?')) {
         axios.delete(`http://localhost:1234/video/deleteSeance/${id}`)
-            .then(response => {
+        .then(response => {
+            if (response.data.success) {
                 alert('Séance supprimée avec succès');
                 // Rafraîchir la liste des séances
-                axios.get("http://localhost:1234/video/getVideos")
-                    .then(response => {
-                        videosUnique = response.data;
-                        afficherVideosUnique(videosUnique);
-                    })
-                    .catch(error => {
-                        console.error('Erreur lors de la récupération des vidéos:', error);
-                    });
-            })
-            .catch(error => {
-                console.error('Erreur lors de la suppression de la séance:', error);
-                alert('Une erreur est survenue lors de la suppression');
-            });
+                return axios.get("http://localhost:1234/video/getVideos");
+            } else {
+                throw new Error(response.data.message || 'Erreur lors de la suppression');
+            }
+        })
+        .then(response => {
+            videosUnique = response.data;
+            afficherVideosUnique(videosUnique);
+            // Rafraîchir aussi le calendrier si il est visible
+            if (document.getElementById('planning_tab').style.display !== 'none') {
+                window.calendar.refetchEvents();
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la suppression de la séance:', error);
+            alert('Une erreur est survenue lors de la suppression: ' + (error.response?.data?.message || error.message));
+        });
     }
 }
 
@@ -107,6 +115,17 @@ axios.get("http://localhost:1234/video/getVideos")
 function afficherVideosUnique(videos) {
     listeVideosUnique.innerHTML = '';
 
+    if (videos.length === 0) {
+        const noVideosMessage = document.createElement('div');
+        noVideosMessage.style.textAlign = 'center';
+        noVideosMessage.style.gridColumn = '1 / -1';
+        noVideosMessage.style.padding = '20px';
+        noVideosMessage.style.color = '#fff';
+        noVideosMessage.innerHTML = '<p>Aucune séance trouvée</p>';
+        listeVideosUnique.appendChild(noVideosMessage);
+        return;
+    }
+
     videos.forEach(video => {
         const videoContainer = document.createElement('div');
         videoContainer.id = 'video_container_unique';
@@ -120,25 +139,54 @@ function afficherVideosUnique(videos) {
         const titreVideo = document.createElement('div');
         titreVideo.id = 'titre_video_unique';
         const h3 = document.createElement('h3');
-        h3.textContent = `${video.titre}`;
+        h3.textContent = video.titre;
         titreVideo.appendChild(h3);
 
         const descriptionVideo = document.createElement('div');
         descriptionVideo.id = 'description_video_unique';
-        descriptionVideo.textContent = `${video.description}`;
+        descriptionVideo.textContent = video.description || 'Aucune description';
+
+        // Ajout des informations supplémentaires
+        const infoVideo = document.createElement('div');
+        infoVideo.style.marginTop = '10px';
+        infoVideo.style.fontSize = '0.9rem';
+        infoVideo.style.color = '#ccc';
+        
+        const lieu = document.createElement('div');
+        lieu.textContent = `📍 ${video.lieu || 'Lieu non spécifié'}`;
+        lieu.style.marginBottom = '5px';
+        
+        const dateDebut = new Date(video.dateDebut).toLocaleString('fr-FR');
+        const dateFin = new Date(video.dateFin).toLocaleString('fr-FR');
+        const dates = document.createElement('div');
+        dates.textContent = `🕒 ${dateDebut} - ${dateFin}`;
+        dates.style.marginBottom = '5px';
+        
+        const places = document.createElement('div');
+        places.textContent = `👥 ${video.nombrePlaces || 0} places disponibles`;
+        
+        infoVideo.appendChild(lieu);
+        infoVideo.appendChild(dates);
+        infoVideo.appendChild(places);
 
         // Ajout du bouton de suppression
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Supprimer';
+        deleteButton.textContent = '🗑️ Supprimer';
         deleteButton.className = 'delete-btn';
         deleteButton.onclick = () => deleteSeance(video.id);
         deleteButton.style.backgroundColor = '#ff4444';
-        deleteButton.style.marginTop = '10px';
-        deleteButton.style.width = 'auto';
-        deleteButton.style.padding = '5px 10px';
+        deleteButton.style.color = '#fff';
+        deleteButton.style.border = 'none';
+        deleteButton.style.borderRadius = '5px';
+        deleteButton.style.padding = '8px 15px';
+        deleteButton.style.cursor = 'pointer';
+        deleteButton.style.fontSize = '0.9rem';
+        deleteButton.style.marginTop = '15px';
+        deleteButton.style.transition = 'background-color 0.3s ease';
 
         videoContent.appendChild(titreVideo);
         videoContent.appendChild(descriptionVideo);
+        videoContent.appendChild(infoVideo);
         videoContent.appendChild(deleteButton);
 
         videoContainer.appendChild(blancBlock);

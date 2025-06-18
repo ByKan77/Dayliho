@@ -9,6 +9,7 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <div id="tab_navigation" style="display:flex;justify-content:center; margin:20vh 10vh 10vh 10vh">
     <button onclick="showTab('videos')">Toutes les séances</button>
@@ -65,7 +66,7 @@
 </div>
 
 <!-- Contenu de l'onglet "Vidéos" -->
-<div id="videos_tab" class="tab_content" style="display:none;">
+<div id="videos_tab" class="tab_content">
     <div id="videos_body_unique">
         <div id="container_videos_unique">
             <div id="search_area_unique">
@@ -92,7 +93,7 @@
 </div>
 
 <!-- Contenu de l'onglet "planning" -->
-<div id="planning_tab" class="tab_content">
+<div id="planning_tab" class="tab_content" style="display:none;">
     <div id="calendrier" class="tab-content"> <!-- Enlever 'hidden' pour charger le calendrier dès le début -->
         <div class="container">
             <div id="calendar"></div> <!-- Rendu du calendrier dans la div -->

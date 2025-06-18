@@ -89,11 +89,29 @@ async function deleteReservation(req, res) {
 async function deleteSeance(req, res) {
     try {
         const { id } = req.params;
+        console.log('Tentative de suppression de la séance avec ID:', id, 'Type:', typeof id);
+
+        // Vérifier si la séance existe
+        const seance = await videoModel.getSeanceById(id);
+        console.log('Résultat de getSeanceById:', seance);
+        
+        if (!seance) {
+            console.log('Séance non trouvée pour ID:', id);
+            return res.status(404).json({ success: false, message: "Séance non trouvée." });
+        }
+
+        console.log('Séance trouvée, suppression en cours...');
         const result = await videoModel.deleteSeance(id);
-        res.status(200).json({ success: true, message: "Séance supprimée avec succès." });
+        console.log('Résultat de la suppression:', result);
+        
+        if (result.affectedRows > 0) {
+            res.status(200).json({ success: true, message: "Séance supprimée avec succès." });
+        } else {
+            res.status(404).json({ success: false, message: "Séance non trouvée." });
+        }
     } catch (error) {
         console.error("Erreur lors de la suppression de la séance:", error);
-        res.status(500).json({ success: false, message: 'Erreur serveur.' });
+        res.status(500).json({ success: false, message: 'Erreur serveur lors de la suppression de la séance.' });
     }
 }
 
