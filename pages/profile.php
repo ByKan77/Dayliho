@@ -20,36 +20,5 @@
 <script src="../scripts/profile.js" defer></script>
 <script>
     const userId = localStorage.getItem('userId');
-    function showDetails() {
-        axios.get(`http://localhost:1234/user/getUserById?id=${userId}`)
-            .then(response => {
-                const utilisateur = response.data;
-                if (utilisateur) {
-                    profileContent.innerHTML = `
-                        <h2>Informations du compte</h2>
-                        <form id="profileForm">
-                            <div id="form-group-email" class="form-group">
-                                <label for="email">Adresse email</label>
-                                <input type="email" id="email" value="${utilisateur.email}" readonly>
-                            </div>
-                            <div id="form-group-firstName" class="form-group">
-                                <label for="firstName">Prénom</label>
-                                <input type="text" id="firstName" value="${utilisateur.prenom}" readonly>
-                            </div>
-                            <div id="form-group-lastName" class="form-group">
-                                <label for="lastName">Nom</label>
-                                <input type="text" id="lastName" value="${utilisateur.nom}" readonly>
-                            </div>
-                        </form>
-                    `;
-                } else {
-                    profileContent.innerHTML = '<p>Aucun utilisateur trouvé.</p>';
-                }
-            })
-            .catch(error => {
-                console.error("Erreur lors de la récupération des données de l'utilisateur:", error);
-                profileContent.innerHTML = '<p>Erreur lors de la récupération des données.</p>';
-            });
-    }
 </script>
 
