@@ -1,7 +1,7 @@
 ./API/node_modules
 /API/node_modules
 /API/node_modules/*
-./API/node_modules/*
+node_modules/*
 
 
 .env
