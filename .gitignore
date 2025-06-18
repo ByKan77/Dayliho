@@ -4,6 +4,5 @@
 ./API/node_modules/*
 
 
-/API/.env
+.env
 ./API/.env
-API/.env
