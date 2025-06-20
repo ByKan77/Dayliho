@@ -137,14 +137,19 @@ function afficherVideosUnique(videos) {
         // Charger les notes pour cette séance
         loadRatingsForSeance(video.id, notesSection);
 
-        // Vérifier si la séance est passée et si l'utilisateur peut la noter
-        const seanceDate = new Date(video.dateFin);
-        const now = new Date();
-        const isPast = seanceDate < now;
-        const currentUserId = localStorage.getItem('userId');
-        const canNotate = isPast && video.id_utilisateur != currentUserId;
+        // Vérifier si l'utilisateur peut noter cette séance (seulement si ce n'est pas sa propre séance)
+        const currentUserId = parseInt(localStorage.getItem('userId'));
+        const seanceUserId = parseInt(video.id_utilisateur);
+        
+        console.log('Debug notation:', {
+            currentUserId: currentUserId,
+            seanceUserId: seanceUserId,
+            canNotate: seanceUserId !== currentUserId
+        });
+        
+        const canNotate = seanceUserId !== currentUserId;
 
-        // Bouton de notation (seulement pour les séances passées et non créées par l'utilisateur)
+        // Bouton de notation (seulement pour les séances créées par d'autres utilisateurs)
         if (canNotate) {
             const notationBtn = document.createElement('button');
             notationBtn.textContent = 'Noter cette séance';

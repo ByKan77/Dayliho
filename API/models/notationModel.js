@@ -32,20 +32,22 @@ async function checkUserNotation(idSeance, idUtilisateur) {
     return rows[0]; // Retourne la notation si elle existe, sinon null
 }
 
-// Récupérer les séances passées que l'utilisateur peut noter
-async function getPastSeancesForNotation(idUtilisateur) {
+// Récupérer les séances que l'utilisateur peut noter (créées par d'autres utilisateurs)
+async function getNotableSeances(idUtilisateur) {
     let conn = await pool.getConnection();
+    console.log('Recherche des séances pour utilisateur:', idUtilisateur);
+    
     const query = `
         SELECT s.*, u.nom as createur_nom, u.prenom as createur_prenom
         FROM seance s 
         JOIN utilisateur u ON s.id_utilisateur = u.id 
-        WHERE s.dateFin < NOW() 
-        AND s.id_utilisateur != ?
+        WHERE s.id_utilisateur != ?
         AND s.id NOT IN (
             SELECT idSeance FROM notation WHERE idUtilisateur = ?
         )
     `;
     const rows = await conn.query(query, [idUtilisateur, idUtilisateur]);
+    console.log('Séances trouvées:', rows.length);
     conn.release();
     return rows;
 }
@@ -63,6 +65,6 @@ module.exports = {
     addNotation, 
     getNotationsBySeance, 
     checkUserNotation, 
-    getPastSeancesForNotation,
+    getNotableSeances,
     getAverageNote 
 }; 

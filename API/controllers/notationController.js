@@ -55,11 +55,11 @@ async function getNotationsBySeance(req, res) {
     }
 }
 
-// Récupérer les séances passées que l'utilisateur peut noter
-async function getPastSeancesForNotation(req, res) {
+// Récupérer les séances que l'utilisateur peut noter
+async function getNotableSeances(req, res) {
     try {
         const idUtilisateur = req.user.id;
-        const seances = await notationModel.getPastSeancesForNotation(idUtilisateur);
+        const seances = await notationModel.getNotableSeances(idUtilisateur);
         
         res.status(200).json(seances);
     } catch (error) {
@@ -96,6 +96,6 @@ async function canUserNotate(req, res) {
 module.exports = { 
     addNotation, 
     getNotationsBySeance, 
-    getPastSeancesForNotation,
+    getNotableSeances,
     canUserNotate 
 }; 

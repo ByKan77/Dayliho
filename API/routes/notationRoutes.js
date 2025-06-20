@@ -9,8 +9,8 @@ router.post("/addNotation", middleware.authentification, notationController.addN
 // Route pour récupérer les notations d'une séance
 router.get("/getNotationsBySeance/:idSeance", notationController.getNotationsBySeance);
 
-// Route pour récupérer les séances passées que l'utilisateur peut noter
-router.get("/getPastSeancesForNotation", middleware.authentification, notationController.getPastSeancesForNotation);
+// Route pour récupérer les séances que l'utilisateur peut noter
+router.get("/getNotableSeances", middleware.authentification, notationController.getNotableSeances);
 
 // Route pour vérifier si un utilisateur peut noter une séance
 router.get("/canUserNotate/:idSeance", middleware.authentification, notationController.canUserNotate);
