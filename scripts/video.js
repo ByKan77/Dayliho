@@ -135,7 +135,10 @@ function afficherVideosUnique(videos) {
 
 searchBarUnique.addEventListener('input', () => {
     const searchQuery = searchBarUnique.value.toLowerCase();
-    const filteredVideos = videosUnique.filter(video => video.titre.toLowerCase().includes(searchQuery));
+    const filteredVideos = videosUnique.filter(video => 
+        video.titre.toLowerCase().includes(searchQuery) || 
+        video.description.toLowerCase().includes(searchQuery)
+    );
     afficherVideosUnique(filteredVideos); // Afficher uniquement les vidéos filtrées
 });
 
