@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         end: event.dateFin,
                         extendedProps: {
                             description: event.description,
-                            lieu: event.lieu
+                            lieu: event.lieu,
+                            url: event.URL_video
                         }
                     }));
                     successCallback(events); // Retourne les données au calendrier
@@ -49,6 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('eventId').textContent = event.id;
             document.getElementById('eventTitle').textContent = event.title;
             document.getElementById('eventDesc').textContent = event.extendedProps.description;
+            document.getElementById('eventLieu').textContent = event.extendedProps.lieu;
+            document.getElementById('eventUrl').href = event.extendedProps.url;
             document.getElementById('eventStart').textContent = event.start.toLocaleString(); // Affiche l'heure locale
             document.getElementById('eventEnd').textContent = event.end.toLocaleString(); // Affiche l'heure locale
 
@@ -178,7 +181,8 @@ document.addEventListener("DOMContentLoaded", function() {
     
                 const sessionData = {
                     titre: document.getElementById("session-name").value,
-                    description: document.getElementById("session-name").value,
+                    description: document.getElementById("session-description").value,
+                    URL_video: document.getElementById("session-url").value,
                     dateDebut: document.getElementById("session-dateDebut").value,
                     dateFin: document.getElementById("session-dateFin").value,
                     lieu: document.getElementById("session-lieu").value,
@@ -191,6 +195,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const formData = new FormData();
                 formData.append('titre', sessionData.titre);
                 formData.append('description', sessionData.description);
+                formData.append('URL_video', sessionData.URL_video);
                 formData.append('dateDebut', sessionData.dateDebut);
                 formData.append('dateFin', sessionData.dateFin);
                 formData.append('lieu', sessionData.lieu);

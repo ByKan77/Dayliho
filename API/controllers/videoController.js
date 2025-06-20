@@ -18,11 +18,11 @@ async function addSeance(req, res) {
         console.log(req.user)
         console.log(req.body);
         
-        const {titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_utilisateur } = req.body;
+        const {titre, description, dateDebut, dateFin, lieu, nombrePlaces, id_utilisateur, URL_video } = req.body;
         
         console.log(typeof(id_utilisateur));
         
-        const result = await videoModel.pushNewSeance(titre, description, dateDebut, dateFin, lieu, parseInt(nombrePlaces), parseInt(id_utilisateur));
+        const result = await videoModel.pushNewSeance(titre, description, dateDebut, dateFin, lieu, parseInt(nombrePlaces), parseInt(id_utilisateur), URL_video);
         
         res.status(201).json({ success: true, message: "Séance ajoutée avec succès"});
     } catch (error) {
