@@ -80,6 +80,7 @@
     transition: background-color 0.3s ease;
     border-radius: 10px; 
     z-index: 1;
+    pointer-events: none;
 }
 
 #video_container_unique:hover::before {
@@ -98,6 +99,8 @@
     flex-grow: 2;
     height: 100%;
     overflow: hidden;
+    position: relative;
+    z-index: 5;
 }
 
 #titre_video_unique, #description_video_unique, #auteur_video_unique {
@@ -515,4 +518,127 @@ button:hover {
         padding: 10px 15px;
         font-size: 1rem;
     }
+}
+
+/* Style pour le bouton de notation */
+.notation-btn {
+    background-color: #fd9d1f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 14px;
+    position: relative;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.notation-btn:hover {
+    background-color: #e68a1a;
+    transform: scale(1.05);
+}
+
+#submitNotation:hover {
+    background-color: #e68a1a;
+}
+
+/* Styles pour l'affichage des notes */
+.rating-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.stars {
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.star.filled {
+    color: #fd9d1f;
+}
+
+.star.half {
+    color: #fd9d1f;
+    opacity: 0.7;
+}
+
+.star.empty {
+    color: #666;
+}
+
+.rating-text {
+    font-size: 14px;
+    color: #ddd;
+}
+
+.view-reviews-btn {
+    background-color: #060e31;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.view-reviews-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Styles pour le modal des avis */
+.reviews-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 15px;
+}
+
+.review-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    margin-bottom: 10px;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.reviewer-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.review-rating {
+    color: #fd9d1f;
+    font-size: 14px;
+}
+
+.review-comment {
+    color: #666;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* Style spécifique pour le modal de notation */
+#notationModal {
+    z-index: 10001 !important;
+}
+
+#notationModal .modal-content {
+    z-index: 10002 !important;
 }
