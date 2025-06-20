@@ -124,8 +124,38 @@ function afficherVideosUnique(videos) {
         descriptionVideo.id = 'description_video_unique';
         descriptionVideo.textContent = `${video.description}`;
 
+        // Section des notes
+        const notesSection = document.createElement('div');
+        notesSection.id = 'notes_section';
+        notesSection.innerHTML = `
+            <div class="rating-display">
+                <span class="stars">★★★★★</span>
+                <span class="rating-text">Chargement...</span>
+            </div>
+        `;
+
+        // Charger les notes pour cette séance
+        loadRatingsForSeance(video.id, notesSection);
+
+        // Vérifier si la séance est passée et si l'utilisateur peut la noter
+        const seanceDate = new Date(video.dateFin);
+        const now = new Date();
+        const isPast = seanceDate < now;
+        const currentUserId = localStorage.getItem('userId');
+        const canNotate = isPast && video.id_utilisateur != currentUserId;
+
+        // Bouton de notation (seulement pour les séances passées et non créées par l'utilisateur)
+        if (canNotate) {
+            const notationBtn = document.createElement('button');
+            notationBtn.textContent = 'Noter cette séance';
+            notationBtn.className = 'notation-btn';
+            notationBtn.onclick = () => openNotationModal(video.id);
+            videoContent.appendChild(notationBtn);
+        }
+
         videoContent.appendChild(titreVideo);
         videoContent.appendChild(descriptionVideo);
+        videoContent.appendChild(notesSection);
 
         // Ajouter le bloc blanc et le contenu de la vidéo au conteneur de la vidéo
         videoContainer.appendChild(blancBlock);
@@ -143,6 +173,167 @@ searchBarUnique.addEventListener('input', () => {
         video.description.toLowerCase().includes(searchQuery)
     );
     afficherVideosUnique(filteredVideos); // Afficher uniquement les vidéos filtrées
+});
+
+// Fonctions pour le système de notation
+function openNotationModal(seanceId) {
+    document.getElementById('notationSeanceId').value = seanceId;
+    document.getElementById('notationModal').style.display = 'block';
+}
+
+function closeNotationModal() {
+    document.getElementById('notationModal').style.display = 'none';
+    document.getElementById('notationForm').reset();
+}
+
+// Fonction pour charger les notes d'une séance
+async function loadRatingsForSeance(seanceId, notesSection) {
+    try {
+        const response = await axios.get(`http://localhost:1234/notation/getNotationsBySeance/${seanceId}`);
+        const notations = response.data;
+        
+        if (notations.length > 0) {
+            // Calculer la moyenne
+            const total = notations.reduce((sum, notation) => sum + notation.note, 0);
+            const moyenne = (total / notations.length).toFixed(1);
+            
+            // Afficher les étoiles colorées
+            const starsElement = notesSection.querySelector('.stars');
+            const ratingText = notesSection.querySelector('.rating-text');
+            
+            // Colorer les étoiles selon la note
+            const fullStars = Math.floor(moyenne);
+            const hasHalfStar = moyenne % 1 >= 0.5;
+            
+            let starsHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    starsHTML += '<span class="star filled">★</span>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    starsHTML += '<span class="star half">★</span>';
+                } else {
+                    starsHTML += '<span class="star empty">☆</span>';
+                }
+            }
+            
+            starsElement.innerHTML = starsHTML;
+            ratingText.textContent = `${moyenne}/10 (${notations.length} avis)`;
+            
+            // Ajouter un bouton pour voir tous les avis
+            const viewReviewsBtn = document.createElement('button');
+            viewReviewsBtn.textContent = 'Voir tous les avis';
+            viewReviewsBtn.className = 'view-reviews-btn';
+            viewReviewsBtn.onclick = () => showAllReviews(seanceId, notations);
+            notesSection.appendChild(viewReviewsBtn);
+            
+        } else {
+            notesSection.innerHTML = `
+                <div class="rating-display">
+                    <span class="stars">☆☆☆☆☆</span>
+                    <span class="rating-text">Aucune note</span>
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Erreur lors du chargement des notes:', error);
+        notesSection.innerHTML = `
+            <div class="rating-display">
+                <span class="stars">☆☆☆☆☆</span>
+                <span class="rating-text">Erreur de chargement</span>
+            </div>
+        `;
+    }
+}
+
+// Fonction pour afficher tous les avis
+function showAllReviews(seanceId, notations) {
+    const reviewsHTML = notations.map(notation => `
+        <div class="review-item">
+            <div class="review-header">
+                <span class="reviewer-name">${notation.prenom} ${notation.nom}</span>
+                <span class="review-rating">
+                    ${'★'.repeat(notation.note)}${'☆'.repeat(10-notation.note)} ${notation.note}/10
+                </span>
+            </div>
+            ${notation.commentaire ? `<div class="review-comment">${notation.commentaire}</div>` : ''}
+        </div>
+    `).join('');
+    
+    // Créer un modal pour afficher les avis
+    const reviewsModal = document.createElement('div');
+    reviewsModal.className = 'modal';
+    reviewsModal.style.display = 'block';
+    reviewsModal.innerHTML = `
+        <div class="modal-content">
+            <span class="close" onclick="this.parentElement.parentElement.remove()">&times;</span>
+            <h2>Avis sur cette séance</h2>
+            <div class="reviews-container">
+                ${reviewsHTML}
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(reviewsModal);
+    
+    // Fermer le modal en cliquant en dehors
+    reviewsModal.onclick = function(event) {
+        if (event.target === reviewsModal) {
+            reviewsModal.remove();
+        }
+    };
+}
+
+// Gestion du formulaire de notation
+document.addEventListener('DOMContentLoaded', function() {
+    const notationModal = document.getElementById('notationModal');
+    const closeNotationBtn = document.getElementById('closeNotationModal');
+    const notationForm = document.getElementById('notationForm');
+
+    // Fermer le modal de notation
+    closeNotationBtn.onclick = closeNotationModal;
+
+    // Fermer le modal en cliquant en dehors
+    window.onclick = function(event) {
+        if (event.target === notationModal) {
+            closeNotationModal();
+        }
+    };
+
+    // Soumettre la notation
+    notationForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const seanceId = document.getElementById('notationSeanceId').value;
+        const note = document.getElementById('notationNote').value;
+        const commentaire = document.getElementById('notationCommentaire').value;
+
+        try {
+            const response = await axios.post('http://localhost:1234/notation/addNotation', {
+                idSeance: seanceId,
+                note: parseInt(note),
+                commentaire: commentaire
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
+                }
+            });
+
+            if (response.data.success) {
+                alert('Notation envoyée avec succès !');
+                closeNotationModal();
+                // Recharger les vidéos pour mettre à jour l'affichage
+                location.reload();
+            }
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi de la notation:', error);
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert('Erreur lors de l\'envoi de la notation.');
+            }
+        }
+    });
 });
 
 async function getUser(req) {

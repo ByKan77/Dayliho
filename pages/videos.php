@@ -112,13 +112,45 @@
     </div>
 </div>
 
+<!-- Modal de notation -->
+<div id="notationModal" class="modal">
+    <div class="modal-content">
+        <span id="closeNotationModal" class="close">&times;</span>
+        <h2>Noter cette séance</h2>
+        <form id="notationForm">
+            <input type="hidden" id="notationSeanceId">
+            <div class="form-group">
+                <label for="notationNote">Note (1-10) :</label>
+                <select id="notationNote" name="notationNote" required>
+                    <option value="">Choisir une note</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="notationCommentaire">Commentaire :</label>
+                <textarea id="notationCommentaire" name="notationCommentaire" rows="4" maxlength="255" placeholder="Votre avis sur cette séance..."></textarea>
+            </div>
+            <button type="submit" id="submitNotation">Envoyer la notation</button>
+        </form>
+    </div>
+</div>
+
 <style>
 
 /* Style pour le modal */
 .modal {
     display: none; /* Cacher le modal par défaut */
     position: fixed;
-    z-index: 1; /* Placer le modal au-dessus du contenu */
+    z-index: 9999; /* Augmenter le z-index pour être au-dessus de tout */
     left: 0;
     top: 0;
     width: 100%;
@@ -135,6 +167,8 @@
     border: 1px solid #888;
     width: 80%;
     max-width: 500px;
+    position: relative;
+    z-index: 10000; /* Z-index encore plus élevé pour le contenu */
 }
 
 /* Style pour le bouton de fermeture */
@@ -150,6 +184,71 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Style pour le bouton de notation */
+.notation-btn {
+    background-color: #fd9d1f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.notation-btn:hover {
+    background-color: #e68a1a;
+}
+
+/* Style pour les éléments du formulaire de notation */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+#submitNotation {
+    background-color: #fd9d1f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+#submitNotation:hover {
+    background-color: #e68a1a;
+}
+
+/* Style spécifique pour le modal de notation */
+#notationModal {
+    z-index: 10001 !important;
+}
+
+#notationModal .modal-content {
+    z-index: 10002 !important;
 }
 </style>
 
