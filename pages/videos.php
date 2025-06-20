@@ -24,18 +24,15 @@
         <form>
             <label for="session-name">Nom de la séance :</label>
             <input type="text" id="session-name" name="session-name" required><br><br>
+
+            <label for="session-description">Description :</label>
+            <textarea id="session-description" name="session-description" required></textarea><br><br>
+            
+            <label for="session-url">URL de la vidéo :</label>
+            <input type="text" id="session-url" name="session-url"><br><br>
             
             <label for="session-lieu">Lieu :</label>
             <input type="text" id="session-lieu" name="session-lieu" required><br><br>
-
-            <!-- <label for="session-sport">Sport :</label>
-            <select id="session-sport" name="session-sport">
-                <option value=1>Football</option>
-                <option value=2>Basketball</option>
-                <option value=3>Tennis</option>
-                <option value=4>Natation</option>
-                <option value=5>Cyclisme</option>
-            </select><br><br> -->
 
             <label for="session-taille">Nombre de Places</label>
             <select id="session-taille" name="session-taille">
@@ -108,6 +105,8 @@
         <p><strong>ID :</strong> <span id="eventId"></span></p>
         <p><strong>Titre :</strong> <span id="eventTitle"></span></p>
         <p><strong>Description :</strong> <span id="eventDesc"></span></p>
+        <p><strong>Lieu :</strong> <span id="eventLieu"></span></p>
+        <p><strong>Vidéo :</strong> <a id="eventUrl" href="" target="_blank">Lien vers la vidéo</a></p>
         <p><strong>Début :</strong> <span id="eventStart"></span></p>
         <p><strong>Fin :</strong> <span id="eventEnd"></span></p>
     </div>
